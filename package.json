@@ -1,0 +1,13 @@
+{
+  "name": "sri-lanka-trip",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "build": "wrangler deploy --dry-run",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "4.162.0"
+  },
+  "engines": { "node": ">=24" }
+}
