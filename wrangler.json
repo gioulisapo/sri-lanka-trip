@@ -8,6 +8,5 @@
   "preview_urls": false,
   "routes": [
     { "pattern": "sri-lanka.giouliscloud.gr", "custom_domain": true }
-  ],
-  "vars": { "SITE_USER": "traveller" }
+  ]
 }

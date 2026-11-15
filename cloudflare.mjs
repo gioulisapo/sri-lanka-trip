@@ -1,22 +1,13 @@
-import { timingSafeEqual } from 'node:crypto';
 import { Buffer } from 'node:buffer';
+import { authenticate } from './auth.mjs';
 import worker from './worker.mjs';
 import { supabaseStore } from './storage.mjs';
 
 export default {
   async fetch(request, env) {
-    if (!env.SITE_PASSWORD || env.SITE_PASSWORD.length < 16) {
-      return new Response('Site password is not configured', { status: 503, headers: { 'Cache-Control': 'no-store' } });
-    }
-    const expected = Buffer.from('Basic ' + Buffer.from((env.SITE_USER || 'traveller') + ':' + env.SITE_PASSWORD).toString('base64'));
-    const supplied = Buffer.from(request.headers.get('Authorization') || '');
-    if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
-      return new Response('Sign in to view the trip', { status: 401, headers: {
-        'WWW-Authenticate': 'Basic realm="Sri Lanka trip", charset="UTF-8"',
-        'Cache-Control': 'no-store'
-      } });
-    }
     try {
+      const login = await authenticate(request, env.SITE_PASSWORD);
+      if (login) return login;
       const chunks = [];
       let size = 0;
       if (request.body) {

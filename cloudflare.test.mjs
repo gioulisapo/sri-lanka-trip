@@ -6,45 +6,87 @@ import worker from './cloudflare.mjs';
 import app from './worker.mjs';
 
 const origin = 'https://sri-lanka.giouliscloud.gr';
-const password = 'a-long-test-password';
-const authorization = 'Basic ' + Buffer.from('traveller:' + password).toString('base64');
+const password = 'x';
 const env = { SITE_PASSWORD: password };
 const request = (path = '/', options = {}) => new Request(origin + path, options);
+async function login(settings = env, supplied = settings.SITE_PASSWORD) {
+  const response = await worker.fetch(request('/login', {
+    method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ password: supplied })
+  }), settings);
+  assert.equal(response.status, 303);
+  return response.headers.get('Set-Cookie').split(';')[0];
+}
+const cookie = await login();
 
-test('requires a configured strong password', async () => {
-  for (const SITE_PASSWORD of [undefined, '', 'short']) {
+test('requires a configured password', async () => {
+  for (const SITE_PASSWORD of [undefined, '']) {
     assert.equal((await worker.fetch(request(), { SITE_PASSWORD })).status, 503);
   }
 });
 
-test('protects the page and APIs, including forged identity headers', async () => {
-  for (const path of ['/', '/api/answers', '/api/comments?section=flights']) {
-    for (const supplied of ['', 'Basic invalid', 'Bearer token']) {
-      const response = await worker.fetch(request(path, { headers: {
-        authorization: supplied, 'oai-authenticated-user-id': 'forged'
-      } }), env);
-      assert.equal(response.status, 401);
-      assert.match(response.headers.get('WWW-Authenticate'), /^Basic /);
-      assert.equal(response.headers.get('Cache-Control'), 'no-store');
-    }
+test('shows a password-only form and protects APIs against forged identity headers', async () => {
+  const response = await worker.fetch(request(), env);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /name="password"/);
+  assert.doesNotMatch(html, /name="username"|minlength|pattern=/);
+  for (const path of ['/api/answers', '/api/comments?section=flights']) {
+    const denied = await worker.fetch(request(path, { headers: {
+      Cookie: cookie + 'tampered', 'oai-authenticated-user-id': 'forged'
+    } }), env);
+    assert.equal(denied.status, 401);
+    assert.equal(denied.headers.get('Cache-Control'), 'no-store');
   }
 });
 
-test('serves the page after authentication', async () => {
-  const response = await worker.fetch(request('/', { headers: { authorization } }), env);
+test('serves the page after password-only authentication with a one-character password', async () => {
+  const response = await worker.fetch(request('/', { headers: { Cookie: cookie } }), env);
   assert.equal(response.status, 200);
-  assert.match(await response.text(), /Sri Lanka/);
+  assert.match(await response.text(), /Day-by-day/);
 });
 
-test('supports configured usernames', async () => {
-  const headers = { authorization: 'Basic ' + Buffer.from('family:' + password).toString('base64') };
-  assert.equal((await worker.fetch(request('/', { headers }), { ...env, SITE_USER: 'family' })).status, 200);
-  assert.equal((await worker.fetch(request('/', { headers: { authorization } }), { ...env, SITE_USER: 'family' })).status, 401);
+test('rejects wrong passwords, cross-origin logins, oversized forms, and cookies from an old password', async () => {
+  for (const [supplied, source, status] of [['wrong', origin, 401], [password, 'https://other.example', 403], ['x'.repeat(65537), origin, 413]]) {
+    const response = await worker.fetch(request('/login', {
+      method: 'POST', headers: { Origin: source, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ password: supplied })
+    }), env);
+    assert.equal(response.status, status);
+    assert.equal(response.headers.get('Set-Cookie'), null);
+  }
+  assert.equal((await worker.fetch(request('/api/answers', { headers: { Cookie: cookie } }), { SITE_PASSWORD: 'changed' })).status, 401);
+});
+
+test('sets a signed, expiring, secure session cookie without the password', async () => {
+  const response = await worker.fetch(request('/login', {
+    method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ password: 'cookie-test-password' })
+  }), { SITE_PASSWORD: 'cookie-test-password' });
+  const value = response.headers.get('Set-Cookie');
+  assert.match(value, /HttpOnly/);
+  assert.match(value, /SameSite=Strict/);
+  assert.match(value, /Secure/);
+  assert.match(value, /Max-Age=/);
+  assert.doesNotMatch(value, /cookie-test-password/);
+  assert.equal(response.headers.get('Location'), '/');
+});
+
+test('accepts spaces and Unicode in passwords without complexity rules', async () => {
+  const settings = { SITE_PASSWORD: ' 日本 : ' };
+  const session = await login(settings);
+  assert.equal((await worker.fetch(request('/', { headers: { Cookie: session } }), settings)).status, 200);
+});
+
+test('rejects expired session cookies', async t => {
+  const future = Date.now() + 31 * 24 * 60 * 60 * 1000;
+  t.mock.method(Date, 'now', () => future);
+  assert.equal((await worker.fetch(request('/api/answers', { headers: { Cookie: cookie } }), env)).status, 401);
 });
 
 test('rejects oversized authenticated bodies', async () => {
   const response = await worker.fetch(request('/api/answers', {
-    method: 'POST', headers: { authorization, Origin: origin }, body: 'x'.repeat(65537)
+    method: 'POST', headers: { Cookie: cookie, Origin: origin }, body: 'x'.repeat(65537)
   }), env);
   assert.equal(response.status, 413);
 });
@@ -60,7 +102,7 @@ test('uses Supabase REST and an atomic save function without exposing the key', 
   const settings = { ...env, SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SECRET_KEY: 'sb_secret_test' };
   const call = (path, body) => worker.fetch(request(path, {
     method: body ? 'POST' : 'GET',
-    headers: { authorization, Origin: origin, 'Content-Type': 'application/json' },
+    headers: { Cookie: cookie, Origin: origin, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined
   }), settings);
   assert.deepEqual(await (await call('/api/answers')).json(), { answers: {}, revision: 0 });
@@ -85,7 +127,7 @@ test('uses Supabase REST and an atomic save function without exposing the key', 
 test('returns a generic error when Supabase fails', async t => {
   t.mock.method(globalThis, 'fetch', async () => new Response('private database details', { status: 500 }));
   t.mock.method(console, 'error', () => {});
-  const response = await worker.fetch(request('/api/answers', { headers: { authorization } }), {
+  const response = await worker.fetch(request('/api/answers', { headers: { Cookie: cookie } }), {
     ...env, SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SECRET_KEY: 'sb_secret_test'
   });
   assert.equal(response.status, 500);

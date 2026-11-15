@@ -1,12 +1,11 @@
 import http from 'node:http';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
-import { timingSafeEqual } from 'node:crypto';
+import { authenticate } from './auth.mjs';
 import worker from './worker.mjs';
 
-const username = process.env.SITE_USER || 'traveller';
 const password = process.env.SITE_PASSWORD;
-if (!password || password.length < 16) throw new Error('Set SITE_PASSWORD to at least 16 characters.');
+if (!password) throw new Error('Set SITE_PASSWORD.');
 const origin = new URL(process.env.PUBLIC_URL || 'http://localhost:8080').origin;
 mkdirSync('/data', { recursive: true });
 const sqlite = new DatabaseSync('/data/trip.sqlite');
@@ -36,15 +35,8 @@ const DB = {
     return bound([]);
   }
 };
-const expected = Buffer.from('Basic ' + Buffer.from(username + ':' + password).toString('base64'));
 const server = http.createServer(async (req, res) => {
   if (req.url === '/healthz') { res.writeHead(200); res.end('ok'); return; }
-  const supplied = Buffer.from(req.headers.authorization || '');
-  if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
-    res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="Sri Lanka trip", charset="UTF-8"' });
-    res.end('Sign in to view the trip');
-    return;
-  }
   try {
     const chunks = [];
     let size = 0;
@@ -54,15 +46,15 @@ const server = http.createServer(async (req, res) => {
       chunks.push(chunk);
     }
     const headers = new Headers();
-    for (const key of ['content-type', 'origin']) if (req.headers[key]) headers.set(key, req.headers[key]);
-    // Identity comes only from the successful password check above.
-    headers.set('oai-authenticated-user-id', 'self-hosted-user');
+    for (const key of ['content-type', 'origin', 'cookie']) if (req.headers[key]) headers.set(key, req.headers[key]);
     const method = req.method || 'GET';
     const request = new Request(new URL(req.url, origin), {
       method, headers,
       body: ['GET', 'HEAD'].includes(method) ? undefined : Buffer.concat(chunks)
     });
-    const response = await worker.fetch(request, { DB });
+    const login = await authenticate(request, password);
+    if (!login) request.headers.set('oai-authenticated-user-id', 'self-hosted-user');
+    const response = login || await worker.fetch(request, { DB });
     res.writeHead(response.status, Object.fromEntries(response.headers));
     res.end(Buffer.from(await response.arrayBuffer()));
   } catch (error) {

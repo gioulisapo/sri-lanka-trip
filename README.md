@@ -19,13 +19,13 @@ In the GitHub repository, open **Settings → Secrets and variables → Actions*
 | Secret | `CLOUDFLARE_API_TOKEN` | Token scoped to this account with Workers Scripts Edit and to `giouliscloud.gr` with Zone Read and DNS Edit |
 | Secret | `SUPABASE_SECRET_KEY` | Supabase project's server-side `sb_secret_...` key, from Project Settings → API Keys |
 | Secret | `SUPABASE_DB_URL` | PostgreSQL connection URI from Supabase's Connect dialog, using the shared session pooler for GitHub's IPv4 runners, with the real database password and `sslmode=require` |
-| Secret | `SITE_PASSWORD` | Unique site password of at least 16 characters |
+| Secret | `SITE_PASSWORD` | Shared site password of your choice, with no length or complexity rules |
 
 Percent-encode special characters in the database password when putting it into the connection URI. The Supabase Data API must be enabled with the `public` schema exposed. This setup requires the new `sb_secret_` key format, not a publishable or legacy JWT key.
 
 The workflow applies [supabase/schema.sql](supabase/schema.sql) in a transaction before deployment. It creates only `sri_lanka_comments`, `sri_lanka_answers`, their index, and the `sri_lanka_save_answers` function. It can run repeatedly. RLS and grants prevent anonymous and ordinary authenticated Supabase clients from accessing these tables or calling the save function. The Worker alone uses the server key. The key has project-wide privileges, so keep it in GitHub and Cloudflare secrets.
 
-Push the repository to `main`, then check **Actions → Cloudflare**. Sign in as `traveller` with `SITE_PASSWORD`. The workflow checks the live page, comments, and questionnaire reads after deploying. First-time DNS and certificate provisioning can delay that check. Rerun the workflow once provisioning completes if needed.
+Push the repository to `main`, then check **Actions → Cloudflare**. Sign in using only `SITE_PASSWORD`. No username is required. A signed session cookie keeps the browser signed in for 30 days. Changing the password invalidates existing sessions. The workflow checks the live page, comments, and questionnaire reads after deploying. First-time DNS and certificate provisioning can delay that check. Rerun the workflow once provisioning completes if needed.
 
 The database starts empty. Existing hosted-site or Docker data is not imported. Schema changes apply before code and must remain compatible with the previous deployed version.
 
@@ -48,9 +48,9 @@ For local Worker development, create an ignored `.dev.vars` file containing `SIT
 Requires Docker Engine and Docker Compose v2.
 
 1. Copy .env.example to .env.
-2. Set SITE_PASSWORD to a unique password of at least 16 characters.
+2. Set SITE_PASSWORD to your chosen password. There are no length or complexity rules.
 3. Run docker compose up -d --build.
-4. Open http://localhost:8080 and sign in with SITE_USER and SITE_PASSWORD.
+4. Open http://localhost:8080 and sign in with SITE_PASSWORD. No username is required.
 
 The site has a shared password. Comment names Maria, Apostolis and Giannis are selectable display names, not individual authenticated accounts.
 
@@ -66,7 +66,7 @@ Back up the SQLite database with SQLite's backup API or stop the container befor
 
 ## Source
 
-worker.mjs contains the exported page, frontend JavaScript and API logic. server.mjs adapts it to Node and SQLite. cloudflare.mjs provides password authentication for Cloudflare. storage.mjs implements SQLite and Supabase storage. migrations contains the Docker database schema, and supabase/schema.sql contains the Cloudflare deployment's PostgreSQL schema. There are no runtime npm dependencies. Wrangler is a development dependency.
+worker.mjs contains the exported page, frontend JavaScript and API logic. server.mjs adapts it to Node and SQLite. auth.mjs provides the shared password-only login and signed session cookies. cloudflare.mjs adapts the app for Cloudflare. storage.mjs implements SQLite and Supabase storage. migrations contains the Docker database schema, and supabase/schema.sql contains the Cloudflare deployment's PostgreSQL schema. There are no runtime npm dependencies. Wrangler is a development dependency.
 
 Edit worker.mjs and rebuild with docker compose up -d --build. The ChatGPT-hosted site and this deployment are separate copies.
 
