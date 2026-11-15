@@ -191,3 +191,57 @@ test('hides answered questions and preserves their original keys when saving new
   assert.equal(payload.answers['2'], 'One day of scuba diving; no surfing.');
   assert.deepEqual([...fields.keys()], ['8', '10', '11']);
 });
+
+test('quick reference links reach the trip sections and the new guides follow the itinerary', async () => {
+  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
+  const toc = html.match(/<nav[^>]*id="quick-reference"[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(toc, 'Missing top table of contents');
+  for (const id of ['flights','route','itinerary','plans','hiking','diving','practical','questions','sources','todo','history','culture','food']) {
+    assert.ok(toc.includes('href="#'+id+'"'), 'Missing TOC entry: '+id);
+    assert.ok(html.includes('id="'+id+'"'), 'Missing TOC destination: '+id);
+  }
+  assert.ok(html.indexOf('id="quick-reference"') < html.indexOf('<main>'));
+  assert.ok(html.indexOf('id="todo"') > html.indexOf('id="sources"'));
+  assert.ok(html.indexOf('id="history"') < html.indexOf('id="culture"'));
+  assert.ok(html.indexOf('id="culture"') < html.indexOf('id="food"'));
+  assert.match(html, /LKR 100,000 total for both travellers/);
+  assert.match(html, /Hotels, private drivers, guides, safari and diving are excluded/);
+  assert.match(html, /illustration, not a live exchange quote/);
+});
+
+test('checklist restores and saves ticks locally, and remains usable if storage fails', async () => {
+  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
+  const script = html.match(/const todoBoxes=[\s\S]*?\/\/ End trip checklist\./)?.[0];
+  assert.ok(script, 'Missing checklist script');
+  const setup = (saved, failure) => {
+    const boxes = ['todo-cash','todo-driver'].map(id => ({ id, checked:false, addEventListener(type,callback) { this.change=callback; } }));
+    const status = {};
+    let stored;
+    const context = {
+      document: { querySelectorAll: () => boxes, querySelector: () => status },
+      localStorage: {
+        getItem() { if(failure==='read')throw Error('Blocked');return saved; },
+        setItem(key,value) { if(failure==='write')throw Error('Full');stored={key,value}; }
+      }
+    };
+    runInNewContext(script, context);
+    return {boxes,status,get stored(){return stored;}};
+  };
+  const state=setup('["todo-cash","unknown"]');
+  assert.equal(state.boxes[0].checked,true);
+  assert.equal(state.boxes[1].checked,false);
+  state.boxes[1].checked=true;
+  state.boxes[1].change();
+  assert.deepEqual(JSON.parse(state.stored.value),['todo-cash','todo-driver']);
+  assert.match(state.status.textContent,/browser only/);
+  state.boxes[0].checked=false;
+  state.boxes[0].change();
+  assert.deepEqual(JSON.parse(state.stored.value),['todo-driver']);
+  for(const saved of ['{broken','{}','null'])assert.doesNotThrow(()=>setup(saved));
+  const denied=setup(null,'read');
+  assert.match(denied.status.textContent,/not be restored/);
+  const full=setup(null,'write');full.boxes[0].checked=true;
+  assert.doesNotThrow(()=>full.boxes[0].change());
+  assert.equal(full.boxes[0].checked,true);
+  assert.match(full.status.textContent,/not saved/);
+});
