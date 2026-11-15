@@ -1,6 +1,8 @@
 FROM node:24-bookworm-slim
 WORKDIR /app
 COPY --chown=node:node server.mjs worker.mjs storage.mjs auth.mjs ./
+COPY --chown=node:node site.html build-page.mjs ./
+RUN node build-page.mjs
 COPY --chown=node:node migrations ./migrations
 RUN mkdir /data && chown node:node /data
 USER node

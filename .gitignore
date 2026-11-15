@@ -1,4 +1,5 @@
 node_modules/
+page.generated.mjs
 .wrangler/
 .env
 .env.*

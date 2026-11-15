@@ -66,9 +66,24 @@ Back up the SQLite database with SQLite's backup API or stop the container befor
 
 ## Source
 
-worker.mjs contains the exported page, frontend JavaScript and API logic. server.mjs adapts it to Node and SQLite. auth.mjs provides the shared password-only login and signed session cookies. cloudflare.mjs adapts the app for Cloudflare. storage.mjs implements SQLite and Supabase storage. migrations contains the Docker database schema, and supabase/schema.sql contains the Cloudflare deployment's PostgreSQL schema. There are no runtime npm dependencies. Wrangler is a development dependency.
+site.html contains the page text, HTML, styles and frontend JavaScript as ordinary HTML, without JavaScript string escaping. worker.mjs contains the API logic. server.mjs adapts it to Node and SQLite. auth.mjs provides the shared password-only login and signed session cookies. cloudflare.mjs adapts the app for Cloudflare. storage.mjs implements SQLite and Supabase storage. migrations contains the Docker database schema, and supabase/schema.sql contains the Cloudflare deployment's PostgreSQL schema. There are no runtime npm dependencies. Wrangler is a development dependency.
 
-Edit worker.mjs and rebuild with docker compose up -d --build. The ChatGPT-hosted site and this deployment are separate copies.
+Edit site.html directly or with an HTML parser in your scripts. Keep element IDs and data attributes intact because maps, plan switching and comments use them. Some alternate-plan text lives in data attributes and inline JavaScript in the same file.
+
+For example, this Python script updates the page title without editing an MJS file:
+
+```python
+from pathlib import Path
+
+page = Path('site.html')
+html = page.read_text(encoding='utf-8')
+html = html.replace('<h1>Sri Lanka</h1>', '<h1>Our Sri Lanka trip</h1>')
+page.write_text(html, encoding='utf-8')
+```
+
+Tests, Wrangler builds/deployments and Docker builds automatically run build-page.mjs to generate page.generated.mjs. Do not edit or commit that generated file. For direct Node execution, run `node build-page.mjs` first.
+
+Run `npm test` and `npm run build` after editing. Rebuild Docker with `docker compose up -d --build`, or deploy the Worker through the existing GitHub workflow. The ChatGPT-hosted site and this deployment are separate copies.
 
 ## External resources
 

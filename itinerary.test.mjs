@@ -3,6 +3,31 @@ import { test } from 'node:test';
 import { runInNewContext, Script } from 'node:vm';
 import worker from './worker.mjs';
 
+test('ordinary sightseeing days start at 08:00 or later across every plan and hike', async () => {
+  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
+  const schedules = [...html.matchAll(/data-schedule-day="(\d+)"/g)];
+  assert.equal(schedules.length, 14);
+  for (let i = 0; i < schedules.length; i++) {
+    const day = Number(schedules[i][1]);
+    if ([4, 5, 8, 17].includes(day)) continue; // Flights and the agreed Horton Plains exception.
+    const section = html.slice(schedules[i].index, schedules[i + 1]?.index ?? html.indexOf('id="plans"'));
+    for (const [, time] of section.matchAll(/<time datetime="(\d\d:\d\d)">/g)) {
+      assert.ok(time >= '08:00', `${day} December still schedules ${time}`);
+    }
+  }
+  const script = html.slice(html.indexOf('const points=['), html.indexOf('function choosePlan(){'));
+  const context = {};
+  runInNewContext(script, context);
+  for (const plan of ['A', 'B', 'C']) {
+    const safariDay = context.dailyRoutes(12, plan, 'ella');
+    assert.ok(!safariDay.some(route => route.ids[0] === 8 && route.ids.includes(10)), 'No safari-plus-coast transfer');
+    assert.ok(context.dailyRoutes(13, plan, 'ella').some(route => route.ids[0] === 8 && route.ids.at(-1) === 10 && !route.optional));
+    assert.ok(!context.dailyRoutes(14, plan, 'ella').some(route => route.ids.includes(16)), 'No dawn whale outing');
+  }
+  assert.ok(!context.dailyRoutes(10, 'C', 'ella').some(route => route.ids.includes(17)), 'Shared diving uses a transfer-only day');
+  assert.ok(!context.dailyRoutes(11, 'A', 'ella').some(route => route.ids.includes(18)), 'Recovery day has no second full hike');
+});
+
 test('required Polonnaruwa and optional coastal routes are represented on the map', async () => {
   const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
   for (const [, source] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Script(source);
@@ -26,13 +51,13 @@ test('required Polonnaruwa and optional coastal routes are represented on the ma
     context.drawRoutes(plan);
     assert.ok(lines.some(line => contains(line, 'Polonnaruwa') && !line.options.dashArray));
     assert.ok(lines.some(line => contains(line, 'Colombo culture') && line.options.dashArray));
-    assert.ok(lines.some(line => contains(line, 'Mirissa') && line.options.dashArray));
+    assert.ok(!lines.some(line => contains(line, 'Mirissa')));
   }
   controls['#hike-select'].value = 'ella';
   context.drawRoutes('A');
   assert.ok(lines.some(line => contains(line, 'Polonnaruwa') && !line.options.dashArray));
   assert.ok(lines.some(line => contains(line, 'Ella Rock') && !line.options.dashArray));
-  assert.ok(lines.some(line => contains(line, 'Haputale') && line.options.dashArray));
+  assert.ok(!lines.some(line => contains(line, 'Haputale')));
 });
 
 test('every trip day has a proposed breakdown and plan switching shows the matching tracks', async () => {
@@ -102,16 +127,18 @@ test('daily maps follow the selected day, traveller split and hike, including re
     assert.ok(has(routes(17,plan,hike), [12,13]));
   }
   assert.ok(has(routes(5), [0,2,1], true));
-  assert.ok(has(routes(9), [4,9]));
+  assert.ok(has(routes(9), [4,10]));
+  assert.ok(has(routes(9), [4,7]), 'Stage 13 uses a Haputale overnight');
+  assert.ok(has(routes(9,'B','ella'), [4,6]));
   assert.ok(!routes(9,'B').some(route=>route.ids.includes(9)));
-  assert.ok(has(routes(10), [6,7,18,6]), 'Stage 13 is point-to-point with finish pickup');
+  assert.ok(has(routes(10), [7,18,7]), 'Stage 13 starts locally with finish pickup back to Haputale');
   assert.ok(has(routes(10,'B','ella'), [6,17,6]));
-  assert.ok(has(routes(10,'C'), [6,17,6,10]));
-  assert.ok(has(routes(11), [6,17,6], true));
-  assert.ok(has(routes(11,'B','ella'), [6,7,18,6], true));
-  assert.ok(has(routes(12), [6,8]));
+  assert.ok(has(routes(10,'C'), [6,10]));
+  assert.ok(has(routes(11), [7]));
+  assert.ok(has(routes(11,'B','ella'), [6]));
+  assert.ok(has(routes(12), [7,8]));
   assert.ok(has(routes(12,'C'), [10,8]));
-  assert.ok(has(routes(13), [8,10], true), 'Park overnight shifts transfer to next day');
+  assert.ok(has(routes(13), [8,10]), 'Park overnight and next-day transfer are standard');
   const rendered = [];
   const layer = { clearLayers() { rendered.length=0; } };
   const map = { fitBounds(coords, options) { this.bounds=coords; this.options=options; } };

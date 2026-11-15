@@ -2,6 +2,7 @@
   "name": "sri-lanka-trip",
   "private": true,
   "scripts": {
+    "pretest": "node build-page.mjs",
     "test": "node --test",
     "build": "wrangler deploy --dry-run",
     "dev": "wrangler dev"
