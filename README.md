@@ -25,7 +25,7 @@ Percent-encode special characters in the database password when putting it into 
 
 The workflow applies [supabase/schema.sql](supabase/schema.sql) in a transaction before deployment. It creates only `sri_lanka_comments`, `sri_lanka_answers`, their index, and the `sri_lanka_save_answers` function. It can run repeatedly. RLS and grants prevent anonymous and ordinary authenticated Supabase clients from accessing these tables or calling the save function. The Worker alone uses the server key. The key has project-wide privileges, so keep it in GitHub and Cloudflare secrets.
 
-Push the repository to `main`, then check **Actions → Cloudflare**. Sign in using only `SITE_PASSWORD`. No username is required. A signed session cookie keeps the browser signed in for 30 days. Changing the password invalidates existing sessions. The workflow checks the live page, comments, and questionnaire reads after deploying. First-time DNS and certificate provisioning can delay that check. Rerun the workflow once provisioning completes if needed.
+Push the repository to `main`, then check **Actions → Cloudflare**. Sign in using only `SITE_PASSWORD`. No username is required. A signed session cookie keeps the browser signed in for 30 days. Changing the password invalidates existing sessions. CI runs automated tests and a Worker build before deployment. Verify the live login, comments, and questionnaire manually after deployment because Cloudflare challenges automated requests.
 
 The database starts empty. Existing hosted-site or Docker data is not imported. Schema changes apply before code and must remain compatible with the previous deployed version.
 

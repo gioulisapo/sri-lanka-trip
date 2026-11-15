@@ -67,35 +67,6 @@ jobs:
         run: psql --dbname="$PGDATABASE" --no-psqlrc --set ON_ERROR_STOP=1 --single-transaction --file supabase/schema.sql
       - name: Deploy Worker and secrets together
         run: npx wrangler deploy --var "SUPABASE_URL:$SUPABASE_URL" --secrets-file "$RUNNER_TEMP/worker-secrets.json"
-      - name: Check live page and database access
-        run: |
-          node --input-type=module <<'JS'
-          import assert from 'node:assert/strict';
-          const base = 'https://sri-lanka.giouliscloud.gr';
-          const anonymous = await fetch(base + '/api/answers', { signal: AbortSignal.timeout(30000) });
-          if (anonymous.status !== 401) {
-            console.error('Unexpected anonymous response', {
-              status: anonymous.status,
-              server: anonymous.headers.get('server'),
-              mitigation: anonymous.headers.get('cf-mitigated'),
-              ray: anonymous.headers.get('cf-ray'),
-              body: (await anonymous.text()).slice(0, 1000)
-            });
-          }
-          assert.equal(anonymous.status, 401);
-          const login = await fetch(base + '/login', {
-            method: 'POST', redirect: 'manual',
-            headers: { Origin: base, 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ password: process.env.SITE_PASSWORD }),
-            signal: AbortSignal.timeout(30000)
-          });
-          assert.equal(login.status, 303);
-          const headers = { Cookie: login.headers.get('Set-Cookie').split(';')[0] };
-          for (const path of ['/', '/api/answers', '/api/comments?section=flights']) {
-            const response = await fetch(base + path, { headers, signal: AbortSignal.timeout(30000) });
-            assert.equal(response.status, 200, path);
-          }
-          JS
       - name: Remove temporary secrets
         if: always()
         run: rm -f "$RUNNER_TEMP/worker-secrets.json"
