@@ -3,7 +3,7 @@ import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 const sessionSeconds = 30 * 24 * 60 * 60;
 const equal = (a, b) => timingSafeEqual(createHash('sha256').update(a).digest(), createHash('sha256').update(b).digest());
 const signature = (expires, password) => createHmac('sha256', password).update('sri-lanka-session:' + expires).digest('hex');
-const headers = { 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' };
+const headers = { 'Cache-Control': 'no-store', 'Referrer-Policy': 'same-origin' };
 
 function loginPage(incorrect = false) {
   return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign in | Sri Lanka</title>

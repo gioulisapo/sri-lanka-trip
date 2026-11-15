@@ -40,6 +40,24 @@ test('shows a password-only form and protects APIs against forged identity heade
   }
 });
 
+test('login pages preserve the browser form Origin header', async () => {
+  for (const response of [
+    await worker.fetch(request(), env),
+    await worker.fetch(request('/login', {
+      method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ password: 'wrong' })
+    }), env)
+  ]) {
+    // no-referrer makes native form submissions send Origin: null and fail CSRF checks.
+    assert.equal(response.headers.get('Referrer-Policy'), 'same-origin');
+  }
+  const denied = await worker.fetch(request('/login', {
+    method: 'POST', headers: { Origin: 'null', 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ password })
+  }), env);
+  assert.equal(denied.status, 403);
+});
+
 test('serves the page after password-only authentication with a one-character password', async () => {
   const response = await worker.fetch(request('/', { headers: { Cookie: cookie } }), env);
   assert.equal(response.status, 200);
