@@ -2,9 +2,11 @@
 
 ## Cloudflare deployment through GitHub Actions
 
-Production URL: https://sri-lanka.giouliscloud.gr. Pushes to `main` test and deploy the Worker. Pull requests only test and build. The Cloudflare deployment uses separate trip tables in your existing Supabase project. Docker continues to use its local SQLite database.
+Production URL: https://sri-lanka.giouliscloud.gr. Pushes to `main` test and deploy the Worker. Pull requests only test and build. The Cloudflare deployment uses a dedicated Supabase project for this trip. Docker continues to use its local SQLite database.
 
 ### One-time setup
+
+Create a dedicated Supabase project named `sri-lanka-trip`. Use that project's URL, server secret key, and database connection URI for every Supabase setting below. Do not use credentials from your other project's database. CI creates the trip tables during the first deployment.
 
 The `giouliscloud.gr` zone must be active in the Cloudflare account used below. Wrangler's Custom Domain configuration creates the site's DNS record and certificate. An existing DNS record at `sri-lanka.giouliscloud.gr` must be removed before attaching the Worker. Do not remove a record serving another application without checking it first.
 
@@ -13,7 +15,7 @@ In the GitHub repository, open **Settings → Secrets and variables → Actions*
 | Type | Name | Value |
 | --- | --- | --- |
 | Variable | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID containing the domain |
-| Variable | `SUPABASE_URL` | Existing project's URL, such as `https://PROJECT.supabase.co` |
+| Variable | `SUPABASE_URL` | Dedicated trip project's URL, such as `https://PROJECT.supabase.co` |
 | Secret | `CLOUDFLARE_API_TOKEN` | Token scoped to this account with Workers Scripts Edit and to `giouliscloud.gr` with Zone Read and DNS Edit |
 | Secret | `SUPABASE_SECRET_KEY` | Supabase project's server-side `sb_secret_...` key, from Project Settings → API Keys |
 | Secret | `SUPABASE_DB_URL` | PostgreSQL connection URI from Supabase's Connect dialog, using the shared session pooler for GitHub's IPv4 runners, with the real database password and `sslmode=require` |
