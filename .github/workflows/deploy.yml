@@ -64,7 +64,7 @@ jobs:
           }), { mode: 0o600 });
           JS
       - name: Apply trip schema
-        run: psql --no-psqlrc --set ON_ERROR_STOP=1 --single-transaction --file supabase/schema.sql
+        run: psql --dbname="$PGDATABASE" --no-psqlrc --set ON_ERROR_STOP=1 --single-transaction --file supabase/schema.sql
       - name: Deploy Worker and secrets together
         run: npx wrangler deploy --var "SUPABASE_URL:$SUPABASE_URL" --secrets-file "$RUNNER_TEMP/worker-secrets.json"
       - name: Check live page and database access
