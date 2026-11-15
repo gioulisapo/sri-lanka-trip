@@ -1,0 +1,67 @@
+name: Worker logs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  logs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Capture 45 seconds of safe Worker diagnostics
+        run: |
+          status=0
+          timeout 45s npx wrangler tail sri-lanka-trip --format=json > "$RUNNER_TEMP/worker-tail.json" || status=$?
+          if [ "$status" -ne 0 ] && [ "$status" -ne 124 ]; then exit "$status"; fi
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          path = Path(os.environ['RUNNER_TEMP']) / 'worker-tail.json'
+          raw = path.read_text()
+          decoder = json.JSONDecoder()
+          count = 0
+          while raw:
+              start = raw.find('{')
+              if start < 0:
+                  break
+              raw = raw[start:]
+              try:
+                  event, end = decoder.raw_decode(raw)
+              except json.JSONDecodeError:
+                  raw = raw[1:]
+                  continue
+              raw = raw[end:]
+              if not isinstance(event, dict) or 'outcome' not in event:
+                  continue
+              details = event.get('event') or {}
+              request = details.get('request') or {}
+              response = details.get('response') or {}
+              # Headers, cookies, IP addresses, bodies, and query strings stay private.
+              print(json.dumps({
+                  'outcome': event.get('outcome'),
+                  'method': request.get('method'),
+                  'path': urlsplit(request.get('url', '')).path,
+                  'status': response.get('status'),
+                  'errors': [entry.get('message') for entry in event.get('exceptions', [])]
+              }))
+              count += 1
+          path.unlink(missing_ok=True)
+          print(f'Captured {count} Worker events.')
+          PY
+      - name: Remove raw logs
+        if: always()
+        run: rm -f "$RUNNER_TEMP/worker-tail.json"
