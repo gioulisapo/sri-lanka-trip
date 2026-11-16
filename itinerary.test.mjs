@@ -147,7 +147,6 @@ test('daily maps follow the selected day, traveller split and hike, including re
   const rendered = [];
   const layer = { clearLayers() { rendered.length=0; } };
   const map = { fitBounds(coords, options) { this.bounds=coords; this.options=options; } };
-  const caption = {};
   Object.assign(context, {
     selector: { value:'A' },
     document: { querySelector: () => ({ value:'stage13' }) },
@@ -156,14 +155,14 @@ test('daily maps follow the selected day, traveller split and hike, including re
       circleMarker() { return { addTo() { return this; }, bindPopup() { return this; } }; }
     }
   });
-  const view = { day:10, map, layer, caption };
+  const view = { day:10, map, layer };
   context.drawDailyRoute(view);
   assert.ok(rendered.some(line => line.coords.some(coord=>coord[0]===context.mapPoints[18][2])));
   context.selector.value='C';
   context.drawDailyRoute(view);
   assert.ok(!rendered.some(line=>line.coords.some(coord=>coord[0]===context.mapPoints[18][2])), 'Old hike removed on plan switch');
   assert.ok(rendered.some(line=>line.coords.some(coord=>coord[0]===context.mapPoints[10][2])));
-  assert.match(caption.textContent, /Ella/);
+  assert.ok(!html.includes('daily-route-caption'), 'Daily maps have no route captions');
   assert.equal(map.options.maxZoom,12);
   assert.ok(!html.includes('const prev=cards[i-1]'));
 });
