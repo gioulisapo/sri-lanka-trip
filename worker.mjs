@@ -1,4 +1,5 @@
 import html from './page.generated.mjs';
+const textKeys = new Set([...html.matchAll(/data-edit-id="([a-z0-9-]+)"/g)].map(match => match[1]));
 const sections = new Set(["dec-4", "alternatives", "booking", "day-1", "day-10", "day-11", "day-2", "day-3", "day-4", "day-5", "day-6", "day-7", "day-8", "day-9", "dec-10", "dec-11", "dec-12", "dec-13", "dec-14", "dec-15", "dec-16", "dec-17", "dec-5", "dec-6", "dec-7", "dec-8", "dec-9", "diving", "flights", "hiking", "itinerary", "map", "plans", "practical", "questions", "route", "sources", "surfing", "transport"]);
 
 import { sqliteStore } from './storage.mjs';
@@ -11,6 +12,21 @@ export default {
       return new Response(html, {
         headers: {'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'strict-origin-when-cross-origin'}
       });
+    }
+    if (url.pathname === '/api/text') {
+      if (!request.headers.get('oai-authenticated-user-id')) return new Response(null, { status: 401 });
+      if (request.method === 'GET') return Response.json(await store.getText(), { headers: { 'Cache-Control': 'no-store' } });
+      if (request.method !== 'POST') return new Response(null, { status: 405 });
+      if (request.headers.get('Origin') !== url.origin) return new Response(null, { status: 403 });
+      const payload = await request.json().catch(() => null);
+      if (!payload || !Number.isSafeInteger(payload.revision) || payload.revision < 0
+        || !payload.edits || typeof payload.edits !== 'object' || Array.isArray(payload.edits)) return new Response(null, { status: 400 });
+      const entries = Object.entries(payload.edits);
+      if (!entries.length || entries.length > textKeys.size || entries.some(([key, value]) =>
+        !textKeys.has(key) || typeof value !== 'string' || value.length > 5000)) return new Response(null, { status: 400 });
+      const revision = await store.saveText(payload.edits, payload.revision);
+      if (revision === null) return new Response(null, { status: 409 });
+      return Response.json({ revision });
     }
     if (url.pathname === '/api/answers') {
       if (!request.headers.get('oai-authenticated-user-id')) return new Response(null,{status:401});

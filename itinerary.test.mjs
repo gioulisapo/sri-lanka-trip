@@ -15,17 +15,17 @@ test('ordinary sightseeing days start at 08:00 or later across every plan and hi
       assert.ok(time >= '08:00', `${day} December still schedules ${time}`);
     }
   }
-  const script = html.slice(html.indexOf('const points=['), html.indexOf('function choosePlan(){'));
+  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
   const context = {};
   runInNewContext(script, context);
   for (const plan of ['A', 'B', 'C']) {
-    const safariDay = context.dailyRoutes(12, plan, 'ella');
+    const safariDay = context.dailyRoutes(plan === 'A' ? 11 : 12, plan, 'ella');
     assert.ok(!safariDay.some(route => route.ids[0] === 8 && route.ids.includes(10)), 'No safari-plus-coast transfer');
-    assert.ok(context.dailyRoutes(13, plan, 'ella').some(route => route.ids[0] === 8 && route.ids.at(-1) === 10 && !route.optional));
+    assert.ok(context.dailyRoutes(plan === 'A' ? 12 : 13, plan, 'ella').some(route => route.ids[0] === 8 && route.ids.at(-1) === 10 && !route.optional));
     assert.ok(!context.dailyRoutes(14, plan, 'ella').some(route => route.ids.includes(16)), 'No dawn whale outing');
   }
   assert.ok(!context.dailyRoutes(10, 'C', 'ella').some(route => route.ids.includes(17)), 'Shared diving uses a transfer-only day');
-  assert.ok(!context.dailyRoutes(11, 'A', 'ella').some(route => route.ids.includes(18)), 'Recovery day has no second full hike');
+  assert.ok(!context.dailyRoutes(11, 'A', 'ella').some(route => route.ids.includes(18)), 'Safari day has no second full hike');
 });
 
 test('required Polonnaruwa and optional coastal routes are represented on the map', async () => {
@@ -34,7 +34,7 @@ test('required Polonnaruwa and optional coastal routes are represented on the ma
   assert.ok(!html.includes('id="culture-select"'));
   assert.ok(html.includes('Sigiriya + Polonnaruwa · required'));
   assert.ok(html.includes('id="hike-select"'));
-  const script = html.slice(html.indexOf('const points=['), html.indexOf('function choosePlan(){'));
+  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
   const lines = [];
   const controls = { '#hike-select': { value: 'stage13' }, '#map-state': {} };
   const context = {
@@ -65,7 +65,7 @@ test('every trip day has a proposed breakdown and plan switching shows the match
   for (let day = 4; day <= 17; day++) {
     assert.ok(html.includes('data-schedule-day="' + day + '"'), 'Missing schedule for ' + day + ' December');
   }
-  const choosePlan = html.match(/function choosePlan\(\)\{[\s\S]*?\n\}/)[0];
+  const choosePlan = html.match(/function choosePlan\s*\(\)\s*\{[\s\S]*?(?=\n\s*selector\.addEventListener)/)[0];
   const tracks = [
     { plans: 'ABC' }, { plans: 'AB', hike: 'stage13' }, { plans: 'AB', hike: 'ella' },
     { plans: 'C' }
@@ -111,7 +111,7 @@ test('every trip day has a proposed breakdown and plan switching shows the match
 
 test('daily maps follow the selected day, traveller split and hike, including return legs', async () => {
   const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const script = html.slice(html.indexOf('const points=['), html.indexOf('function choosePlan(){'));
+  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
   const context = {};
   runInNewContext(script + ';globalThis.mapPoints=points;', context);
   const routes = (day, plan='A', hike='stage13') => JSON.parse(JSON.stringify(context.dailyRoutes(day, plan, hike)));
@@ -134,11 +134,16 @@ test('daily maps follow the selected day, traveller split and hike, including re
   assert.ok(has(routes(10), [7,18,7]), 'Stage 13 starts locally with finish pickup back to Haputale');
   assert.ok(has(routes(10,'B','ella'), [6,17,6]));
   assert.ok(has(routes(10,'C'), [6,10]));
-  assert.ok(has(routes(11), [7]));
+  assert.ok(has(routes(10), [10]), 'Maria dives locally on the 10th');
+  assert.ok(has(routes(11), [7,8]));
+  assert.ok(has(routes(11,'A','ella'), [6,8]), 'Ella hike also reaches the shared safari');
+  assert.ok(has(routes(11), [10,8]), 'Maria joins the safari from Unawatuna');
   assert.ok(has(routes(11,'B','ella'), [6]));
-  assert.ok(has(routes(12), [7,8]));
+  assert.ok(has(routes(12), [8,13]), 'Maria leaves the park overnight directly for CMB');
+  assert.ok(has(routes(12), [8,10]), 'Apostolos transfers to the coast after the shared safari');
   assert.ok(has(routes(12,'C'), [10,8]));
-  assert.ok(has(routes(13), [8,10]), 'Park overnight and next-day transfer are standard');
+  assert.ok(has(routes(13), [10]), 'Coastal rest day after the 12th transfer');
+  assert.ok(has(routes(13,'B'), [8,10]), 'Alternative B retains its solo safari');
   const rendered = [];
   const layer = { clearLayers() { rendered.length=0; } };
   const map = { fitBounds(coords, options) { this.bounds=coords; this.options=options; } };
@@ -165,7 +170,7 @@ test('daily maps follow the selected day, traveller split and hike, including re
 
 test('Apostolos return ticket and airport clock times replace the provisional flight', async () => {
   const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const flights = html.match(/<section[^>]*id="flights"[\s\S]*?<\/section>/)[0];
+  const flights = html.match(/<section[^>]*id="flights"[\s\S]*?<\/section>/)[0].replace(/\s+/g, ' ');
   assert.match(flights, /RETURN · 17–18 DEC/);
   assert.match(flights, /17 Dec · 6E 1170 CMB 20:05 → DEL 23:55/);
   assert.match(flights, /18 Dec · 6E 1901 DEL 07:20 → ATH 11:55/);
@@ -178,7 +183,7 @@ test('Apostolos return ticket and airport clock times replace the provisional fl
 
 test('hides answered questions and preserves their original keys when saving new answers', async () => {
   const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const script = html.match(/const questions=\[[\s\S]*?loadAnswers\(\);/)[0];
+  const script = html.match(/const questions\s*=\s*\[[\s\S]*?loadAnswers\(\);/)[0];
   const fields = new Map();
   const form = {
     elements: { namedItem: key => fields.get(key) },
@@ -232,13 +237,13 @@ test('quick reference links reach the trip sections and the new guides follow th
   assert.ok(html.indexOf('id="history"') < html.indexOf('id="culture"'));
   assert.ok(html.indexOf('id="culture"') < html.indexOf('id="food"'));
   assert.match(html, /LKR 100,000 total for both travellers/);
-  assert.match(html, /Hotels, private drivers, guides, safari and diving are excluded/);
+  assert.match(html.replace(/\s+/g, ' '), /Hotels, private drivers, guides, safari and diving are excluded/);
   assert.match(html, /illustration, not a live exchange quote/);
 });
 
 test('checklist restores and saves ticks locally, and remains usable if storage fails', async () => {
   const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const script = html.match(/const todoBoxes=[\s\S]*?\/\/ End trip checklist\./)?.[0];
+  const script = html.match(/const todoBoxes\s*=[\s\S]*?\/\/ End trip checklist\./)?.[0];
   assert.ok(script, 'Missing checklist script');
   const setup = (saved, failure) => {
     const boxes = ['todo-cash','todo-driver'].map(id => ({ id, checked:false, addEventListener(type,callback) { this.change=callback; } }));
@@ -271,4 +276,16 @@ test('checklist restores and saves ticks locally, and remains usable if storage 
   assert.doesNotThrow(()=>full.boxes[0].change());
   assert.equal(full.boxes[0].checked,true);
   assert.match(full.status.textContent,/not saved/);
+});
+
+test('shared safari proposal keeps the full hike and moves Maria diving before it', async () => {
+  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
+  const card = day => html.match(new RegExp('<div class="stop" data-date="'+day+'"[\\s\\S]*?(?=<div class="stop" data-date=|<section class="panel" data-thread="plans")'))[0];
+  assert.match(card(10), /Maria · her one afternoon dive day/);
+  assert.match(card(11), /Together · afternoon safari and Udawalawe overnight/);
+  assert.match(card(12), /Udawalawe → CMB/);
+  assert.match(html, /A · Shared safari and full mountain hike/);
+  assert.match(html, /Reserve Maria’s one dive day on 10 December in A/);
+  assert.match(html, /Maria: 12 December, Udawalawe → CMB in A/);
+  assert.ok(!html.includes('The 11th is recovery.'));
 });

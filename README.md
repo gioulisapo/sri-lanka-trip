@@ -54,6 +54,14 @@ Requires Docker Engine and Docker Compose v2.
 
 The site has a shared password. Comment names Maria, Apostolis and Giannis are selectable display names, not individual authenticated accounts.
 
+## Editing page text
+
+After signing in, choose **Edit text**, click the outlined wording, then **Save text** or **Cancel**. This includes checklist wording, descriptions and static headings. Anyone with the trip password can save edits. Changes appear on other devices after reloading. Checklist ticks still belong to each browser.
+
+Edits are plain text. They do not add checklist items, change links, alter schedule times or update map routes and plan logic. Plan-controlled headings stay read-only. Saving rejects outdated revisions instead of overwriting someone else's changes, and failed saves leave the draft open. Copy a conflicted draft before cancelling and reopening edit mode to load the latest version.
+
+Shared text is stored separately from comments and answers in `trip_text` for Docker or `sri_lanka_text` for Cloudflare. The existing migration/deployment workflow creates this storage. Saved wording overrides the text in `site.html` and survives deployments. Preserve each `data-edit-id` when changing source text, and assign a new unique ID if replacing a text block whose old saved wording should no longer apply. Do not regenerate or reuse these IDs for unrelated text.
+
 ## Remote access
 
 The default port binds to localhost. Put an HTTPS reverse proxy or Cloudflare Tunnel in front of it for remote access, and set PUBLIC_URL to the exact external origin, for example https://trip.example.com. Restart after changing .env. Correct PUBLIC_URL is required for comment and questionnaire writes. Use HTTPS for password protection over the internet.

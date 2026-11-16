@@ -39,3 +39,31 @@ END;
 $$;
 REVOKE ALL ON FUNCTION public.sri_lanka_save_answers(jsonb, integer) FROM PUBLIC, anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.sri_lanka_save_answers(jsonb, integer) TO service_role;
+
+CREATE TABLE IF NOT EXISTS public.sri_lanka_text (
+  id integer PRIMARY KEY CHECK (id = 1),
+  edits jsonb NOT NULL DEFAULT '{}'::jsonb,
+  revision integer NOT NULL DEFAULT 0
+);
+ALTER TABLE public.sri_lanka_text ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.sri_lanka_text FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.sri_lanka_text TO service_role;
+
+CREATE OR REPLACE FUNCTION public.sri_lanka_save_text(new_edits jsonb, expected_revision integer)
+RETURNS integer
+LANGUAGE plpgsql
+SECURITY INVOKER
+SET search_path = ''
+AS $$
+DECLARE saved_revision integer;
+BEGIN
+  INSERT INTO public.sri_lanka_text (id) VALUES (1) ON CONFLICT DO NOTHING;
+  UPDATE public.sri_lanka_text
+  SET edits = edits || new_edits, revision = revision + 1
+  WHERE id = 1 AND revision = expected_revision
+  RETURNING revision INTO saved_revision;
+  RETURN saved_revision;
+END;
+$$;
+REVOKE ALL ON FUNCTION public.sri_lanka_save_text(jsonb, integer) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.sri_lanka_save_text(jsonb, integer) TO service_role;

@@ -1,0 +1,5 @@
+CREATE TABLE trip_text (
+  id INTEGER PRIMARY KEY CHECK (id = 1),
+  edits TEXT NOT NULL DEFAULT '{}',
+  revision INTEGER NOT NULL DEFAULT 0
+);
