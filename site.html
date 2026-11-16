@@ -868,16 +868,7 @@
       font: inherit
     }
 
-    #questionnaire label {
-      display: block;
-      margin: 14px 0
-    }
 
-    #questionnaire textarea {
-      display: block;
-      width: 100%;
-      min-height: 65px
-    }
 
     table {
       width: 100%;
@@ -910,10 +901,6 @@
       cursor: pointer
     }
 
-    #copy-output {
-      width: 100%;
-      min-height: 200px
-    }
   </style>
   <style>
     .day-schedule {
@@ -1140,14 +1127,12 @@
       <h2 id="quick-reference-title">Quick reference</h2>
       <ul class="quick-links">
         <li><a href="#flights">Flights</a></li>
-        <li><a href="#route">Route overview</a></li>
         <li><a href="#itinerary">Day-by-day</a></li>
         <li><a href="#plans">Plan options</a></li>
         <li><a href="#map">Interactive map</a></li>
         <li><a href="#hiking">Hiking</a></li>
         <li><a href="#diving">Diving</a></li>
         <li><a href="#practical">Transfers &amp; wildlife</a></li>
-        <li><a href="#questions">Maria’s questions</a></li>
         <li><a href="#sources">Sources</a></li>
         <li><a href="#todo">To-do &amp; money</a></li>
         <li><a href="#history">History</a></li>
@@ -1191,29 +1176,6 @@
           book a private Udawalawe-to-CMB transfer around 10:00, or earlier if advised, targeting the airport by 16:00.
           Alternatives B/C retain a coast-to-CMB transfer around noon. Confirm pickup with the driver and current
           airline guidance.</p>
-      </section>
-      <section class="panel" data-thread="route" id="route">
-        <h2 data-edit-id="route-1">Recommended route</h2>
-        <p data-edit-id="route-2">Begin together in Sigiriya after the overnight flight. Keep Sigiriya and Polonnaruwa
-          on 6 December, after an 08:00 breakfast; this is the one full sightseeing day. Dambulla stays optional on
-          arrival only if both travellers feel well. On the 7th, travel through the Kandy area without a temple visit or
-          tea-factory tour. Keep two nights in Nuwara Eliya for Horton Plains on the 8th, the only early-start activity.
-        </p>
-        <p data-edit-id="route-3">Option A remains the provisional plan: split on 9 December, with Maria transferring to
-          Unawatuna and Apostolos staying in Haputale for Stage 13 or Ella for Ella Rock. Choose one primary hike on the
-          10th, then meet Maria at Udawalawe for a shared afternoon safari and park-area overnight on the 11th. This
-          replaces the full post-hike recovery day. Option B keeps the shared mountain transfer on the 9th; Maria leaves
-          the selected base for Unawatuna on the 10th. Option C gives up the full mountain hike and uses the 10th only
-          to transfer together to Unawatuna for shared diving on the 11th.</p>
-        <p data-edit-id="route-4">Both travellers are Advanced Open Water divers. Maria keeps exactly one dive day, a
-          proposed 13:30–17:30 afternoon session on 10 December in A, or 11 December in B/C, preserving at least 24
-          hours before her 12 December 20:05 flight. No surfing. In A, both travellers have the afternoon Udawalawe
-          safari and overnight on the 11th. On the 12th Maria travels directly to CMB while Apostolos transfers to
-          Unawatuna. The 13th is free coastal time; Apostolos keeps afternoon diving on the 14th. B/C retain the solo
-          safari on the 12th and coast transfer on the 13th, so Maria misses the safari in those alternatives. Whale
-          watching and the second full hike are removed. Galle stays on the 15th, then the airport-area overnight on the
-          16th, with one short Colombo stop optional. Hotels, guides, drivers, boats and the split remain unconfirmed.
-        </p>
       </section>
       <section class="panel" data-thread="itinerary" id="itinerary">
         <h2 data-edit-id="itinerary-1">Day-by-day working itinerary</h2>
@@ -3410,16 +3372,6 @@
             Udawalawe on the 12th, then in Unawatuna on 13–15 December, with the airport-area overnight retained on the
             16th. All property availability remains unchecked.</span></p>
       </section>
-      <section class="panel" data-thread="questions" id="questions">
-        <h2 data-edit-id="questions-1">Questions for Maria</h2>
-        <p data-edit-id="questions-2">Maria has confirmed one day of diving and no surfing. Answered questions are
-          removed from this list. Save the remaining answers to share across devices, then copy them into a message for
-          the next itinerary revision.</p>
-        <form id="questionnaire"></form><button id="save-answers" type="button">Save answers</button> <button
-          id="copy-answers" type="button">Copy answers</button>
-        <p id="answer-status" role="status"></p><textarea aria-label="Answers ready to copy" hidden="" id="copy-output"
-          readonly=""></textarea>
-      </section>
       <section class="panel" data-thread="sources" id="sources">
         <h2 data-edit-id="sources-1">Sources and outstanding decisions</h2>
         <p data-edit-id="sources-2">Core research checked 14 November 2026. Relaxed-pace revision: 15 November 2026.
@@ -4103,49 +4055,6 @@
       cards.forEach(element => visibleMaps.observe(element));
     } else document.querySelector('#map-state').textContent = 'Map library unavailable. Use the navigation links on each day card.';
     choosePlan();
-    const questions = [
-      ['5', 'Independent transfer on 9 December'], ['6', 'Horton Plains participation'],
-      ['8', 'Diving together on Maria’s one dive day'], ['9', 'Private driver budget'],
-      ['10', 'Accommodation style'], ['11', 'Additional preferences']
-    ];
-    // Keep the original answer keys so existing saved decisions are not reassigned.
-    const confirmedAnswers = {
-      0: 'Confirmed: CMB arrival 5 Dec 08:10; departure 12 Dec 20:05.',
-      1: 'Not applicable — no surfing.', 2: 'One day of scuba diving; no surfing.',
-      3: 'Advanced Open Water', 4: 'No surfing; shared hiking preference remains unconfirmed.',
-      7: 'One dive day, proposed for the morning of 11 December.'
-    };
-    let answers = { 5: '', 6: '', 8: '', 9: '', 10: '', 11: '', ...confirmedAnswers };
-    const form = document.querySelector('#questionnaire'), status = document.querySelector('#answer-status');
-    function renderQuestions() {
-      form.replaceChildren();
-      let number = 0;
-      questions.forEach(([key, label]) => {
-        if (answers[key].trim()) return;
-        const wrapper = document.createElement('label'); wrapper.textContent = (++number) + '. ' + label + ' · pending';
-        const field = document.createElement('textarea'); field.name = key; field.value = ''; field.placeholder = 'Pending — add your answer';
-        wrapper.append(field); form.append(wrapper);
-      });
-      if (!number) status.textContent = 'All questions have been answered.';
-    }
-    renderQuestions();
-    let revision = 0;
-    async function loadAnswers() {
-      try {
-        const response = await fetch('/api/answers'); if (!response.ok) throw new Error(); const data = await response.json(); revision = data.revision; answers = { ...answers, ...data.answers, ...confirmedAnswers };
-        status.textContent = 'Saved answers loaded. Only unanswered questions are shown.'; renderQuestions();
-      } catch { status.textContent = 'Could not load shared answers; retry before saving.'; document.querySelector('#save-answers').disabled = true; }
-    }
-    document.querySelector('#save-answers').addEventListener('click', async () => {
-      const button = document.querySelector('#save-answers'); button.disabled = true;
-      try { const draft = { ...answers, ...Object.fromEntries(new FormData(form)) }; const response = await fetch('/api/answers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ answers: draft, revision }) }); if (response.status === 409) { status.textContent = 'Someone updated these answers. Copy your draft, then reload before saving.'; return; } if (!response.ok) throw new Error(); answers = draft; revision = (await response.json()).revision; status.textContent = 'Answers saved. Answered questions are removed from the list.'; renderQuestions(); } catch { status.textContent = 'Save failed. Your answers remain in the form.'; } finally { button.disabled = false; }
-    });
-    document.querySelector('#copy-answers').addEventListener('click', async () => {
-      const draft = { ...answers, ...Object.fromEntries(new FormData(form)) };
-      const value = questions.map(([key, label], i) => (i + 1) + '. ' + label + '\n' + (draft[key].trim() || 'Pending')).join('\n\n');
-      try { await navigator.clipboard.writeText(value); status.textContent = 'Answers copied.'; } catch { const out = document.querySelector('#copy-output'); out.hidden = false; out.value = value; out.select(); status.textContent = 'Select and copy the answers below.'; }
-    });
-    loadAnswers();
   </script>
   <script>
     const todoBoxes = [...document.querySelectorAll('#todo input[type="checkbox"]')];

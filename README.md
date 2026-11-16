@@ -25,7 +25,7 @@ Percent-encode special characters in the database password when putting it into 
 
 The workflow applies [supabase/schema.sql](supabase/schema.sql) in a transaction before deployment. It creates only `sri_lanka_comments`, `sri_lanka_answers`, their index, and the `sri_lanka_save_answers` function. It can run repeatedly. RLS and grants prevent anonymous and ordinary authenticated Supabase clients from accessing these tables or calling the save function. The Worker alone uses the server key. The key has project-wide privileges, so keep it in GitHub and Cloudflare secrets.
 
-Push the repository to `main`, then check **Actions → Cloudflare**. Sign in using only `SITE_PASSWORD`. No username is required. A signed session cookie keeps the browser signed in for 30 days. Changing the password invalidates existing sessions. CI runs automated tests and a Worker build before deployment. Verify the live login, comments, and questionnaire manually after deployment because Cloudflare challenges automated requests.
+Push the repository to `main`, then check **Actions → Cloudflare**. Sign in using only `SITE_PASSWORD`. No username is required. A signed session cookie keeps the browser signed in for 30 days. Changing the password invalidates existing sessions. CI runs automated tests and a Worker build before deployment. Verify the live login, comments and shared text editing manually after deployment.
 
 The database starts empty. Existing hosted-site or Docker data is not imported. Schema changes apply before code and must remain compatible with the previous deployed version.
 
@@ -64,11 +64,11 @@ Shared text is stored separately from comments and answers in `trip_text` for Do
 
 ## Remote access
 
-The default port binds to localhost. Put an HTTPS reverse proxy or Cloudflare Tunnel in front of it for remote access, and set PUBLIC_URL to the exact external origin, for example https://trip.example.com. Restart after changing .env. Correct PUBLIC_URL is required for comment and questionnaire writes. Use HTTPS for password protection over the internet.
+The default port binds to localhost. Put an HTTPS reverse proxy or Cloudflare Tunnel in front of it for remote access, and set PUBLIC_URL to the exact external origin, for example https://trip.example.com. Restart after changing .env. Correct PUBLIC_URL is required for comment and shared text writes. Use HTTPS for password protection over the internet.
 
 ## Data
 
-Comments and questionnaire answers persist in the Docker volume trip-data. Ordinary docker compose down preserves the volume; down -v deletes it. The export starts with an empty database and the itinerary's prefilled questionnaire defaults. Existing hosted-site comments and saved answers are not included.
+Comments and questionnaire answers persist in the Docker volume trip-data. Ordinary docker compose down preserves the volume; down -v deletes it. The export starts with an empty database. The former questionnaire is no longer shown; previously saved answers remain in storage. Existing hosted-site comments and saved answers are not included.
 
 Back up the SQLite database with SQLite's backup API or stop the container before copying the entire data volume, including any WAL files. Keep backups private.
 
