@@ -860,6 +860,28 @@
         display: none
       }
     }
+
+    .has-place-photo {display:grid;grid-template-columns:minmax(0,1fr) 96px;column-gap:14px;align-items:start}
+    .has-place-photo > :not(.place-photo) {grid-column:1}
+    .has-place-photo > .place-photo {grid-column:2;grid-row:1 / span 2}
+    .place-photo {position:relative;width:96px;height:76px;padding:0;border:0;border-radius:8px;overflow:hidden;background:#e7eeea;cursor:zoom-in}
+    .place-photo img {width:100%;height:100%;object-fit:cover;vertical-align:middle}
+    .place-photo span {position:absolute;right:4px;bottom:4px;padding:2px 5px;border-radius:3px;background:#123b38;color:#fff;font:11px/1.4 system-ui,sans-serif}
+    .place-photo.photo-unavailable span {inset:0;display:grid;place-items:center;background:#e7eeea;color:#145e53}
+    .place-photo:focus-visible,.photo-viewer button:focus-visible {outline:3px solid #c68c21;outline-offset:3px}
+    .photo-viewer {width:min(960px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+    .photo-viewer:modal {overscroll-behavior:contain}
+    .photo-viewer::backdrop {background:rgb(10 28 26 / .82);overflow:hidden;overscroll-behavior:contain}
+    .photo-viewer-heading {display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:16px}
+    .photo-viewer h2 {font-size:20px;margin:0}
+    .photo-viewer form {flex:none}
+    .photo-viewer button {min-height:44px;padding:8px 14px;border:1px solid #a2b9af;border-radius:7px;background:#eff6f2;color:#145e53;font:inherit}
+    .photo-viewer figure {margin:0}
+    .photo-viewer img {width:100%;height:auto;max-height:70dvh;object-fit:contain;vertical-align:middle}
+    .photo-viewer figcaption {padding-top:12px;color:var(--muted);font-size:12px}
+    #place-photo-error {padding:24px;background:#eff6f2}
+    @media(max-width:520px) {.has-place-photo {grid-template-columns:minmax(0,1fr) 76px;column-gap:12px}.place-photo {width:76px;height:64px}.photo-viewer {padding:16px}}
+    @media print {.place-photo,.photo-viewer {display:none}.has-place-photo {display:block}}
   </style>
   <style>
     select,
@@ -1311,12 +1333,12 @@
             </div>
             <details>
               <summary>Optional Dambulla on arrival day · only if genuinely comfortable</summary>
-              <p data-edit-id="dec-5-19">Default: continue to Sigiriya and rest. Add the caves only if immigration is
+              <div data-place-photo="dambulla"><p data-edit-id="dec-5-19">Default: continue to Sigiriya and rest. Add the caves only if immigration is
                 quick, both travellers feel well after the overnight flight, and the driver confirms reaching the ticket
                 counter around 14:00–14:30 with enough time before current last entry. Allow 1.5–2 hours for the temple
                 steps and caves, then 30–45 minutes to Sigiriya. That puts hotel arrival around 17:00–18:00; the driver
                 must confirm the actual route and opening hours. If any condition fails, skip Dambulla without rushing.
-                It does not move to the 6th, which is reserved for Sigiriya and Polonnaruwa.</p>
+                It does not move to the 6th, which is reserved for Sigiriya and Polonnaruwa.</p></div>
               <p data-edit-id="dec-5-20">Accommodation: keep the proposed Sigiriya base for 5–6 December. No additional
                 arrival-day climb or booking is assumed.</p>
             </details>
@@ -1398,7 +1420,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
                       datetime="12:00">12:00</time></span>
-                  <div><strong data-edit-id="dec-6-7">Sigiriya fortress and gardens</strong>
+                  <div data-place-photo="sigiriya"><strong data-edit-id="dec-6-7">Sigiriya fortress and gardens</strong>
                     <p data-edit-id="dec-6-8">Keep three hours for the gardens, lion-paw gateway and summit. Take shade
                       and water breaks. This later start can be warmer; do not rush the climb.</p>
                   </div>
@@ -1419,7 +1441,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="14:30">14:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-6-13">Polonnaruwa · required core-site visit</strong>
+                  <div data-place-photo="polonnaruwa"><strong data-edit-id="dec-6-13">Polonnaruwa · required core-site visit</strong>
                     <p data-edit-id="dec-6-14">Keep three hours for the Sacred Quadrangle, Gal Vihara and selected
                       palace ruins, using a driver between monuments. Confirm monument closing times separately from
                       ticket-counter hours. Skip the museum and outlying ruins.</p>
@@ -1626,7 +1648,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="07:15">07:15</time>–<time
                       datetime="11:15">11:15</time></span>
-                  <div><strong data-edit-id="dec-8-9">World’s End circuit</strong>
+                  <div data-place-photo="horton"><strong data-edit-id="dec-8-9">World’s End circuit</strong>
                     <p data-edit-id="dec-8-10">Reserve four hours for the roughly 9 km loop, grassland and cloud forest,
                       the World’s End viewpoint and Baker’s Falls. Do not approach exposed edges in mist or strong wind.
                     </p>
@@ -1648,7 +1670,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="14:15">14:15</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-8-15">Rest, with an optional Gregory Lake stroll</strong>
+                  <div data-place-photo="gregory"><strong data-edit-id="dec-8-15">Rest, with an optional Gregory Lake stroll</strong>
                     <p data-edit-id="dec-8-16">Use this as a recovery afternoon. A short lakeside walk is enough if
                       weather improves; Maria can also use the town/rest option if she skips Horton Plains.</p>
                   </div>
@@ -1952,7 +1974,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
                       datetime="15:00">15:00</time></span>
-                  <div><strong data-edit-id="dec-10-5">Haputale → St Catherine · Stage 13</strong>
+                  <div data-place-photo="haputale"><strong data-edit-id="dec-10-5">Haputale → St Catherine · Stage 13</strong>
                     <p data-edit-id="dec-10-6">Keep up to six hours for the 14.6 km point-to-point hike, including
                       lunch. The official trail lists 810 m ascent and reports leeches and overgrowth; reconfirm
                       conditions with the guide.</p>
@@ -1987,7 +2009,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
                       datetime="15:00">15:00</time></span>
-                  <div><strong data-edit-id="dec-10-14">Ella Rock · guide-confirmed route</strong>
+                  <div data-place-photo="ella"><strong data-edit-id="dec-10-14">Ella Rock · guide-confirmed route</strong>
                     <p data-edit-id="dec-10-15">Keep up to six hours including a packed-lunch stop. The guide must
                       confirm a safe daylight finish for the chosen route and weather; use a shorter local walk if
                       needed.</p>
@@ -2034,7 +2056,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-10-27">Proposed afternoon diving</strong>
+                  <div data-place-photo="unawatuna"><strong data-edit-id="dec-10-27">Proposed afternoon diving</strong>
                     <p data-edit-id="dec-10-28">The proposed 13:30 session and finish around 17:30 require operator
                       confirmation. This is Maria’s only dive day. Her flight is on 12 December at 20:05; follow the
                       dive computer and professional guidance on flying and altitude after diving.</p>
@@ -2249,7 +2271,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-11-20">Proposed afternoon diving</strong>
+                  <div data-place-photo="unawatuna"><strong data-edit-id="dec-11-20">Proposed afternoon diving</strong>
                     <p data-edit-id="dec-11-21">Divinguru Unawatuna publishes a 13:30 start. The number of dives,
                       profiles and latest finish require confirmation. Aim to finish by 17:30, leaving more than 24
                       hours before Maria’s 20:05 flight tomorrow. If the operator cannot preserve the full buffer,
@@ -2290,7 +2312,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-11-31">Proposed afternoon diving</strong>
+                  <div data-place-photo="unawatuna"><strong data-edit-id="dec-11-31">Proposed afternoon diving</strong>
                     <p data-edit-id="dec-11-32">Divinguru Unawatuna publishes a 13:30 start. The number of dives,
                       profiles and latest finish require confirmation. Aim to finish by 17:30, leaving more than 24
                       hours before Maria’s 20:05 flight tomorrow. If the operator cannot preserve the full buffer,
@@ -2333,7 +2355,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="14:00">14:00</time>–<time
                       datetime="17:00">17:00</time></span>
-                  <div><strong data-edit-id="dec-11-42">Shared Udawalawe safari</strong>
+                  <div data-place-photo="udawalawe"><strong data-edit-id="dec-11-42">Shared Udawalawe safari</strong>
                     <p data-edit-id="dec-11-43">Allow about three hours in the park together. The operator must confirm
                       access and exit times. Wildlife sightings are not guaranteed.</p>
                   </div>
@@ -2481,7 +2503,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="14:00">14:00</time>–<time
                       datetime="17:00">17:00</time></span>
-                  <div><strong data-edit-id="dec-12-20">Proposed afternoon Udawalawe safari</strong>
+                  <div data-place-photo="udawalawe"><strong data-edit-id="dec-12-20">Proposed afternoon Udawalawe safari</strong>
                     <p data-edit-id="dec-12-21">Allow about three hours in the park. The operator must confirm access
                       and exit times; wildlife sightings are not guaranteed.</p>
                   </div>
@@ -2791,7 +2813,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-14-11">Proposed reef or exterior wreck dives</strong>
+                  <div data-place-photo="unawatuna"><strong data-edit-id="dec-14-11">Proposed reef or exterior wreck dives</strong>
                     <p data-edit-id="dec-14-12">The operator must confirm the number of dives and finish time. Cancel if
                       sea conditions or fatigue make the outing unsuitable; no whale trip or second boat session is
                       stacked onto today.</p>
@@ -2880,7 +2902,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="09:30">09:30</time>–<time
                       datetime="12:00">12:00</time></span>
-                  <div><strong data-edit-id="dec-15-9">Ramparts, lighthouse and historic lanes</strong>
+                  <div data-place-photo="galle"><strong data-edit-id="dec-15-9">Ramparts, lighthouse and historic lanes</strong>
                     <p data-edit-id="dec-15-10">Walk the Fort’s defensive walls and streets at an unhurried pace. Use
                       shade and water stops; the aim is a compact historic walk rather than a checklist of buildings.
                     </p>
@@ -3006,7 +3028,7 @@
                 </li>
                 <li><span class="time-range"><time datetime="14:30">14:30</time>–<time
                       datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-16-11">Rest and optional Negombo stroll</strong>
+                  <div data-place-photo="negombo"><strong data-edit-id="dec-16-11">Rest and optional Negombo stroll</strong>
                     <p data-edit-id="dec-16-12">A nearby beach walk is enough if weather and energy allow. Keep the
                       afternoon easy before tomorrow’s evening departure.</p>
                   </div>
@@ -3047,7 +3069,7 @@
                   </li>
                   <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
                         datetime="15:00">15:00</time></span>
-                    <div><strong data-edit-id="dec-16-22">One short museum or temple visit</strong>
+                    <div data-place-photo="colombo"><strong data-edit-id="dec-16-22">One short museum or temple visit</strong>
                       <p data-edit-id="dec-16-23">Choose one attraction and confirm its opening hours. Leave at 15:00
                         even if that means a shorter visit.</p>
                     </div>
@@ -4171,6 +4193,208 @@
       load();
     })();
     // End shared text editing.
+  </script>
+
+  <dialog id="place-photo-dialog" class="photo-viewer" aria-labelledby="place-photo-title" closedby="any">
+    <div class="photo-viewer-heading">
+      <h2 id="place-photo-title">Destination photo</h2>
+      <form method="dialog"><button id="place-photo-close" autofocus>Close</button></form>
+    </div>
+    <figure>
+      <img id="place-photo-image" alt="" width="1280" height="960" />
+      <p id="place-photo-error" role="status" hidden>Photo could not load. Open the photo source below.</p>
+      <figcaption><span id="place-photo-credit"></span> · <a id="place-photo-license" target="_blank" rel="noopener">Licence</a> · <a id="place-photo-source" target="_blank" rel="noopener">Photo source</a>. Thumbnail cropped.</figcaption>
+    </figure>
+  </dialog>
+
+  <script>
+// Destination photo previews.
+(() => {
+  const placePhotos = {
+  "sigiriya": {
+    "title": "Sigiriya fortress and gardens",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Sigiriya_rock_fortress.jpg/330px-Sigiriya_rock_fortress.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Sigiriya_rock_fortress.jpg/1280px-Sigiriya_rock_fortress.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_rock_fortress.jpg",
+    "author": "Himam123",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 3024,
+    "height": 4032
+  },
+  "polonnaruwa": {
+    "title": "Gal Vihara, Polonnaruwa",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/LK-polonnaruwa-gal-vihara-01.jpg/330px-LK-polonnaruwa-gal-vihara-01.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/LK-polonnaruwa-gal-vihara-01.jpg/1280px-LK-polonnaruwa-gal-vihara-01.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:LK-polonnaruwa-gal-vihara-01.jpg",
+    "author": "Balou46",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 4928,
+    "height": 3264
+  },
+  "horton": {
+    "title": "World’s End, Horton Plains",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/World%27s_End%2C_Horton_Plains_National_Park%2C_Sri_Lanka.jpg/330px-World%27s_End%2C_Horton_Plains_National_Park%2C_Sri_Lanka.jpg",
+    "large": "https://upload.wikimedia.org/wikipedia/commons/8/8e/World%27s_End%2C_Horton_Plains_National_Park%2C_Sri_Lanka.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:World%27s_End,_Horton_Plains_National_Park,_Sri_Lanka.jpg",
+    "author": "Sendaru Perera",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1024,
+    "height": 762
+  },
+  "gregory": {
+    "title": "Gregory Lake, Nuwara Eliya",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Gregory_lake_in_nuwara_eliya.jpg/330px-Gregory_lake_in_nuwara_eliya.jpg",
+    "large": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Gregory_lake_in_nuwara_eliya.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Gregory_lake_in_nuwara_eliya.jpg",
+    "author": "Praveen Wahundeniya",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 640,
+    "height": 480
+  },
+  "haputale": {
+    "title": "Tea country near Haputale · Stage 13 area",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Haputale%2C_Sri_Lanka%2C_Tea_plantations%2C_trees.jpg/330px-Haputale%2C_Sri_Lanka%2C_Tea_plantations%2C_trees.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Haputale%2C_Sri_Lanka%2C_Tea_plantations%2C_trees.jpg/1280px-Haputale%2C_Sri_Lanka%2C_Tea_plantations%2C_trees.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Haputale,_Sri_Lanka,_Tea_plantations,_trees.jpg",
+    "author": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "width": 3072,
+    "height": 2048
+  },
+  "ella": {
+    "title": "Ella Rock",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Ella_Rock%2C_Srilanka.jpg/330px-Ella_Rock%2C_Srilanka.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Ella_Rock%2C_Srilanka.jpg/1280px-Ella_Rock%2C_Srilanka.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ella_Rock,_Srilanka.jpg",
+    "author": "Abishek Palraj",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 5472,
+    "height": 3648
+  },
+  "udawalawe": {
+    "title": "Elephants in Udawalawe National Park",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Udawalawe_Elephants_Sri_Lanka.jpg/330px-Udawalawe_Elephants_Sri_Lanka.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Udawalawe_Elephants_Sri_Lanka.jpg/1280px-Udawalawe_Elephants_Sri_Lanka.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Udawalawe_Elephants_Sri_Lanka.jpg",
+    "author": "Sanduweragoda",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 3052,
+    "height": 1717
+  },
+  "galle": {
+    "title": "Galle Fort lighthouse",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/SL_Galle_Fort_asv2020-01_img24.jpg/330px-SL_Galle_Fort_asv2020-01_img24.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/SL_Galle_Fort_asv2020-01_img24.jpg/1280px-SL_Galle_Fort_asv2020-01_img24.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:SL_Galle_Fort_asv2020-01_img24.jpg",
+    "author": "A.Savin",
+    "license": "FAL",
+    "licenseUrl": "http://artlibre.org/licence/lal/en",
+    "width": 5170,
+    "height": 4136
+  },
+  "negombo": {
+    "title": "Negombo beach",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/330px-Negombo_Beach%2C_Sri_Lanka.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/1280px-Negombo_Beach%2C_Sri_Lanka.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Negombo_Beach,_Sri_Lanka.jpg",
+    "author": "S B from Sydney, Australia",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "width": 2048,
+    "height": 1536
+  },
+  "colombo": {
+    "title": "Colombo National Museum · optional visit",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Colombo_National_Museum_Sri_Lanka.JPG/330px-Colombo_National_Museum_Sri_Lanka.JPG",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Colombo_National_Museum_Sri_Lanka.JPG/1280px-Colombo_National_Museum_Sri_Lanka.JPG",
+    "source": "https://commons.wikimedia.org/wiki/File:Colombo_National_Museum_Sri_Lanka.JPG",
+    "author": "Hasindu2008",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 4000,
+    "height": 3000
+  },
+  "unawatuna": {
+    "title": "Unawatuna beach · coastal dive base",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Unawatuna.jpg/330px-Unawatuna.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Unawatuna.jpg/1280px-Unawatuna.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Unawatuna.jpg",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 2189,
+    "height": 1495
+  },
+  "dambulla": {
+    "title": "Dambulla cave temple · optional arrival stop",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Exterior_of_Dambulla_cave_temple_16.JPG/330px-Exterior_of_Dambulla_cave_temple_16.JPG",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Exterior_of_Dambulla_cave_temple_16.JPG/1280px-Exterior_of_Dambulla_cave_temple_16.JPG",
+    "source": "https://commons.wikimedia.org/wiki/File:Exterior_of_Dambulla_cave_temple_16.JPG",
+    "author": "Cherubino",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 2592,
+    "height": 1944
+  }
+};
+  const dialog = document.querySelector('#place-photo-dialog');
+  if (typeof dialog.showModal !== 'function') return;
+  const image = document.querySelector('#place-photo-image');
+  const title = document.querySelector('#place-photo-title');
+  const credit = document.querySelector('#place-photo-credit');
+  const license = document.querySelector('#place-photo-license');
+  const source = document.querySelector('#place-photo-source');
+  const error = document.querySelector('#place-photo-error');
+  image.addEventListener('error', () => { image.hidden = true; error.hidden = false; });
+  for (const target of document.querySelectorAll('[data-place-photo]')) {
+    const photo = placePhotos[target.dataset.placePhoto];
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'place-photo';
+    button.setAttribute('aria-label', 'Enlarge photo: ' + photo.title);
+    button.setAttribute('aria-haspopup', 'dialog');
+    const thumbnail = document.createElement('img');
+    thumbnail.src = photo.thumbnail;
+    thumbnail.alt = photo.title;
+    thumbnail.width = 96;
+    thumbnail.height = 76;
+    thumbnail.loading = 'lazy';
+    thumbnail.decoding = 'async';
+    const label = document.createElement('span');
+    label.textContent = 'Expand';
+    label.setAttribute('aria-hidden', 'true');
+    thumbnail.addEventListener('error', () => {
+      thumbnail.hidden = true;
+      label.textContent = 'View photo';
+      button.classList.add('photo-unavailable');
+    });
+    button.append(thumbnail, label);
+    button.addEventListener('click', () => {
+      title.textContent = photo.title;
+      credit.textContent = 'Photo: ' + photo.author;
+      license.textContent = photo.license;
+      license.href = photo.licenseUrl;
+      source.href = photo.source;
+      image.alt = photo.title;
+      image.width = photo.width;
+      image.height = photo.height;
+      image.hidden = false;
+      error.hidden = true;
+      image.src = photo.large;
+      dialog.showModal();
+    });
+    target.classList.add('has-place-photo');
+    target.append(button);
+  }
+})();
+// End destination photo previews.
   </script>
 </body>
 
