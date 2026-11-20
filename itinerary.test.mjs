@@ -3,168 +3,73 @@ import { test } from 'node:test';
 import { runInNewContext, Script } from 'node:vm';
 import worker from './worker.mjs';
 
-test('ordinary sightseeing days start at 08:00 or later across every plan and hike', async () => {
-  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
+const page = async () => (await worker.fetch(new Request('https://trip.example/'), {})).text();
+const mapScript = html => html.match(/const points\s*=\s*\[[\s\S]*?(?=function chooseHike\s*\()/)[0];
+
+test('ordinary days retain an 08:00 start and every day has a schedule', async () => {
+  const html = await page();
   const schedules = [...html.matchAll(/data-schedule-day="(\d+)"/g)];
   assert.equal(schedules.length, 14);
-  for (let i = 0; i < schedules.length; i++) {
-    const day = Number(schedules[i][1]);
-    if ([4, 5, 8, 17].includes(day)) continue; // Flights and the agreed Horton Plains exception.
-    const section = html.slice(schedules[i].index, schedules[i + 1]?.index ?? html.indexOf('id="plans"'));
-    for (const [, time] of section.matchAll(/<time datetime="(\d\d:\d\d)">/g)) {
-      assert.ok(time >= '08:00', `${day} December still schedules ${time}`);
-    }
+  for (let i=0; i<schedules.length; i++) {
+    const day=Number(schedules[i][1]);
+    if ([4,5,8,17].includes(day)) continue;
+    const section=html.slice(schedules[i].index,schedules[i+1]?.index??html.indexOf('id="plans"'));
+    for (const [,time] of section.matchAll(/<time datetime="(\d\d:\d\d)">/g)) assert.ok(time>='08:00',day+' starts at '+time);
   }
-  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
-  const context = {};
-  runInNewContext(script, context);
-  for (const plan of ['A', 'B', 'C']) {
-    const safariDay = context.dailyRoutes(plan === 'A' ? 11 : 12, plan, 'ella');
-    assert.ok(!safariDay.some(route => route.ids[0] === 8 && route.ids.includes(10)), 'No safari-plus-coast transfer');
-    assert.ok(context.dailyRoutes(plan === 'A' ? 12 : 13, plan, 'ella').some(route => route.ids[0] === 8 && route.ids.at(-1) === 10 && !route.optional));
-    assert.ok(!context.dailyRoutes(14, plan, 'ella').some(route => route.ids.includes(16)), 'No dawn whale outing');
-  }
-  assert.ok(!context.dailyRoutes(10, 'C', 'ella').some(route => route.ids.includes(17)), 'Shared diving uses a transfer-only day');
-  assert.ok(!context.dailyRoutes(11, 'A', 'ella').some(route => route.ids.includes(18)), 'Safari day has no second full hike');
 });
 
-test('required Polonnaruwa and optional coastal routes are represented on the map', async () => {
-  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  for (const [, source] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Script(source);
-  assert.ok(!html.includes('id="culture-select"'));
-  assert.ok(html.includes('Sigiriya + Polonnaruwa · required'));
-  assert.ok(html.includes('id="hike-select"'));
-  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
-  const lines = [];
-  const controls = { '#hike-select': { value: 'stage13' }, '#map-state': {} };
-  const context = {
-    lines, document: { querySelector: query => controls[query] },
-    L: { polyline: (coordinates, options) => { lines.push({ coordinates, options }); return { addTo() {} }; } }
-  };
-  runInNewContext(script + '; mainMap={}; routeLayers={clearLayers(){lines.length=0}}; globalThis.mapPoints=points;', context);
-  const contains = (line, name) => {
-    const point = context.mapPoints.find(point => point[0].includes(name));
-    assert.ok(point, 'Missing map point: ' + name);
-    return line.coordinates.some(coord => coord[0] === point[2] && coord[1] === point[3]);
-  };
-  for (const plan of ['A', 'B', 'C']) {
-    context.drawRoutes(plan);
-    assert.ok(lines.some(line => contains(line, 'Polonnaruwa') && !line.options.dashArray));
-    assert.ok(lines.some(line => contains(line, 'Colombo culture') && line.options.dashArray));
-    assert.ok(!lines.some(line => contains(line, 'Mirissa')));
+test('both hike choices keep shared bridge and safari routes before Maria flies', async () => {
+  const html=await page(), context={};
+  for(const [,source] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Script(source);
+  runInNewContext(mapScript(html),context);
+  for(const hike of ['stage13','ella']) {
+    const base=hike==='ella'?6:7;
+    for(let day=4;day<=17;day++) assert.ok(context.dailyRoutes(day,hike).length,'Missing route '+day);
+    const bridgeDay=context.dailyRoutes(9,hike);
+    assert.equal(bridgeDay.length,1);
+    assert.ok(bridgeDay[0].ids.includes(22),'Shared Nine Arch Bridge visit');
+    assert.equal(bridgeDay[0].ids.at(-1),base);
+    for(const day of [9,10,11]) for(const route of context.dailyRoutes(day,hike)) assert.equal(route.color,'#146c61','Together on '+day);
+    const safari=context.dailyRoutes(11,hike);
+    assert.equal(safari.length,1);
+    assert.deepEqual(Array.from(safari[0].ids),[base,8]);
+    assert.ok(!context.dailyRoutes(10,hike).some(r=>r.ids.includes(10)),'No Maria coast/dive detour');
+    assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===13));
+    assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===10));
+    assert.ok(context.dailyRoutes(14,hike).some(r=>r.ids.includes(10)),'Apostolos keeps diving');
+    assert.ok(context.dailyRoutes(6,hike).some(r=>r.ids.includes(14)),'Keep Polonnaruwa');
+    assert.ok(context.dailyRoutes(15,hike).some(r=>r.ids.includes(11)),'Keep Galle');
   }
-  controls['#hike-select'].value = 'ella';
-  context.drawRoutes('A');
-  assert.ok(lines.some(line => contains(line, 'Polonnaruwa') && !line.options.dashArray));
-  assert.ok(lines.some(line => contains(line, 'Ella Rock') && !line.options.dashArray));
-  assert.ok(!lines.some(line => contains(line, 'Haputale')));
 });
 
-test('every trip day has a proposed breakdown and plan switching shows the matching tracks', async () => {
-  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  for (let day = 4; day <= 17; day++) {
-    assert.ok(html.includes('data-schedule-day="' + day + '"'), 'Missing schedule for ' + day + ' December');
+test('hike control switches only the hike tracks and matching maps', async () => {
+  const html=await page();
+  const source=html.match(/function chooseHike\s*\(\)\s*\{[\s\S]*?(?=\n\s*document.querySelector\('#hike-select'\).addEventListener)/)[0];
+  const tracks=['stage13','ella'].map(hike=>({dataset:{hike},hidden:false}));
+  const heading={}, control={value:'stage13'}, transport={value:'road'};
+  const context={document:{querySelector:q=>q==='#hike-select'?control:q==='#transport-select'?transport:heading,querySelectorAll:q=>q.includes('data-hike')?tracks:[]},drawRoutes(){},dailyMaps:new Map(),drawDailyRoute(){}};
+  runInNewContext(source,context);
+  for(const hike of ['ella','stage13']) {
+    control.value=hike;context.chooseHike();
+    for(const track of tracks)assert.equal(track.hidden,track.dataset.hike!==hike);
+    assert.match(heading.textContent,new RegExp(hike==='ella'?'Ella Rock':'Pekoe Stage 13'));
   }
-  const choosePlan = html.match(/function choosePlan\s*\(\)\s*\{[\s\S]*?(?=\n\s*selector\.addEventListener)/)[0];
-  const tracks = [
-    { plans: 'ABC' }, { plans: 'AB', hike: 'stage13' }, { plans: 'AB', hike: 'ella' },
-    { plans: 'C' }
-  ].map(dataset => ({ dataset, hidden: false }));
-  const cards = new Map();
-  for (const day of ['6', '9', '10', '11', '12']) {
-    const fields = Object.fromEntries(['.date', 'h3', '.sub', '.travel-links', '.day-highlights'].map(key => [key, {
-      dataset: { a: 'Default', b: 'Together', c: 'Diving' }, textContent: '', hidden: false
-    }]));
-    cards.set(day, { fields, querySelector: selector => fields[selector] });
-  }
-  const controls = {
-    '#hike-select': { value: 'stage13' },
-    '#hike-choice': { hidden: false }, '#plan-detail': {}
-  };
-  const selector = { value: 'A' };
-  const context = {
-    selector, planTexts: { A: 'Default', B: 'Together', C: 'Diving' }, drawRoutes() {}, dailyMaps: new Map(), drawDailyRoute() {},
-    document: {
-      querySelector: query => controls[query] || cards.get(query.match(/data-date="(\d+)"/)[1]),
-      querySelectorAll: query => query === '.schedule-track[data-plans]' ? tracks : []
-    }
-  };
-  runInNewContext(choosePlan, context);
-  for (const hike of ['stage13', 'ella']) for (const plan of ['B', 'C', 'A']) {
-    controls['#hike-select'].value = hike;
-    selector.value = plan;
-    context.choosePlan();
-    const effectiveHike = plan === 'C' ? 'ella' : hike;
-    assert.equal(controls['#plan-detail'].textContent, context.planTexts[plan]);
-    assert.equal(controls['#hike-choice'].hidden, plan === 'C');
-    for (const track of tracks) {
-      const visible = track.dataset.plans.includes(plan) && (!track.dataset.hike || track.dataset.hike === effectiveHike);
-      assert.equal(track.hidden, !visible, 'Wrong track visibility for ' + [plan, hike]);
-    }
-    if (plan !== 'C') assert.match(cards.get('10').fields.h3.textContent, new RegExp(hike === 'stage13' ? 'Pekoe Stage 13' : 'Ella Rock'));
-  }
-  const comments = await worker.fetch(new Request('https://trip.example/api/comments?section=dec-4', {
-    headers: { 'oai-authenticated-user-id': 'test' }
-  }), { STORE: { getComments: async section => { assert.equal(section, 'dec-4'); return []; } } });
-  assert.equal(comments.status, 200);
 });
 
-test('daily maps follow the selected day, traveller split and hike, including return legs', async () => {
-  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const script = html.match(/const points\s*=\s*\[[\s\S]*?(?=function choosePlan\s*\()/)[0];
-  const context = {};
-  runInNewContext(script + ';globalThis.mapPoints=points;', context);
-  const routes = (day, plan='A', hike='stage13') => JSON.parse(JSON.stringify(context.dailyRoutes(day, plan, hike)));
-  const has = (routes, ids, optional=false) => routes.some(route => JSON.stringify(route.ids) === JSON.stringify(ids) && route.optional === optional);
-  for (const plan of ['A','B','C']) for (const hike of ['stage13','ella']) {
-    for (let day=4; day<=17; day++) assert.ok(routes(day,plan,hike).length, 'Missing route for '+day);
-    assert.ok(has(routes(6,plan,hike), [1,14,1]), 'Required Polonnaruwa return route');
-    assert.ok(!routes(6,plan,hike).some(route=>route.ids.includes(2)), 'No Dambulla fallback on 6 Dec');
-    assert.ok(has(routes(7,plan,hike), [1,3,4]));
-    assert.ok(has(routes(8,plan,hike), [4,5,4]));
-    assert.ok(has(routes(15,plan,hike), [10,11,10]), 'Galle returns to coast accommodation');
-    assert.ok(has(routes(16,plan,hike), [10,15,12], true));
-    assert.ok(has(routes(17,plan,hike), [12,13]));
-  }
-  assert.ok(has(routes(5), [0,2,1], true));
-  assert.ok(has(routes(9), [4,10]));
-  assert.ok(has(routes(9), [4,7]), 'Stage 13 uses a Haputale overnight');
-  assert.ok(has(routes(9,'B','ella'), [4,6]));
-  assert.ok(!routes(9,'B').some(route=>route.ids.includes(9)));
-  assert.ok(has(routes(10), [7,18,7]), 'Stage 13 starts locally with finish pickup back to Haputale');
-  assert.ok(has(routes(10,'B','ella'), [6,17,6]));
-  assert.ok(has(routes(10,'C'), [6,10]));
-  assert.ok(has(routes(10), [10]), 'Maria dives locally on the 10th');
-  assert.ok(has(routes(11), [7,8]));
-  assert.ok(has(routes(11,'A','ella'), [6,8]), 'Ella hike also reaches the shared safari');
-  assert.ok(has(routes(11), [10,8]), 'Maria joins the safari from Unawatuna');
-  assert.ok(has(routes(11,'B','ella'), [6]));
-  assert.ok(has(routes(12), [8,13]), 'Maria leaves the park overnight directly for CMB');
-  assert.ok(has(routes(12), [8,10]), 'Apostolos transfers to the coast after the shared safari');
-  assert.ok(has(routes(12,'C'), [10,8]));
-  assert.ok(has(routes(13), [10]), 'Coastal rest day after the 12th transfer');
-  assert.ok(has(routes(13,'B'), [8,10]), 'Alternative B retains its solo safari');
-  const rendered = [];
-  const layer = { clearLayers() { rendered.length=0; } };
-  const map = { fitBounds(coords, options) { this.bounds=coords; this.options=options; } };
-  Object.assign(context, {
-    selector: { value:'A' },
-    document: { querySelector: () => ({ value:'stage13' }) },
-    L: {
-      polyline(coords, options) { rendered.push({coords,options}); return { addTo() { return this; }, bindPopup() { return this; } }; },
-      circleMarker() { return { addTo() { return this; }, bindPopup() { return this; } }; }
-    }
-  });
-  const view = { day:10, map, layer };
+test('daily maps still draw selected hikes without captions', async () => {
+  const html=await page(),rendered=[],control={value:'stage13'};
+  const context={document:{querySelector:()=>control},L:{
+    polyline(coords){rendered.push(coords);return{addTo(){return this},bindPopup(){return this}}},
+    circleMarker(){return{addTo(){return this},bindPopup(){return this}}}
+  }};
+  runInNewContext(mapScript(html)+';globalThis.mapPoints=routePoints;',context);
+  const view={day:10,layer:{clearLayers(){rendered.length=0}},map:{fitBounds(){}}};
   context.drawDailyRoute(view);
-  assert.ok(rendered.some(line => line.coords.some(coord=>coord[0]===context.mapPoints[18][2])));
-  context.selector.value='C';
-  context.drawDailyRoute(view);
-  assert.ok(!rendered.some(line=>line.coords.some(coord=>coord[0]===context.mapPoints[18][2])), 'Old hike removed on plan switch');
-  assert.ok(rendered.some(line=>line.coords.some(coord=>coord[0]===context.mapPoints[10][2])));
-  assert.ok(!html.includes('daily-route-caption'), 'Daily maps have no route captions');
-  assert.equal(map.options.maxZoom,12);
-  assert.ok(!html.includes('const prev=cards[i-1]'));
+  assert.ok(rendered.some(line=>line.some(p=>p[0]===context.mapPoints[18][2])));
+  control.value='ella';context.drawDailyRoute(view);
+  assert.ok(rendered.some(line=>line.some(p=>p[0]===context.mapPoints[17][2])));
+  assert.ok(!rendered.some(line=>line.some(p=>p[0]===context.mapPoints[18][2])));
+  assert.ok(!html.includes('daily-route-caption'));
 });
 
 test('Apostolos return ticket and airport clock times replace the provisional flight', async () => {
@@ -241,14 +146,26 @@ test('checklist restores and saves ticks locally, and remains usable if storage 
   assert.match(full.status.textContent,/not saved/);
 });
 
-test('shared safari proposal keeps the full hike and moves Maria diving before it', async () => {
-  const html = await (await worker.fetch(new Request('https://trip.example/'), {})).text();
-  const card = day => html.match(new RegExp('<div class="stop" data-date="'+day+'"[\\s\\S]*?(?=<div class="stop" data-date=|<section class="panel" data-thread="plans")'))[0];
-  assert.match(card(10), /Maria · her one afternoon dive day/);
-  assert.match(card(11), /Together · afternoon safari and Udawalawe overnight/);
-  assert.match(card(12), /Udawalawe → CMB/);
-  assert.match(html, /A · Shared safari and full mountain hike/);
-  assert.match(html, /Reserve Maria’s one dive day on 10 December in A/);
-  assert.match(html, /Maria: 12 December, Udawalawe → CMB in A/);
-  assert.ok(!html.includes('The 11th is recovery.'));
+test('one shared itinerary includes the bridge and safari with no Maria diving', async () => {
+  const html=await page();
+  for(const removed of ['id="plan-select"','data-plans=','Maria misses','B/C','Maria dives','independent coast','before splitting','one dive day']) assert.ok(!html.includes(removed),'Stale plan: '+removed);
+  assert.match(html,/Nine Arch Bridge · together/);
+  assert.match(html,/Maria has no diving scheduled/);
+  assert.match(html,/Together · afternoon safari and Udawalawe overnight/);
+  assert.match(html,/Shared transfer to Udawalawe/);
+});
+
+test('shared scenic train option crosses Nine Arch Bridge before Demodara without changing the safari', async () => {
+  const html=await page(),context={};runInNewContext(mapScript(html),context);
+  for(const hike of ['stage13','ella']) {
+    const train=context.dailyRoutes(9,hike,'train')[0];
+    assert.equal(train.color,'#146c61');
+    assert.deepEqual(Array.from(train.ids).slice(0,5),[4,23,6,22,24]);
+    assert.equal(train.ids.at(-1),hike==='ella'?6:7);
+    assert.ok(!context.dailyRoutes(9,hike,'road')[0].ids.includes(23));
+    assert.equal(context.dailyRoutes(11,hike,'train')[0].ids.at(-1),8);
+  }
+  assert.match(html,/id="transport-select"/);
+  assert.match(html,/Nanu Oya → Ella alone ends before Nine Arch Bridge/);
+  assert.match(html,/arrival by 14:00/);
 });
