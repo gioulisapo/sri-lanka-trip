@@ -37,7 +37,7 @@ test('both hike choices keep shared bridge and safari routes before Maria flies'
     assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===13));
     assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===10));
     assert.ok(context.dailyRoutes(14,hike).some(r=>r.ids.includes(10)),'Apostolos keeps diving');
-    assert.ok(context.dailyRoutes(6,hike).some(r=>r.ids.includes(14)),'Keep Polonnaruwa');
+    assert.ok(context.dailyRoutes(5,hike).some(r=>r.ids.includes(14)),'Polonnaruwa on arrival day');
     assert.ok(context.dailyRoutes(15,hike).some(r=>r.ids.includes(11)),'Keep Galle');
   }
 });
@@ -168,4 +168,20 @@ test('shared scenic train option crosses Nine Arch Bridge before Demodara withou
   assert.match(html,/id="transport-select"/);
   assert.match(html,/Nanu Oya → Ella alone ends before Nine Arch Bridge/);
   assert.match(html,/arrival by 14:00/);
+});
+
+test('arrival route visits Polonnaruwa before Sigiriya and restores Kandy temple and tea estate', async () => {
+  const html=await page(),context={};runInNewContext(mapScript(html),context);
+  assert.deepEqual(Array.from(context.dailyRoutes(5,'ella')[0].ids),[0,14,1]);
+  const day6=context.dailyRoutes(6,'ella')[0].ids;
+  assert.equal(day6[0],1);assert.ok(day6.includes(25));assert.equal(day6.at(-1),3);
+  assert.deepEqual(Array.from(context.dailyRoutes(7,'ella')[0].ids),[3,26,4]);
+  const card=day=>html.match(new RegExp('<div class="stop" data-date="'+day+'"[\\s\\S]*?(?=<div class="stop" data-date=|<section class="panel" data-thread="plans")'))[0];
+  assert.match(card(5),/Polonnaruwa · core-site visit/);
+  assert.match(card(5),/Overnight Sigiriya/);
+  assert.match(card(5),/14:30/);
+  assert.match(card(6),/Temple of the Tooth/);
+  assert.match(card(6),/Overnight Kandy/);
+  assert.match(card(7),/Labookellie/);
+  assert.match(html,/If arrival or traffic delays/);
 });

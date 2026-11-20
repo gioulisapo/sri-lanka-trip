@@ -24,7 +24,8 @@ function preview() {
     addEventListener(type,fn) { this.events[type] = fn; },
     append(...children) { this.children.push(...children); }
   });
-  const targets = ['sigiriya','udawalawe','ella'].map(key => Object.assign(node(), { dataset: { placePhoto: key } }));
+  const destinations = new Set(['sigiriya','udawalawe','ella', ...[...html.matchAll(/data-place-photo="([^"]+)"/g)].map(match => match[1])]);
+  const targets = [...destinations].map(key => Object.assign(node(), { dataset: { placePhoto: key } }));
   const nodes = Object.fromEntries(['#place-photo-dialog','#place-photo-image','#place-photo-title','#place-photo-credit','#place-photo-license','#place-photo-source','#place-photo-error'].map(key => [key,node()]));
   nodes['#place-photo-dialog'].showModal = function() { this.open = true; };
   const document = {
