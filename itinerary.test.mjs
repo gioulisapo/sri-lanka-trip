@@ -36,9 +36,9 @@ test('both hike choices keep shared bridge and safari routes before Maria flies'
     assert.ok(!context.dailyRoutes(10,hike).some(r=>r.ids.includes(10)),'No Maria coast/dive detour');
     assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===13));
     assert.ok(context.dailyRoutes(12,hike).some(r=>r.ids[0]===8&&r.ids.at(-1)===10));
-    assert.ok(context.dailyRoutes(14,hike).some(r=>r.ids.includes(10)),'Apostolos keeps diving');
+    assert.ok(context.dailyRoutes(13,hike).some(r=>r.ids.includes(10)),'Apostolos keeps diving');
     assert.ok(context.dailyRoutes(5,hike).some(r=>r.ids.includes(14)),'Polonnaruwa on arrival day');
-    assert.ok(context.dailyRoutes(15,hike).some(r=>r.ids.includes(11)),'Keep Galle');
+    assert.ok(context.dailyRoutes(14,hike).some(r=>r.ids.includes(11)),'Keep Galle');
   }
 });
 
@@ -184,4 +184,42 @@ test('arrival route visits Polonnaruwa before Sigiriya and restores Kandy temple
   assert.match(card(6),/Overnight Kandy/);
   assert.match(card(7),/Labookellie/);
   assert.match(html,/If arrival or traffic delays/);
+});
+
+test('independent trip has official bus links and keeps one-off help where needed', async () => {
+  const html=await page();
+  assert.match(html,/Independent trip/);
+  assert.match(html,/id="public-transport"/);
+  assert.match(html,/href="#public-transport"/);
+  for(const url of ['https://ntc.gov.lk/times/','https://sltb.eseat.lk/bus/schedule/search?','https://www.sprpta.lk/schedulebyrouteall.php?routenumber=350','https://www.sprpta.lk/schedulebyrouteall.php?routenumber=360']) assert.ok(html.includes(url),url);
+  assert.ok((html.match(/class="transport-alternatives"/g)||[]).length>=10);
+  assert.match(html,/No official local timetable verified/);
+  assert.ok(!html.includes('one shared driver for the mountain journey'));
+  assert.ok(!html.includes('Keep the driver for luggage'));
+  assert.match(html,/one-off driver for 5 December/);
+});
+
+test('rainforest replaces final coast day with earlier diving and Galle retained', async () => {
+  const html=await page(),context={};runInNewContext(mapScript(html),context);
+  assert.deepEqual(Array.from(context.dailyRoutes(13,'ella')[0].ids),[10]);
+  assert.deepEqual(Array.from(context.dailyRoutes(14,'ella')[0].ids),[10,11,10]);
+  assert.ok(context.dailyRoutes(15,'ella')[0].ids.includes(27));
+  assert.deepEqual(Array.from(context.dailyRoutes(16,'ella')[0].ids),[27,28,15,13,12]);
+  const card=day=>html.match(new RegExp('<div class="stop" data-date="'+day+'"[\\s\\S]*?(?=<div class="stop" data-date=|<section class="panel" data-thread="plans")'))[0];
+  assert.match(card(13),/afternoon diving/);
+  assert.match(card(14),/Galle Fort/);
+  assert.match(card(15),/Sinharaja/);
+  assert.match(card(15),/forest walk/);
+  assert.match(card(16),/10:30/);
+  assert.match(card(16),/16:10/);
+  assert.match(card(15),/local forest guide/);
+});
+
+test('first night is the user-confirmed Palitha Homestay booking', async () => {
+  const html=await page();
+  assert.match(html,/Palitha Homestay/);
+  assert.match(html,/Standard Triple Room/);
+  assert.match(html,/€19\.28/);
+  assert.match(html,/5–6 December 2026/);
+  assert.match(html,/Booked · Palitha Homestay/);
 });

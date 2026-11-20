@@ -882,6 +882,10 @@
     #place-photo-error {padding:24px;background:#eff6f2}
     @media(max-width:520px) {.has-place-photo {grid-template-columns:minmax(0,1fr) 76px;column-gap:12px}.place-photo {width:76px;height:64px}.photo-viewer {padding:16px}}
     @media print {.place-photo,.photo-viewer {display:none}.has-place-photo {display:block}}
+
+    .transport-alternatives {margin:14px 0;padding:12px 0;border-top:1px solid var(--line)}
+    .transport-alternatives summary {cursor:pointer;font-weight:650;color:var(--accent)}
+    .transport-alternatives p,.transport-alternatives li {font-size:13px;overflow-wrap:anywhere}
   </style>
   <style>
     select,
@@ -1146,22 +1150,22 @@
     <h1>Sri Lanka</h1>
     <p>5–17 December · mountains, culture, wildlife and diving · two travellers</p>
     <nav aria-labelledby="quick-reference-title" id="quick-reference">
-      <h2 id="quick-reference-title">Quick reference</h2>
-      <ul class="quick-links">
-        <li><a href="#flights">Flights</a></li>
-        <li><a href="#itinerary">Day-by-day</a></li>
-        <li><a href="#plans">Mountain hike</a></li>
-        <li><a href="#map">Interactive map</a></li>
-        <li><a href="#hiking">Hiking</a></li>
-        <li><a href="#diving">Diving</a></li>
-        <li><a href="#practical">Transfers &amp; wildlife</a></li>
-        <li><a href="#sources">Sources</a></li>
-        <li><a href="#todo">To-do &amp; money</a></li>
-        <li><a href="#history">History</a></li>
-        <li><a href="#culture">Culture</a></li>
-        <li><a href="#food">Food</a></li>
-      </ul>
-    </nav>
+<h2 id="quick-reference-title">Quick reference</h2>
+<ul class="quick-links">
+<li><a href="#flights">Flights</a></li>
+<li><a href="#itinerary">Day-by-day</a></li>
+<li><a href="#plans">Mountain hike</a></li>
+<li><a href="#map">Interactive map</a></li>
+<li><a href="#hiking">Hiking</a></li>
+<li><a href="#diving">Diving</a></li>
+<li><a href="#practical">Transfers &amp; wildlife</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#todo">To-do &amp; money</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#culture">Culture</a></li>
+<li><a href="#food">Food</a></li>
+<li><a href="#public-transport">Bus timetables</a></li></ul>
+</nav>
   </header>
   <div class="text-editor" hidden="" id="text-editor">
     <div aria-label="Page text editing" class="text-editor-actions" role="group">
@@ -1198,10 +1202,7 @@
 </section>
       <section class="panel" data-thread="itinerary" id="itinerary">
         <h2 data-edit-id="itinerary-1">Day-by-day working itinerary</h2>
-        <p class="sub" data-edit-id="itinerary-2">Times are local to each location. These are planning windows, not
-          bookings: allow weather and traffic buffers, confirm guides and entry hours, and replace road timings with
-          verified train times if using rail. Named food stops are candidates; check current service, menu and
-          availability.</p>
+        <p class="sub" data-edit-id="itinerary-2-diy">Independent trip · organise each journey yourselves. Use buses and trains where practical, one-off rides for tight days or access roads, and local guides at sights only when wanted or required for entry. The time blocks are planning windows, not official bus departures or a managed tour schedule. Expand each day’s public-transport note before choosing a service.</p>
         <div class="stop" data-date="4" data-thread="dec-4">
           <div class="date">4 DEC · Together</div>
           <h3 data-edit-id="dec-4-1">Athens → Mumbai</h3>
@@ -1227,7 +1228,7 @@
         <div class="stop" data-date="5" data-thread="dec-5">
 <div class="date">5 DEC · Together</div>
 <h3 data-edit-id="dec-5-1-arrival">Airport → Polonnaruwa → Sigiriya</h3>
-<p class="sub" data-edit-id="dec-5-2-arrival">Proposed activities · Overnight Sigiriya · arrival-day sightseeing</p>
+<p class="sub" data-edit-id="dec-5-2-arrival">Proposed activities · Overnight Sigiriya · arrival-day sightseeing</p><p class="warn" data-edit-id="palitha-confirmed-booking">Booked · Palitha Homestay, Sigiriya · 5–6 December 2026 · 1 night · Standard Triple Room · approximately €19.28 total, as supplied. Check-in/out times, payment and cancellation terms have not been provided.</p>
 <div class="travel-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Bandaranaike+International+Airport&amp;destination=Sigiriya&amp;waypoints=Polonnaruwa&amp;travelmode=driving" rel="noopener" target="_blank">Airport → Polonnaruwa → Sigiriya</a></div>
 <div class="stop-media">
 <div class="stop-map">
@@ -1252,8 +1253,6 @@
 </div>
 <div class="day-schedule" data-schedule-day="5">
 <h4 data-edit-id="dec-5-3">Proposed day breakdown</h4>
-
-
 <div class="schedule-track"><h5 data-edit-id="arrival-5-track">Together · airport → Polonnaruwa → Sigiriya</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="00:35">00:35</time>–<time datetime="04:30">04:30</time></span>
 <div><strong data-edit-id="dec-5-5">Mumbai connection</strong>
 <p data-edit-id="dec-5-6">Use the 5 h 5 min layover for the required connection checks, a light meal
@@ -1269,7 +1268,7 @@
 <p data-edit-id="dec-5-10">Arrive at CMB at 08:10 local time. Keep today free of strenuous climbs
                       after the overnight journey.</p>
 </div>
-</li><li><span class="time-range"><time datetime="08:10">08:10</time>–<time datetime="09:30">09:30</time></span><div><strong data-edit-id="arrival-5-0-title">Immigration, bags and pre-arranged driver</strong><p data-edit-id="arrival-5-0-body">09:30 departure is a target, not a guarantee. Keep airport tasks brief and agree the onward plan with the driver once flight, baggage and traffic conditions are known. Do not skip required formalities.</p></div></li><li><span class="time-range"><time datetime="09:30">09:30</time>–<time datetime="14:30">14:30</time></span><div><strong data-edit-id="arrival-5-1-title">Airport → Polonnaruwa · direct private transfer</strong><p data-edit-id="arrival-5-1-body">Budget about five hours for the road journey and a brief food/comfort stop, subject to the driver’s actual route. Published transfer estimates vary around 4–5.5 hours. Carry food and avoid Dambulla or other sightseeing detours.</p></div></li><li><span class="time-range"><time datetime="14:30">14:30</time>–<time datetime="17:30">17:30</time></span><div data-place-photo="polonnaruwa"><strong data-edit-id="arrival-5-2-title">Polonnaruwa · core-site visit</strong><p data-edit-id="arrival-5-2-body">Keep three hours for the Sacred Quadrangle, Gal Vihara and selected palace ruins, using the driver between monuments. The driver must confirm tickets, last entry and enough monument access for this full window before committing. This visit is required; do not replace it with a rushed photo stop.</p></div></li><li><span class="time-range"><time datetime="17:30">17:30</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="arrival-5-3-title">Polonnaruwa → Sigiriya</strong><p data-edit-id="arrival-5-3-body">Allow 1.5–2 hours for the onward drive. This is a long arrival day after overnight flights, with an evening hotel arrival. Keep the driver for the entire day and confirm luggage arrangements.</p></div></li><li><span class="time-range"><time datetime="19:30">19:30</time>–<time datetime="20:30">20:30</time></span><div><strong data-edit-id="arrival-5-4-title">Check in and dinner in Sigiriya</strong><p data-edit-id="arrival-5-4-body">Overnight Sigiriya. Eat at or near the accommodation and arrange breakfast at 08:00 before tomorrow’s fortress visit.</p></div></li></ol></div></div>
+</li><li><span class="time-range"><time datetime="08:10">08:10</time>–<time datetime="09:30">09:30</time></span><div><strong data-edit-id="arrival-5-0-title">Immigration, bags and pre-arranged driver</strong><p data-edit-id="arrival-5-0-body">09:30 departure is a target, not a guarantee. Keep airport tasks brief and agree the onward plan with the driver once flight, baggage and traffic conditions are known. Do not skip required formalities.</p></div></li><li><span class="time-range"><time datetime="09:30">09:30</time>–<time datetime="14:30">14:30</time></span><div><strong data-edit-id="arrival-5-1-title">Airport → Polonnaruwa · direct private transfer</strong><p data-edit-id="arrival-5-1-body">Budget about five hours for the road journey and a brief food/comfort stop, subject to the driver’s actual route. Published transfer estimates vary around 4–5.5 hours. Carry food and avoid Dambulla or other sightseeing detours.</p></div></li><li><span class="time-range"><time datetime="14:30">14:30</time>–<time datetime="17:30">17:30</time></span><div data-place-photo="polonnaruwa"><strong data-edit-id="arrival-5-2-title">Polonnaruwa · core-site visit</strong><p data-edit-id="arrival-5-2-body">Keep three hours for the Sacred Quadrangle, Gal Vihara and selected palace ruins, using the driver between monuments. The driver must confirm tickets, last entry and enough monument access for this full window before committing. This visit is required; do not replace it with a rushed photo stop.</p></div></li><li><span class="time-range"><time datetime="17:30">17:30</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="arrival-5-3-title">Polonnaruwa → Sigiriya</strong><p data-edit-id="arrival-5-3-body">Allow 1.5–2 hours for the onward drive. This is a long arrival day after overnight flights, with an evening hotel arrival. Keep the driver for the entire day and confirm luggage arrangements.</p></div></li><li><span class="time-range"><time datetime="19:30">19:30</time>–<time datetime="20:30">20:30</time></span><div><strong data-edit-id="arrival-5-4-title">Check in and dinner in Sigiriya</strong><p data-edit-id="arrival-5-4-body-diy">Booked first night: Palitha Homestay in Sigiriya, 5–6 December 2026, Standard Triple Room, approximately €19.28 total. Share the address from your confirmation with the one-off driver and notify the homestay if the arrival will be late.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-5"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-5">Keep the one-off car for the chosen arrival-day route. A public alternative is airport bus 187 → Colombo, then a Kaduruwela/Polonnaruwa bus and local transport to the ruins and Sigiriya. It is not compatible with the full 14:30–17:30 visit on the official services found: the SLTB search showed a Colombo 12:15 departure reaching Kaduruwela at 19:00. Do not substitute buses while keeping the car timetable.</p><ul><li><a href="https://www.airport.lk/passenger_guide/getting_arround/luxury_bus_service" rel="noopener" target="_blank">Official airport bus 187 information</a></li><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=39&amp;to=481&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Colombo → Kaduruwela</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-5-21-arrival">Polonnaruwa on arrival day</strong>
@@ -1278,7 +1277,7 @@
 </ul>
 <details>
 <summary>More Information</summary>
-<p data-edit-id="dec-5-23-arrival">If arrival or traffic delays prevent a full three-hour visit before the actual monument closing times, go straight to Sigiriya instead. Keep Polonnaruwa required on the 6th and replan the Kandy overnight and temple/tea stops with the driver. Confirm flexible accommodation before booking; do not promise the fallback can fit the same schedule.</p><a href="#sources">Sources and checks
+<p data-edit-id="dec-5-23-arrival-diy">If arrival or traffic delays prevent a full three-hour visit before the actual monument closing times, go straight to the booked Palitha Homestay in Sigiriya instead. Keep Polonnaruwa required on the 6th and replan the still-unbooked Kandy night and temple/tea stops. The first-night booking stays in place; its cancellation terms are unknown.</p><a href="#sources">Sources and checks
                 ↗</a>
 </details>
 </div>
@@ -1310,9 +1309,8 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="6">
-<h4 data-edit-id="dec-6-3">Proposed day breakdown</h4>
-
-<div class="schedule-track"><h5 data-edit-id="arrival-6-track">Together · Sigiriya and Kandy’s Temple of the Tooth</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="arrival-6-0-title">Breakfast and checkout preparations</strong><p data-edit-id="arrival-6-0-body">Have breakfast in Sigiriya. Arrange luggage storage or leave it with the driver while visiting the fortress.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:00">12:00</time></span><div data-place-photo="sigiriya"><strong data-edit-id="dec-6-7">Sigiriya fortress and gardens</strong><p data-edit-id="arrival-6-1-body">Keep three hours for the gardens, lion-paw gateway and summit. Take shade and water breaks; do not rush the climb. Polonnaruwa is planned for yesterday.</p></div></li><li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="arrival-6-2-title">Lunch and checkout</strong><p data-edit-id="arrival-6-2-body">Eat near Sigiriya and collect your luggage. Travel onward to Kandy rather than returning to Polonnaruwa.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="17:00">17:00</time></span><div><strong data-edit-id="arrival-6-3-title">Sigiriya → Kandy</strong><p data-edit-id="arrival-6-3-body">Allow 3–4 hours with a comfort break, subject to driver confirmation. Keep the route direct so there is time for the temple.</p></div></li><li><span class="time-range"><time datetime="17:00">17:00</time>–<time datetime="17:30">17:30</time></span><div><strong data-edit-id="arrival-6-4-title">Check in at the Kandy accommodation</strong><p data-edit-id="arrival-6-4-body">Overnight Kandy, replacing the second Sigiriya night. Leave large bags at the hotel and prepare respectful temple clothing.</p></div></li><li><span class="time-range"><time datetime="17:30">17:30</time>–<time datetime="19:00">19:00</time></span><div data-place-photo="temple"><strong data-edit-id="arrival-6-5-title">Temple of the Tooth · Kandy</strong><p data-edit-id="arrival-6-5-body">Allow time for local transfers, security, footwear storage and the temple visit. The temple publishes daily opening until 20:00 and an evening service from 18:30; access, queues and the service timing must be reconfirmed. Cover shoulders and knees.</p></div></li><li><span class="time-range"><time datetime="19:00">19:00</time>–<time datetime="20:00">20:00</time></span><div><strong data-edit-id="arrival-6-6-title">Dinner in Kandy</strong><p data-edit-id="arrival-6-6-body">Eat near the accommodation and rest. Tomorrow continues through tea country to Nuwara Eliya, with breakfast at 08:00.</p></div></li></ol></div></div>
+<h4 data-edit-id="dec-6-3">Proposed day breakdown</h4><p class="sub" data-edit-id="transport-window-6">Public-transport connections can take longer than the road windows below. Check the official links and local departure before using this schedule; one-off rides remain an option where needed.</p>
+<div class="schedule-track"><h5 data-edit-id="arrival-6-track">Together · Sigiriya and Kandy’s Temple of the Tooth</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="arrival-6-0-title">Breakfast and checkout preparations</strong><p data-edit-id="arrival-6-0-body-diy">Have breakfast at Palitha Homestay and ask about storing your bags during the fortress visit. Collect them before the onward bus, or keep them in a one-off car if you choose one.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:00">12:00</time></span><div data-place-photo="sigiriya"><strong data-edit-id="dec-6-7">Sigiriya fortress and gardens</strong><p data-edit-id="arrival-6-1-body">Keep three hours for the gardens, lion-paw gateway and summit. Take shade and water breaks; do not rush the climb. Polonnaruwa is planned for yesterday.</p></div></li><li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="arrival-6-2-title">Lunch and checkout</strong><p data-edit-id="arrival-6-2-body">Eat near Sigiriya and collect your luggage. Travel onward to Kandy rather than returning to Polonnaruwa.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="17:00">17:00</time></span><div><strong data-edit-id="arrival-6-3-title">Sigiriya → Kandy</strong><p data-edit-id="arrival-6-3-body-diy">Travel via Dambulla by local buses, or hire a one-off car if needed for the evening temple window. The block is a road-planning allowance, not a verified afternoon bus departure. Check the bus alternative below before committing to the timing.</p></div></li><li><span class="time-range"><time datetime="17:00">17:00</time>–<time datetime="17:30">17:30</time></span><div><strong data-edit-id="arrival-6-4-title">Check in at the Kandy accommodation</strong><p data-edit-id="arrival-6-4-body">Overnight Kandy, replacing the second Sigiriya night. Leave large bags at the hotel and prepare respectful temple clothing.</p></div></li><li><span class="time-range"><time datetime="17:30">17:30</time>–<time datetime="19:00">19:00</time></span><div data-place-photo="temple"><strong data-edit-id="arrival-6-5-title">Temple of the Tooth · Kandy</strong><p data-edit-id="arrival-6-5-body">Allow time for local transfers, security, footwear storage and the temple visit. The temple publishes daily opening until 20:00 and an evening service from 18:30; access, queues and the service timing must be reconfirmed. Cover shoulders and knees.</p></div></li><li><span class="time-range"><time datetime="19:00">19:00</time>–<time datetime="20:00">20:00</time></span><div><strong data-edit-id="arrival-6-6-title">Dinner in Kandy</strong><p data-edit-id="arrival-6-6-body">Eat near the accommodation and rest. Tomorrow continues through tea country to Nuwara Eliya, with breakfast at 08:00.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-6"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-6">Route to check: Sigiriya → Dambulla by local bus, then Dambulla → Kandy; use a short tuk-tuk where necessary. The official SLTB search currently lists early Dambulla–Kandy services only, not an afternoon service fitting the fortress visit. No official local timetable verified for Sigiriya–Dambulla. Ask at the bus stand before leaving; a one-off car remains an option if the temple window cannot otherwise fit.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=172&amp;to=15&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Dambulla → Kandy</a></li><li><a href="https://tsa.cp.gov.lk/bus-routes.php" rel="noopener" target="_blank">CPTSA official route information · not a verified local timetable</a></li><li><a href="https://ntc.gov.lk/times/" rel="noopener" target="_blank">NTC official inter-provincial search</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-6-19-arrival">Sigiriya in the morning, temple in the evening</strong>
@@ -1352,9 +1350,8 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="7">
-<h4 data-edit-id="dec-7-3">Proposed day breakdown</h4>
-
-<div class="schedule-track"><h5 data-edit-id="arrival-7-track">Together · tea country and Nuwara Eliya</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="arrival-7-0-title">Breakfast and checkout in Kandy</strong><p data-edit-id="arrival-7-0-body">Have a normal breakfast before the highland drive. The temple visit is planned for yesterday evening.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:00">12:00</time></span><div><strong data-edit-id="arrival-7-1-title">Kandy → Labookellie tea country</strong><p data-edit-id="arrival-7-1-body">Drive through the Ramboda highlands toward the tea estate. Allow breaks and driver-confirmed road timing; do not add another major attraction.</p></div></li><li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="arrival-7-2-title">Lunch near the tea estate</strong><p data-edit-id="arrival-7-2-body">Choose a convenient meal with the driver, then meet the tea-centre guide. Keep the stop flexible if road timings change.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:30">14:30</time></span><div data-place-photo="tea"><strong data-edit-id="arrival-7-3-title">Labookellie tea estate · factory and tasting</strong><p data-edit-id="arrival-7-3-body">Propose Damro Labookellie Tea Centre for a tea-country visit, tea tasting and a factory tour if operating. Confirm tour times and whether tea processing is running; a working production tour is not guaranteed.</p></div></li><li><span class="time-range"><time datetime="14:30">14:30</time>–<time datetime="16:00">16:00</time></span><div><strong data-edit-id="arrival-7-4-title">Continue to Nuwara Eliya and check in</strong><p data-edit-id="arrival-7-4-body">Allow a generous onward road and check-in window. Stay in Nuwara Eliya for the nights of 7–8 December.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="arrival-7-5-title">Rest before Horton Plains</strong><p data-edit-id="arrival-7-5-body">Keep the late afternoon free. Confirm tomorrow’s route, weather, packed breakfast and pickup.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="arrival-7-6-title">Dinner and early night</strong><p data-edit-id="arrival-7-6-body">Eat near the accommodation. Horton Plains remains on 8 December, the planned early-start exception.</p></div></li></ol></div></div>
+<h4 data-edit-id="dec-7-3">Proposed day breakdown</h4><p class="sub" data-edit-id="transport-window-7">Public-transport connections can take longer than the road windows below. Check the official links and local departure before using this schedule; one-off rides remain an option where needed.</p>
+<div class="schedule-track"><h5 data-edit-id="arrival-7-track">Together · tea country and Nuwara Eliya</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="arrival-7-0-title">Breakfast and checkout in Kandy</strong><p data-edit-id="arrival-7-0-body">Have a normal breakfast before the highland drive. The temple visit is planned for yesterday evening.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:00">12:00</time></span><div><strong data-edit-id="arrival-7-1-title">Kandy → Labookellie tea country</strong><p data-edit-id="arrival-7-1-body-diy">Take a bus toward Nuwara Eliya only after confirming it goes via Ramboda and will stop for Labookellie, or use a one-off ride for the estate stop. No 09:00 public-bus departure was verified; use the official links and ask at Kandy bus stand.</p></div></li><li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="arrival-7-2-title">Lunch near the tea estate</strong><p data-edit-id="arrival-7-2-body-diy">Choose lunch locally near the tea centre. Keep your own luggage with you or arrange storage directly; no vehicle or guide is waiting unless you have hired one.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:30">14:30</time></span><div data-place-photo="tea"><strong data-edit-id="arrival-7-3-title">Labookellie tea estate · factory and tasting</strong><p data-edit-id="arrival-7-3-body-diy">Visit Damro Labookellie Tea Centre directly for tea country, tasting and a factory tour if operating. Ask on arrival about current tour times and production. No tour company or pre-booked guide is assumed.</p></div></li><li><span class="time-range"><time datetime="14:30">14:30</time>–<time datetime="16:00">16:00</time></span><div><strong data-edit-id="arrival-7-4-title">Continue to Nuwara Eliya and check in</strong><p data-edit-id="arrival-7-4-body-diy">Continue by a suitable local bus or a one-off tuk-tuk/taxi to Nuwara Eliya, with bags. The arrival window must be adjusted to the service you actually find; stay here for 7–8 December.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="arrival-7-5-title">Rest before Horton Plains</strong><p data-edit-id="arrival-7-5-body">Keep the late afternoon free. Confirm tomorrow’s route, weather, packed breakfast and pickup.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="arrival-7-6-title">Dinner and early night</strong><p data-edit-id="arrival-7-6-body">Eat near the accommodation. Horton Plains remains on 8 December, the planned early-start exception.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-7"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-7">Route to check: Kandy → Nuwara Eliya via Ramboda, asking whether the bus stops at Labookellie. Keep your luggage with you. The official SLTB search returned a 06:30–12:35 service; that does not fit the normal 08:00 breakfast. Other daytime services and the estate drop-off were not verified. Ask at Kandy bus stand, or choose a one-off ride for the estate visit rather than assuming a 09:00 bus.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=15&amp;to=35&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Kandy → Nuwara Eliya</a></li><li><a href="https://tsa.cp.gov.lk/bus-routes.php" rel="noopener" target="_blank">CPTSA official route information</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-7-15-arrival">Tea-estate visit restored</strong>
@@ -1368,126 +1365,101 @@
 </div>
 </div>
 <div class="stop" data-date="8" data-thread="dec-8">
-          <div class="date">8 DEC · Together · Maria to confirm</div>
-          <h3 data-edit-id="dec-8-1">Horton Plains · World’s End</h3>
-          <p class="sub" data-edit-id="dec-8-2">Proposed activities · Overnight Nuwara Eliya</p>
-          <div class="travel-links"><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Nuwara+Eliya&amp;destination=Horton+Plains+National+Park&amp;travelmode=driving"
-              rel="noopener" target="_blank">🚗 Nuwara Eliya → Horton Plains (1.5–2 h each way)</a><a href="#hiking">🥾
+<div class="date">8 DEC · Together · Maria to confirm</div>
+<h3 data-edit-id="dec-8-1">Horton Plains · World’s End</h3>
+<p class="sub" data-edit-id="dec-8-2">Proposed activities · Overnight Nuwara Eliya</p>
+<div class="travel-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Nuwara+Eliya&amp;destination=Horton+Plains+National+Park&amp;travelmode=driving" rel="noopener" target="_blank">🚗 Nuwara Eliya → Horton Plains (1.5–2 h each way)</a><a href="#hiking">🥾
               Horton Plains circuit (3–4 h)</a><a href="#plans">⇄ Alternatives</a></div>
-          <div class="stop-media">
-            <div class="stop-map">
-              <div aria-label="8 December route map" class="local-map" role="region"></div>
-            </div>
-            <div aria-label="Photos near Nuwara Eliya" class="gallery" role="region">
-              <div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Tea_Estate_Nuwara_Eliya.jpg" rel="noopener"
-                    target="_blank"><img alt="Nuwara Eliya tea estate" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tea_Estate_Nuwara_Eliya.jpg/500px-Tea_Estate_Nuwara_Eliya.jpg"
-                      width="500" /></a>
-                  <figcaption>Nuwara Eliya tea estate · <a
-                      href="https://commons.wikimedia.org/wiki/File:Tea_Estate_Nuwara_Eliya.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Estaci%C3%B3_de_Nanu_Oya.jpg" rel="noopener"
-                    target="_blank"><img alt="Nanu Oya station" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Estaci%C3%B3_de_Nanu_Oya.jpg/500px-Estaci%C3%B3_de_Nanu_Oya.jpg"
-                      width="500" /></a>
-                  <figcaption>Nanu Oya station · <a
-                      href="https://commons.wikimedia.org/wiki/File:Estaci%C3%B3_de_Nanu_Oya.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Gregory_lake_in_nuwara_eliya.jpg"
-                    rel="noopener" target="_blank"><img alt="Gregory Lake" decoding="async" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Gregory_lake_in_nuwara_eliya.jpg/500px-Gregory_lake_in_nuwara_eliya.jpg"
-                      width="500" /></a>
-                  <figcaption>Gregory Lake · <a
-                      href="https://commons.wikimedia.org/wiki/File:Gregory_lake_in_nuwara_eliya.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-              </div>
-              <div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
-                <div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1"
-                  type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="day-schedule" data-schedule-day="8">
-            <h4 data-edit-id="dec-8-3">Proposed day breakdown</h4>
-            <div class="schedule-track">
-              <h5 data-edit-id="dec-8-4">Together if Maria joins · Horton Plains</h5>
-              <ol class="time-blocks">
-                <li><span class="time-range"><time datetime="04:45">04:45</time>–<time
-                      datetime="05:15">05:15</time></span>
-                  <div><strong data-edit-id="dec-8-5">Packed breakfast and warm layers</strong>
-                    <p data-edit-id="dec-8-6">Ask the hotel to prepare food the night before. Carry rain protection and
+<div class="stop-media">
+<div class="stop-map">
+<div aria-label="8 December route map" class="local-map" role="region"></div>
+</div>
+<div aria-label="Photos near Nuwara Eliya" class="gallery" role="region">
+<div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
+<figure><a href="https://commons.wikimedia.org/wiki/File:Tea_Estate_Nuwara_Eliya.jpg" rel="noopener" target="_blank"><img alt="Nuwara Eliya tea estate" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tea_Estate_Nuwara_Eliya.jpg/500px-Tea_Estate_Nuwara_Eliya.jpg" width="500"/></a>
+<figcaption>Nuwara Eliya tea estate · <a href="https://commons.wikimedia.org/wiki/File:Tea_Estate_Nuwara_Eliya.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+<figure><a href="https://commons.wikimedia.org/wiki/File:Estaci%C3%B3_de_Nanu_Oya.jpg" rel="noopener" target="_blank"><img alt="Nanu Oya station" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Estaci%C3%B3_de_Nanu_Oya.jpg/500px-Estaci%C3%B3_de_Nanu_Oya.jpg" width="500"/></a>
+<figcaption>Nanu Oya station · <a href="https://commons.wikimedia.org/wiki/File:Estaci%C3%B3_de_Nanu_Oya.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+<figure><a href="https://commons.wikimedia.org/wiki/File:Gregory_lake_in_nuwara_eliya.jpg" rel="noopener" target="_blank"><img alt="Gregory Lake" decoding="async" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Gregory_lake_in_nuwara_eliya.jpg/500px-Gregory_lake_in_nuwara_eliya.jpg" width="500"/></a>
+<figcaption>Gregory Lake · <a href="https://commons.wikimedia.org/wiki/File:Gregory_lake_in_nuwara_eliya.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+</div>
+<div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
+<div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1" type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
+</div>
+</div>
+</div>
+<div class="day-schedule" data-schedule-day="8">
+<h4 data-edit-id="dec-8-3">Proposed day breakdown</h4>
+<div class="schedule-track">
+<h5 data-edit-id="dec-8-4">Together if Maria joins · Horton Plains</h5>
+<ol class="time-blocks">
+<li><span class="time-range"><time datetime="04:45">04:45</time>–<time datetime="05:15">05:15</time></span>
+<div><strong data-edit-id="dec-8-5">Packed breakfast and warm layers</strong>
+<p data-edit-id="dec-8-6">Ask the hotel to prepare food the night before. Carry rain protection and
                       enough water; do not depend on a café being open at the trailhead.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="05:15">05:15</time>–<time
-                      datetime="07:15">07:15</time></span>
-                  <div><strong data-edit-id="dec-8-7">Drive to Horton Plains</strong>
-                    <p data-edit-id="dec-8-8">Allow about 1.5–2 hours. Confirm park entry hours and tickets beforehand;
+</div>
+</li>
+<li><span class="time-range"><time datetime="05:15">05:15</time>–<time datetime="07:15">07:15</time></span>
+<div><strong data-edit-id="dec-8-7">Drive to Horton Plains</strong>
+<p data-edit-id="dec-8-8">Allow about 1.5–2 hours. Confirm park entry hours and tickets beforehand;
                       the aim is an early walk, not a guaranteed gate appointment.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="07:15">07:15</time>–<time
-                      datetime="11:15">11:15</time></span>
-                  <div data-place-photo="horton"><strong data-edit-id="dec-8-9">World’s End circuit</strong>
-                    <p data-edit-id="dec-8-10">Reserve four hours for the roughly 9 km loop, grassland and cloud forest,
+</div>
+</li>
+<li><span class="time-range"><time datetime="07:15">07:15</time>–<time datetime="11:15">11:15</time></span>
+<div data-place-photo="horton"><strong data-edit-id="dec-8-9">World’s End circuit</strong>
+<p data-edit-id="dec-8-10">Reserve four hours for the roughly 9 km loop, grassland and cloud forest,
                       the World’s End viewpoint and Baker’s Falls. Do not approach exposed edges in mist or strong wind.
                     </p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="11:15">11:15</time>–<time
-                      datetime="13:15">13:15</time></span>
-                  <div><strong data-edit-id="dec-8-11">Return to Nuwara Eliya</strong>
-                    <p data-edit-id="dec-8-12">Keep the whole return-drive window. If the hike is slower in rain, drop
+</div>
+</li>
+<li><span class="time-range"><time datetime="11:15">11:15</time>–<time datetime="13:15">13:15</time></span>
+<div><strong data-edit-id="dec-8-11">Return to Nuwara Eliya</strong>
+<p data-edit-id="dec-8-12">Keep the whole return-drive window. If the hike is slower in rain, drop
                       the optional afternoon outing rather than rushing.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="13:15">13:15</time>–<time
-                      datetime="14:15">14:15</time></span>
-                  <div><strong data-edit-id="dec-8-13">Warm lunch in town</strong>
-                    <p data-edit-id="dec-8-14">Choose soup, curry or a simple café meal near the accommodation. A packed
+</div>
+</li>
+<li><span class="time-range"><time datetime="13:15">13:15</time>–<time datetime="14:15">14:15</time></span>
+<div><strong data-edit-id="dec-8-13">Warm lunch in town</strong>
+<p data-edit-id="dec-8-14">Choose soup, curry or a simple café meal near the accommodation. A packed
                       snack on the drive is useful if the return is delayed.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="14:15">14:15</time>–<time
-                      datetime="17:30">17:30</time></span>
-                  <div data-place-photo="gregory"><strong data-edit-id="dec-8-15">Rest, with an optional Gregory Lake stroll</strong>
-                    <p data-edit-id="dec-8-16">Use this as a recovery afternoon. A short lakeside walk is enough if
+</div>
+</li>
+<li><span class="time-range"><time datetime="14:15">14:15</time>–<time datetime="17:30">17:30</time></span>
+<div data-place-photo="gregory"><strong data-edit-id="dec-8-15">Rest, with an optional Gregory Lake stroll</strong>
+<p data-edit-id="dec-8-16">Use this as a recovery afternoon. A short lakeside walk is enough if
                       weather improves; Maria can also use the town/rest option if she skips Horton Plains.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="18:00">18:00</time>–<time
-                      datetime="19:30">19:30</time></span>
-                  <div><strong data-edit-id="dec-8-17">Dinner and check tomorrow’s transfer</strong>
-                    <p><a href="https://www.thegrandhotelnuwaraeliya.com/dining/" rel="noopener" target="_blank">Grand
+</div>
+</li>
+<li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span>
+<div><strong data-edit-id="dec-8-17">Dinner and check tomorrow’s transfer</strong>
+<p><a href="https://www.thegrandhotelnuwaraeliya.com/dining/" rel="noopener" target="_blank">Grand
                         Indian at the Grand Hotel</a><span data-edit-id="dec-8-18-shared"> is one dinner candidate. Confirm tomorrow’s shared train or road transfer, the Nine Arch Bridge visit and the selected mountain accommodation.</span></p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="day-highlights">
-            <ul class="highlight-list">
-              <li><strong data-edit-id="dec-8-19">Walk the cloud-forest circuit</strong>
-                <p data-edit-id="dec-8-20">Drive roughly 1.5–2 hours each way from Nuwara Eliya, aiming for early entry.
+</div>
+</li>
+</ol>
+</div>
+</div><details class="transport-alternatives" id="transport-dec-8"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-8">No official public-bus timetable to the Horton Plains visitor entrance was verified. Do not plan a town bus as a timed park transfer. Ask locally about a shared early ride or hire a car/tuk-tuk for this return journey only; check the entry rules and arrange any local help directly.</p><ul><li><a href="https://tourism.cp.gov.lk/en/horton-plains" rel="noopener" target="_blank">Official Horton Plains visitor information</a></li><li><a href="https://tsa.cp.gov.lk/bus-routes.php" rel="noopener" target="_blank">CPTSA official route information</a></li></ul></details>
+<div class="day-highlights">
+<ul class="highlight-list">
+<li><strong data-edit-id="dec-8-19">Walk the cloud-forest circuit</strong>
+<p data-edit-id="dec-8-20">Drive roughly 1.5–2 hours each way from Nuwara Eliya, aiming for early entry.
                   The approximately 9 km circuit passes grassland, cloud forest, World’s End and Baker’s Falls. Reserve
                   the whole morning.</p>
-              </li>
-            </ul>
-            <details>
-              <summary>More Information</summary>
-              <p data-edit-id="dec-8-21">Moderate; allow 3–4 hours walking, approximately 200–350 m accumulated ascent
+</li>
+</ul>
+<details>
+<summary>More Information</summary>
+<p data-edit-id="dec-8-21">Moderate; allow 3–4 hours walking, approximately 200–350 m accumulated ascent
                 depending on track. Start/end at the visitor centre. A guide is optional on the main circuit. Cold rain
                 and mist can obscure the escarpment; avoid exposed edges. Confirm entry permits and operating hours with
                 DWC before departure.</p><a href="#sources">Sources and checks ↗</a>
-            </details>
-          </div>
-        </div>
-        <div class="stop" data-date="9" data-thread="dec-9">
+</details>
+</div>
+</div>
+<div class="stop" data-date="9" data-thread="dec-9">
 <div class="date">9 DEC · Together</div>
 <h3>Ella and Nine Arch Bridge · shared mountain base</h3>
 <p class="sub">Overnight together: Haputale for Stage 13 or Ella for Ella Rock</p>
@@ -1514,8 +1486,8 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="9">
-<h4 data-edit-id="dec-9-1">Proposed day breakdown</h4>
-<div class="schedule-track" data-transport="road"><h5>Together · Ella, Nine Arch Bridge and the selected hiking base</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="dec-9-shared-0-title">Breakfast and checkout</strong><p data-edit-id="dec-9-shared-0-body">Travel together from Nuwara Eliya. Keep the driver and luggage for the full day.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="dec-9-shared-1-title">Shared transfer to Ella</strong><p data-edit-id="dec-9-shared-1-body">Use a private road transfer with a comfort break. A train is optional only if its verified timing preserves the bridge visit and daylight arrival at the selected base.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:00">14:00</time></span><div><strong data-edit-id="dec-9-shared-2-title">Lunch in Ella</strong><p data-edit-id="dec-9-shared-2-body">Eat before the bridge visit. If staying in Ella, drop luggage at the accommodation; otherwise keep it with the driver.</p></div></li><li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="16:00">16:00</time></span><div data-place-photo="bridge"><strong data-edit-id="dec-9-shared-3-title">Nine Arch Bridge · together</strong><p data-edit-id="dec-9-shared-3-body">Both Maria and Apostolos visit the bridge viewpoints. Arrange road access and a short guide-confirmed walk, keeping off active railway tracks. A passing train is not guaranteed.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="dec-9-shared-4-title">Check in at the selected hiking base</strong><p data-edit-id="dec-9-shared-4-body">Ella Rock: stay in Ella. Stage 13: continue together to Haputale and check in there. Allow up to two hours for the onward drive, traffic and check-in; confirm with the driver.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="dec-9-shared-5-title">Dinner and organise tomorrow’s hike</strong><p data-edit-id="dec-9-shared-5-body">Confirm the guide, route, packed lunch and finish pickup. Maria stays at the same mountain base; there is no separate coast transfer.</p></div></li></ol></div><div class="schedule-track" data-transport="train"><h5>Together · scenic train and Nine Arch Bridge · conditional</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="dec-9-shared-0-title-train">Breakfast and transfer to Nanu Oya station</strong><p data-edit-id="dec-9-shared-0-body-train">Have breakfast at 08:00. The driver must confirm station pickup and check-in against the actual train departure. If the service cannot fit this start, use the road option rather than rushing.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="14:00">14:00</time></span><div><strong data-edit-id="dec-9-shared-1-title-train">Scenic train · Nanu Oya → Ella → Demodara</strong><p data-edit-id="dec-9-shared-1-body-train">Conditional rail window only. Confirm the actual departure, two seats, service operation and arrival by 14:00 before selecting this option. Continue beyond Ella to cross Nine Arch Bridge before getting off at Demodara. Carry lunch; arrange the driver and luggage pickup there.</p></div></li><li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="16:00">16:00</time></span><div data-place-photo="bridge"><strong data-edit-id="dec-9-shared-3-title-train">Nine Arch Bridge · together</strong><p data-edit-id="dec-9-shared-3-body-train">Both travellers visit the bridge viewpoints after the rail journey. Meet the driver at Demodara and use a guide-confirmed road-access approach, keeping off active railway tracks. Preserve enough daylight for the onward shared base.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="dec-9-shared-4-title-train">Check in at the selected hiking base</strong><p data-edit-id="dec-9-shared-4-body-train">Ella Rock: stay in Ella. Stage 13: continue together to Haputale and check in there. Allow up to two hours for the onward drive, traffic and check-in; confirm with the driver.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="dec-9-shared-5-title-train">Dinner and organise tomorrow’s hike</strong><p data-edit-id="dec-9-shared-5-body-train">Confirm the guide, route, packed lunch and finish pickup. Maria stays at the same mountain base; there is no separate coast transfer.</p></div></li></ol></div></div>
+<h4 data-edit-id="dec-9-1">Proposed day breakdown</h4><p class="sub" data-edit-id="transport-window-9">Public-transport connections can take longer than the road windows below. Check the official links and local departure before using this schedule; one-off rides remain an option where needed.</p>
+<div class="schedule-track" data-transport="road"><h5>Together · Ella, Nine Arch Bridge and the selected hiking base</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="dec-9-shared-0-title">Breakfast and checkout</strong><p data-edit-id="dec-9-shared-0-body-diy">Travel together from Nuwara Eliya. Carry your luggage and choose the train or road connections below; hire only the local rides you need.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="dec-9-shared-1-title">Shared transfer to Ella</strong><p data-edit-id="dec-9-shared-1-body">Use a private road transfer with a comfort break. A train is optional only if its verified timing preserves the bridge visit and daylight arrival at the selected base.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:00">14:00</time></span><div><strong data-edit-id="dec-9-shared-2-title">Lunch in Ella</strong><p data-edit-id="dec-9-shared-2-body">Eat before the bridge visit. If staying in Ella, drop luggage at the accommodation; otherwise keep it with the driver.</p></div></li><li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="16:00">16:00</time></span><div data-place-photo="bridge"><strong data-edit-id="dec-9-shared-3-title">Nine Arch Bridge · together</strong><p data-edit-id="dec-9-shared-3-body-diy">Both Maria and Apostolos visit the bridge viewpoints. Arrange road access and a short locally checked walk, keeping off active railway tracks. A passing train is not guaranteed.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="dec-9-shared-4-title">Check in at the selected hiking base</strong><p data-edit-id="dec-9-shared-4-body">Ella Rock: stay in Ella. Stage 13: continue together to Haputale and check in there. Allow up to two hours for the onward drive, traffic and check-in; confirm with the driver.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="dec-9-shared-5-title">Dinner and organise tomorrow’s hike</strong><p data-edit-id="dec-9-shared-5-body-diy">Check the route and any local help you want, route, packed lunch and finish pickup. Maria stays at the same mountain base; there is no separate coast transfer.</p></div></li></ol></div><div class="schedule-track" data-transport="train"><h5>Together · scenic train and Nine Arch Bridge · conditional</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="dec-9-shared-0-title-train">Breakfast and transfer to Nanu Oya station</strong><p data-edit-id="dec-9-shared-0-body-train">Have breakfast at 08:00. The driver must confirm station pickup and check-in against the actual train departure. If the service cannot fit this start, use the road option rather than rushing.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="14:00">14:00</time></span><div><strong data-edit-id="dec-9-shared-1-title-train">Scenic train · Nanu Oya → Ella → Demodara</strong><p data-edit-id="dec-9-shared-1-body-train-diy">Conditional rail window only. Confirm the actual departure, two seats, service operation and arrival by 14:00 before selecting this option. Continue beyond Ella to cross Nine Arch Bridge before getting off at Demodara. Carry lunch; arrange a local tuk-tuk or bus connection there and keep your luggage with you.</p></div></li><li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="16:00">16:00</time></span><div data-place-photo="bridge"><strong data-edit-id="dec-9-shared-3-title-train">Nine Arch Bridge · together</strong><p data-edit-id="dec-9-shared-3-body-train-diy">Both travellers visit the bridge viewpoints after the rail journey. Meet the driver at Demodara and use a locally checked road-access approach, keeping off active railway tracks. Preserve enough daylight for the onward shared base.</p></div></li><li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="18:00">18:00</time></span><div><strong data-edit-id="dec-9-shared-4-title-train">Check in at the selected hiking base</strong><p data-edit-id="dec-9-shared-4-body-train">Ella Rock: stay in Ella. Stage 13: continue together to Haputale and check in there. Allow up to two hours for the onward drive, traffic and check-in; confirm with the driver.</p></div></li><li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="dec-9-shared-5-title-train">Dinner and organise tomorrow’s hike</strong><p data-edit-id="dec-9-shared-5-body-train-diy">Check the route and any local help you want, route, packed lunch and finish pickup. Maria stays at the same mountain base; there is no separate coast transfer.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-9"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-9">Train: short local ride to Nanu Oya, then a confirmed service through Ella to Demodara to cross Nine Arch Bridge. Carry your luggage and arrange a local ride from the station. Road alternative to check: Nuwara Eliya → Bandarawela → Ella, with onward public transport or a one-off local ride to Haputale if choosing Stage 13. No official local timetable verified for all these connections. The train and road time blocks must be replaced by the services you actually find.</p><ul><li><a href="https://eservices.railway.gov.lk/schedule/searchTrain.action?lang=en" rel="noopener" target="_blank">Official rail timetable</a></li><li><a href="https://seatreservation.railway.gov.lk/mtktwebslr/" rel="noopener" target="_blank">Official rail seat booking</a></li><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=35&amp;to=1393&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Nuwara Eliya → Ella search</a></li><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=35&amp;to=1073&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Nuwara Eliya → Haputale search</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-9-42-together">See Nine Arch Bridge together</strong>
@@ -1560,23 +1532,18 @@
 <h5 data-edit-id="dec-10-2-together-together">Primary hike · shared Haputale base</h5>
 <ol class="time-blocks">
 <li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span>
-<div><strong data-edit-id="dec-10-3-together">Breakfast, packed lunch and local guide meeting</strong>
-<p data-edit-id="dec-10-4-together-together">Stay in Haputale the night before. Take enough food and water; arrange
-                      the St Catherine finish pickup before starting. Confirm Maria’s hiking participation with the guide. If she prefers to rest, she stays at the same base and you meet again there; no separate travel is required.</p>
+<div><strong data-edit-id="dec-10-3-together-diy">Breakfast, packed lunch and local route and conditions check</strong>
+<p data-edit-id="dec-10-4-together-together-diy">Stay in Haputale the night before. Take enough food and water; arrange the St Catherine finish pickup before starting. Confirm Maria’s hiking participation with local advice or a guide if you hire one. If she prefers to rest, she stays at the same base and you meet again there; no separate travel is required.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="15:00">15:00</time></span>
 <div data-place-photo="haputale"><strong data-edit-id="dec-10-5-together">Haputale → St Catherine · Stage 13</strong>
-<p data-edit-id="dec-10-6-together">Keep up to six hours for the 14.6 km point-to-point hike, including
-                      lunch. The official trail lists 810 m ascent and reports leeches and overgrowth; reconfirm
-                      conditions with the guide.</p>
+<p data-edit-id="dec-10-6-together-diy">Keep up to six hours for the 14.6 km point-to-point hike, including lunch. The official trail lists 810 m ascent and reports leeches and overgrowth; reconfirm conditions with local advice or a guide if you hire one.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="15:00">15:00</time>–<time datetime="17:00">17:00</time></span>
 <div><strong data-edit-id="dec-10-7-together">Finish pickup and return to Haputale</strong>
-<p data-edit-id="dec-10-8-together">Leave a generous collection and road allowance from St Catherine. The
-                      guide must confirm this window and a safe daylight finish; choose a shorter walk if conditions do
-                      not allow it.</p>
+<p data-edit-id="dec-10-8-together-diy">Leave a generous collection and road allowance from St Catherine. Check locally this window and a safe daylight finish; choose a shorter walk if conditions do not allow it.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="17:00">17:00</time>–<time datetime="19:30">19:30</time></span>
@@ -1590,16 +1557,13 @@
 <h5 data-edit-id="dec-10-11-together-together">Primary hike · shared Ella base</h5>
 <ol class="time-blocks">
 <li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span>
-<div><strong data-edit-id="dec-10-12-together">Breakfast and guide meeting</strong>
-<p data-edit-id="dec-10-13-together-together">Agree a road-access start and finish that avoid active railway tracks.
-                      Carry food and water. Confirm Maria’s hiking participation with the guide. If she prefers to rest, she stays at the same base and you meet again there; no separate travel is required.</p>
+<div><strong data-edit-id="dec-10-12-together-diy">Breakfast and route and conditions check</strong>
+<p data-edit-id="dec-10-13-together-together-diy">Agree a road-access start and finish that avoid active railway tracks. Carry food and water. Confirm Maria’s hiking participation with local advice or a guide if you hire one. If she prefers to rest, she stays at the same base and you meet again there; no separate travel is required.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="15:00">15:00</time></span>
-<div data-place-photo="ella"><strong data-edit-id="dec-10-14-together">Ella Rock · guide-confirmed route</strong>
-<p data-edit-id="dec-10-15-together">Keep up to six hours including a packed-lunch stop. The guide must
-                      confirm a safe daylight finish for the chosen route and weather; use a shorter local walk if
-                      needed.</p>
+<div data-place-photo="ella"><strong data-edit-id="dec-10-14-together-diy">Ella Rock · locally checked route</strong>
+<p data-edit-id="dec-10-15-together-diy">Keep up to six hours including a packed-lunch stop. Check locally a safe daylight finish for the chosen route and weather; use a shorter local walk if needed.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="15:00">15:00</time>–<time datetime="18:00">18:00</time></span>
@@ -1615,10 +1579,7 @@
 </li>
 </ol>
 </div>
-
-
-
-</div>
+</div><details class="transport-alternatives" id="transport-dec-10"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-10">Ella Rock uses a return walk from the Ella base. For Stage 13, arrange a local pickup from St Catherine back to Haputale before walking; no official bus timetable for that trail-end collection was verified. An optional local walking guide is separate from transport and does not manage the rest of the trip.</p><ul><li><a href="https://thepekoetrail.org/pekoe-stages/stage-13/" rel="noopener" target="_blank">Official Pekoe Trail Stage 13</a></li><li><a href="https://sltb.eseat.lk/bus/schedules" rel="noopener" target="_blank">Official SLTB searches</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-10-49-together">Keep the full hike and one shared base</strong>
@@ -1661,33 +1622,28 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="11">
-<h4 data-edit-id="dec-11-1-together">Proposed day breakdown</h4>
-
-
-
+<h4 data-edit-id="dec-11-1-together">Proposed day breakdown</h4><p class="sub" data-edit-id="transport-window-11">Public-transport connections can take longer than the road windows below. Check the official links and local departure before using this schedule; one-off rides remain an option where needed.</p>
 <div class="schedule-track">
 <h5 data-edit-id="dec-11-35-together">Together · afternoon safari and Udawalawe overnight</h5>
 <ol class="time-blocks">
 <li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span>
 <div><strong data-edit-id="dec-11-36-together">Breakfast and checkout</strong>
-<p data-edit-id="dec-11-37-together-together">Have breakfast and leave the same Haputale or Ella accommodation together. One private transfer takes both travellers and their luggage to Udawalawe.</p>
+<p data-edit-id="dec-11-37-together-together-diy">Leave the same Haputale/Ella base together. Use public connections only if they reach Udawalawe in time for the afternoon safari; otherwise hire one car for this journey. Take your luggage with you.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:30">12:30</time></span>
 <div><strong data-edit-id="dec-11-38-together-together">Shared transfer to Udawalawe</strong>
-<p data-edit-id="dec-11-39-together-together">Allow roughly 2.5–3.5 hours plus breaks from the selected mountain base, subject to driver confirmation. Both travellers arrive together for lunch and the safari.</p>
+<p data-edit-id="dec-11-39-together-together-diy">The 2.5–3.5-hour allowance is for a direct road ride, not buses. The public route can require changes and longer waits. Confirm it locally before relying on a 14:00 safari; arrive in the park area with time to arrange the jeep and permits.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="12:30">12:30</time>–<time datetime="14:00">14:00</time></span>
 <div><strong data-edit-id="dec-11-40-together">Meet for lunch and jeep arrangements</strong>
-<p data-edit-id="dec-11-41-together">Drop luggage at the shared park-area accommodation. Confirm permits,
-                      gate access and the afternoon jeep safari.</p>
+<p data-edit-id="dec-11-41-together-diy">Drop luggage at your shared park-area accommodation. Confirm permits, gate access and the afternoon jeep safari.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="17:00">17:00</time></span>
 <div data-place-photo="udawalawe"><strong data-edit-id="dec-11-42-together">Shared Udawalawe safari</strong>
-<p data-edit-id="dec-11-43-together">Allow about three hours in the park together. The operator must confirm
-                      access and exit times. Wildlife sightings are not guaranteed.</p>
+<p data-edit-id="dec-11-43-together-diy">Allow about three hours in the park together. Agree access, permits and exit time directly with the local jeep driver or park office. Wildlife sightings are not guaranteed.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="17:00">17:00</time>–<time datetime="19:30">19:30</time></span>
@@ -1697,7 +1653,7 @@
 </li>
 </ol>
 </div>
-</div>
+</div><details class="transport-alternatives" id="transport-dec-11"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-11">Public route to check: Ella/Haputale → Wellawaya, then a bus toward Udawalawe/Embilipitiya via Thanamalwila, changing where the conductor confirms. No through connection or timed afternoon arrival was verified. Check the actual services before choosing this over a one-off car; the direct-road time block is not a bus journey time. Arrange the safari jeep separately on arrival or directly through your accommodation.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=662&amp;to=914&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Wellawaya → Udawalawa search</a></li><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=1073&amp;to=662&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Haputale → Wellawaya search</a></li><li><a href="https://ntc.gov.lk/times/" rel="noopener" target="_blank">NTC official inter-provincial search</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-11-46-together-together">Both travellers take the safari</strong>
@@ -1740,9 +1696,7 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="12">
-<h4 data-edit-id="dec-12-1-together">Proposed day breakdown</h4>
-
-
+<h4 data-edit-id="dec-12-1-together">Proposed day breakdown</h4><p class="sub" data-edit-id="transport-window-12">Public-transport connections can take longer than the road windows below. Check the official links and local departure before using this schedule; one-off rides remain an option where needed.</p>
 <div class="schedule-track">
 <h5 data-edit-id="dec-12-24-together">Maria · Udawalawe → CMB and flight home</h5>
 <ol class="time-blocks">
@@ -1788,8 +1742,7 @@
 </li>
 <li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="13:00">13:00</time></span>
 <div><strong data-edit-id="dec-12-38-together">Coast transfer with a break</strong>
-<p data-edit-id="dec-12-39-together">Allow roughly 2.5–3.5 hours driving plus a break, confirmed by the
-                      driver. Use the same Unawatuna base for 12–15 December.</p>
+<p data-edit-id="dec-12-39-together-diy">A direct one-off ride can take roughly 2.5–3.5 hours plus a break. Public buses involve separate connections and a longer travel window; see the official links below. Stay in Unawatuna on 12–14 December.</p>
 </div>
 </li>
 <li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:00">14:00</time></span>
@@ -1799,13 +1752,12 @@
 </li>
 <li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="19:30">19:30</time></span>
 <div><strong data-edit-id="dec-12-42-together">Free coastal afternoon and dinner</strong>
-<p data-edit-id="dec-12-43-together">No diving today. Keep the proposed afternoon dives on the 14th and Galle
-                      on the 15th.</p>
+<p data-edit-id="dec-12-43-together-diy">No diving today. Arrange the proposed 13 December dive session directly with a local centre, then keep Galle on the 14th and Sinharaja on the 15th.</p>
 </div>
 </li>
 </ol>
 </div>
-</div>
+</div><details class="transport-alternatives" id="transport-dec-12"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-12">Maria: the direct one-off car is the practical flight-day option. A public route via Embilipitiya and Colombo, followed by airport bus 187, has multiple connections; no combination meeting the 16:00 CMB target was verified. Apostolos: ask for buses toward Matara via Embilipitiya, with a possible change toward Tangalle, then a coast bus to Unawatuna. The official Embilipitiya–Matara search returned no listed departure during this check, so confirm the route locally and allow substantially more time than the car window.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=1166&amp;to=39&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Embilipitiya → Colombo search</a></li><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=1166&amp;to=240&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Embilipitiya → Matara search</a></li><li><a href="https://www.sprpta.lk/schedulebyrouteall.php?routenumber=350" rel="noopener" target="_blank">Official coast route 350: Matara ↔ Galle</a></li><li><a href="https://www.airport.lk/passenger_guide/getting_arround/luxury_bus_service" rel="noopener" target="_blank">Official airport bus 187 information</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
 <li><strong data-edit-id="dec-12-44-together-together">Maria flies home after the shared safari</strong>
@@ -1821,9 +1773,9 @@
 </div>
 <div class="stop" data-date="13" data-thread="dec-13">
 <div class="date">13 DEC · Apostolos</div>
-<h3 data-edit-id="dec-13-1-together-together">Free coastal day</h3>
-<p class="sub" data-edit-id="dec-13-2-together-together">Apostolos · Unawatuna base, 12–15 December</p>
-<div class="travel-links"><a href="#practical">Already in Unawatuna · no transfer today</a></div>
+<h3 data-edit-id="diy-moved-13-0-diy">Unawatuna · afternoon diving</h3>
+<p class="sub" data-edit-id="diy-moved-13-1-diy">Independent day · choose a local dive centre directly</p>
+<div class="travel-links"><a href="#diving">Choose a local dive centre · nothing booked</a></div>
 <div class="stop-media">
 <div class="stop-map">
 <div aria-label="13 December route map" class="local-map" role="region"></div>
@@ -1849,545 +1801,300 @@
 </div>
 </div>
 <div class="day-schedule" data-schedule-day="13">
-<h4 data-edit-id="dec-13-3-together">Proposed day breakdown</h4>
-
+<h4 data-edit-id="diy-moved-13-2">Proposed day breakdown</h4>
 <div class="schedule-track">
-<h5 data-edit-id="dec-13-15-together">Apostolos · free coastal day</h5>
+<h5 data-edit-id="diy-moved-13-3">Apostolos · relaxed coast morning and afternoon diving</h5>
 <ol class="time-blocks">
 <li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span>
-<div><strong data-edit-id="dec-13-16-together">Breakfast in Unawatuna</strong>
-<p data-edit-id="dec-13-17-together">No transfer or boat departure today.</p>
+<div><strong data-edit-id="diy-moved-13-4">Breakfast and weather check</strong>
+<p data-edit-id="diy-moved-13-5-diy">Confirm the dive centre’s conditions decision. No early harbour transfer.</p>
 </div>
 </li>
-<li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="13:00">13:00</time></span>
-<div><strong data-edit-id="dec-13-18-together">Free coastal morning and lunch</strong>
-<p data-edit-id="dec-13-19-together">Rest or take a short local walk. The full mountain hike and safari are
-                      already complete.</p>
+<li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="12:00">12:00</time></span>
+<div><strong data-edit-id="diy-moved-13-6">Free coastal morning</strong>
+<p data-edit-id="diy-moved-13-7-diy">Rest or walk locally. Stay near Unawatuna rather than adding a Hikkaduwa transfer.</p>
 </div>
 </li>
-<li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="19:30">19:30</time></span>
-<div><strong data-edit-id="dec-13-20-together">Free afternoon and dinner</strong>
-<p data-edit-id="dec-13-21-together">Confirm tomorrow’s afternoon dive session. Galle remains on the 15th.
-                    </p>
+<li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:30">13:30</time></span>
+<div><strong data-edit-id="diy-moved-13-8">Light lunch and dive-centre check-in</strong>
+<p data-edit-id="diy-moved-13-9-diy">Confirm the published 13:30 session and agree timing, equipment and recreational profiles with the dive centre.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="13:30">13:30</time>–<time datetime="17:30">17:30</time></span>
+<div data-place-photo="unawatuna"><strong data-edit-id="diy-moved-13-10">Proposed reef or exterior wreck dives</strong>
+<p data-edit-id="diy-moved-13-11-diy">The dive centre must confirm the number of dives and finish time. Cancel if sea conditions or fatigue make the outing unsuitable; no whale trip or second boat session is stacked onto today.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="17:30">17:30</time>–<time datetime="19:30">19:30</time></span>
+<div><strong data-edit-id="diy-moved-13-12">Rest, dive log and dinner</strong>
+<p data-edit-id="diy-moved-13-13-diy">Keep this as the last planned diving day before inland travel on 15 December and the 17 December flight. Record the final dive time and follow your dive computer and any longer professional advice. If diving moves later, rework the forest and altitude timing.</p>
 </div>
 </li>
 </ol>
 </div>
-</div>
+</div><details class="transport-alternatives" id="transport-dec-13"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-13">Stay in Unawatuna for your locally arranged dive session. Walk or take a local tuk-tuk to the chosen dive centre. There is no long intercity transfer or public boat timetable for this activity; agree the session directly with the dive centre.</p><ul><li><a href="https://www.unawatunadiving.com/unawatuna/" rel="noopener" target="_blank">Unawatuna dive-centre information · commercial candidate, not a booking</a></li></ul></details>
 <div class="day-highlights">
 <ul class="highlight-list">
-<li><strong data-edit-id="dec-13-22-together-together">Free coastal day</strong>
-<p data-edit-id="dec-13-23-together-together">Apostolos is already in Unawatuna, with no transfer or diving today.</p>
+<li><strong data-edit-id="diy-moved-13-14-diy">Diving before the rainforest</strong>
+<p data-edit-id="diy-moved-13-15-diy">Choose and contact a local Unawatuna dive centre for the proposed afternoon session on 13 December. Maria has no diving scheduled.</p>
 </li>
 </ul>
 <details>
 <summary>More Information</summary>
-<p data-edit-id="dec-13-24-together-together">Keep afternoon diving on the 14th and Galle on the 15th. No second full hike or whale outing is added.</p><a href="#sources">Sources and checks ↗</a>
+<p data-edit-id="diy-moved-13-16-diy">Arrange the boat, equipment and buddy requirements directly with the dive centre. The 13:30 session is a published candidate, not a reservation. Keep Galle on the 14th at coastal elevation and the inland journey on the 15th; follow the dive computer and professional advice if more time is required.</p><a href="#sources">Sources and checks ↗</a>
 </details>
 </div>
 </div>
 <div class="stop" data-date="14" data-thread="dec-14">
-          <div class="date">14 DEC · Apostolos</div>
-          <h3 data-edit-id="dec-14-1">Relaxed coast morning · afternoon diving</h3>
-          <p class="sub" data-edit-id="dec-14-2">Proposed activities · Same Unawatuna accommodation; operator
-            confirmation required</p>
-          <div class="travel-links"><a href="#diving">Local Unawatuna afternoon session · operator-confirmed</a></div>
-          <div class="stop-media">
-            <div class="stop-map">
-              <div aria-label="14 December route map" class="local-map" role="region"></div>
-            </div>
-            <div aria-label="Photos near Mirissa and the south coast" class="gallery" role="region">
-              <div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Aerial_view_of_Mirissa_beach%2C_Srilanka.jpg"
-                    rel="noopener" target="_blank"><img alt="Mirissa beach" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Aerial_view_of_Mirissa_beach%2C_Srilanka.jpg/500px-Aerial_view_of_Mirissa_beach%2C_Srilanka.jpg"
-                      width="500" /></a>
-                  <figcaption>Mirissa beach · <a
-                      href="https://commons.wikimedia.org/wiki/File:Aerial_view_of_Mirissa_beach%2C_Srilanka.jpg"
-                      rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Elephant_Herd_Yala_National_Park.jpg"
-                    rel="noopener" target="_blank"><img alt="Elephant herd in Yala" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Elephant_Herd_Yala_National_Park.jpg/500px-Elephant_Herd_Yala_National_Park.jpg"
-                      width="500" /></a>
-                  <figcaption>Elephant herd in Yala · <a
-                      href="https://commons.wikimedia.org/wiki/File:Elephant_Herd_Yala_National_Park.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Coconut_Tree_Hill.jpg" rel="noopener"
-                    target="_blank"><img alt="Coconut Tree Hill" decoding="async" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Coconut_Tree_Hill.jpg/500px-Coconut_Tree_Hill.jpg"
-                      width="500" /></a>
-                  <figcaption>Coconut Tree Hill · <a
-                      href="https://commons.wikimedia.org/wiki/File:Coconut_Tree_Hill.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Amazing_Coconut_Tree_Hill.jpg" rel="noopener"
-                    target="_blank"><img alt="View over Mirissa Bay" decoding="async" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Amazing_Coconut_Tree_Hill.jpg/500px-Amazing_Coconut_Tree_Hill.jpg"
-                      width="500" /></a>
-                  <figcaption>View over Mirissa Bay · <a
-                      href="https://commons.wikimedia.org/wiki/File:Amazing_Coconut_Tree_Hill.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-              </div>
-              <div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
-                <div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1"
-                  type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="day-schedule" data-schedule-day="14">
-            <h4 data-edit-id="dec-14-3">Proposed day breakdown</h4>
-            <div class="schedule-track">
-              <h5 data-edit-id="dec-14-4">Apostolos · relaxed coast morning and afternoon diving</h5>
-              <ol class="time-blocks">
-                <li><span class="time-range"><time datetime="08:00">08:00</time>–<time
-                      datetime="09:00">09:00</time></span>
-                  <div><strong data-edit-id="dec-14-5">Breakfast and weather check</strong>
-                    <p data-edit-id="dec-14-6">Confirm the operator’s conditions decision. No early harbour transfer.
-                    </p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
-                      datetime="12:00">12:00</time></span>
-                  <div><strong data-edit-id="dec-14-7">Free coastal morning</strong>
-                    <p data-edit-id="dec-14-8">Rest or walk locally. Stay near Unawatuna rather than adding a Hikkaduwa
-                      transfer.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="12:00">12:00</time>–<time
-                      datetime="13:30">13:30</time></span>
-                  <div><strong data-edit-id="dec-14-9">Light lunch and dive-centre check-in</strong>
-                    <p data-edit-id="dec-14-10">Confirm the published 13:30 session and agree timing, equipment and
-                      recreational profiles with the operator.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
-                      datetime="17:30">17:30</time></span>
-                  <div data-place-photo="unawatuna"><strong data-edit-id="dec-14-11">Proposed reef or exterior wreck dives</strong>
-                    <p data-edit-id="dec-14-12">The operator must confirm the number of dives and finish time. Cancel if
-                      sea conditions or fatigue make the outing unsuitable; no whale trip or second boat session is
-                      stacked onto today.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="17:30">17:30</time>–<time
-                      datetime="19:30">19:30</time></span>
-                  <div><strong data-edit-id="dec-14-13">Rest, dive log and dinner</strong>
-                    <p data-edit-id="dec-14-14">Record the final dive time. Keep this as the last planned diving day
-                      before the supplied 17 December evening flight; no mountain travel afterwards.</p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="day-highlights">
-            <ul class="highlight-list">
-              <li><strong data-edit-id="dec-14-15">One planned afternoon dive day</strong>
-                <p data-edit-id="dec-14-16">Breakfast at 08:00, a free morning and a proposed 13:30 dive session. Whale
-                  watching and the Hikkaduwa detour are removed from this schedule.</p>
-              </li>
-            </ul>
-            <details>
-              <summary>More Information</summary>
-              <p data-edit-id="dec-14-17">Use a local Unawatuna operator to avoid another early transfer. Sites,
-                profiles, weather and the final session time remain operator-confirmed. Galle Fort stays on the 15th.
-              </p><a href="#sources">Sources and checks ↗</a>
-            </details>
-          </div>
-        </div>
-        <div class="stop" data-date="15" data-thread="dec-15">
-          <div class="date">15 DEC · Apostolos</div>
-          <h3 data-edit-id="dec-15-1">Galle Fort day trip</h3>
-          <p class="sub" data-edit-id="dec-15-2">Proposed activities · Overnight Same south-coast base</p>
-          <div class="travel-links"><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Unawatuna&amp;destination=Galle+Fort&amp;travelmode=driving"
-              rel="noopener" target="_blank">🚗 Unawatuna → Galle (15–30 min each way)</a><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Ahangama&amp;destination=Galle+Fort&amp;travelmode=driving"
-              rel="noopener" target="_blank">🚗 Ahangama → Galle (40–60 min each way)</a><a href="#practical">🚶 Galle
+<div class="date">14 DEC · Apostolos</div>
+<h3 data-edit-id="diy-moved-14-0-diy">Galle Fort · explore independently</h3>
+<p class="sub" data-edit-id="diy-moved-14-1-diy">Walk the Fort yourself · optional local guide if wanted · return to Unawatuna</p>
+<div class="travel-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Unawatuna&amp;destination=Galle+Fort&amp;travelmode=driving" rel="noopener" target="_blank">🚗 Unawatuna → Galle (15–30 min each way)</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ahangama&amp;destination=Galle+Fort&amp;travelmode=driving" rel="noopener" target="_blank">🚗 Ahangama → Galle (40–60 min each way)</a><a href="#practical">🚶 Galle
               visit (3–5 h)</a><a href="#plans">⇄ Alternatives</a></div>
-          <div class="stop-media">
-            <div class="stop-map">
-              <div aria-label="15 December route map" class="local-map" role="region"></div>
-            </div>
-            <div aria-label="Photos near Galle Fort" class="gallery" role="region">
-              <div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
-                <figure><a href="https://commons.wikimedia.org/wiki/File:SL_Galle_Fort_asv2020-01_img24.jpg"
-                    rel="noopener" target="_blank"><img alt="Galle Fort lighthouse" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/SL_Galle_Fort_asv2020-01_img24.jpg/500px-SL_Galle_Fort_asv2020-01_img24.jpg"
-                      width="500" /></a>
-                  <figcaption>Galle Fort lighthouse · <a
-                      href="https://commons.wikimedia.org/wiki/File:SL_Galle_Fort_asv2020-01_img24.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Galle_Fort%2C_Sri_Lanka.JPG" rel="noopener"
-                    target="_blank"><img alt="Galle Fort" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Galle_Fort%2C_Sri_Lanka.JPG/500px-Galle_Fort%2C_Sri_Lanka.JPG"
-                      width="500" /></a>
-                  <figcaption>Galle Fort · <a href="https://commons.wikimedia.org/wiki/File:Galle_Fort%2C_Sri_Lanka.JPG"
-                      rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-              </div>
-              <div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
-                <div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1"
-                  type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="day-schedule" data-schedule-day="15">
-            <h4 data-edit-id="dec-15-3">Proposed day breakdown</h4>
-            <div class="schedule-track">
-              <h5 data-edit-id="dec-15-4">Apostolos · Galle Fort</h5>
-              <ol class="time-blocks">
-                <li><span class="time-range"><time datetime="08:00">08:00</time>–<time
-                      datetime="08:30">08:30</time></span>
-                  <div><strong data-edit-id="dec-15-5">Breakfast</strong>
-                    <p data-edit-id="dec-15-6">Eat at the accommodation before travelling into Galle.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="08:30">08:30</time>–<time
-                      datetime="09:30">09:30</time></span>
-                  <div><strong data-edit-id="dec-15-7">Travel to Galle Fort</strong>
-                    <p data-edit-id="dec-15-8">Allow 15–30 minutes from Unawatuna or roughly 40–60 minutes from
-                      Ahangama. The larger window includes finding the drop-off point.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="09:30">09:30</time>–<time
-                      datetime="12:00">12:00</time></span>
-                  <div data-place-photo="galle"><strong data-edit-id="dec-15-9">Ramparts, lighthouse and historic lanes</strong>
-                    <p data-edit-id="dec-15-10">Walk the Fort’s defensive walls and streets at an unhurried pace. Use
-                      shade and water stops; the aim is a compact historic walk rather than a checklist of buildings.
-                    </p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="12:00">12:00</time>–<time
-                      datetime="13:30">13:30</time></span>
-                  <div><strong data-edit-id="dec-15-11">Lunch in the Fort</strong>
-                    <p><span data-edit-id="dec-15-12">Try </span><a
-                        href="https://www.teardrop-hotels.com/fort-bazaar/church-street-social/" rel="noopener"
-                        target="_blank">Church Street Social at Fort Bazaar</a><span data-edit-id="dec-15-13"> for a
-                        sit-down meal, or choose a smaller local café after checking its menu. No table is
-                        reserved.</span></p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
-                      datetime="15:30">15:30</time></span>
-                  <div><strong data-edit-id="dec-15-14">Museum, galleries or a café</strong>
-                    <p data-edit-id="dec-15-15">Choose one indoor stop that interests you and confirm its opening hours
-                      locally. Keep time to revisit a favourite street or shop.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="15:30">15:30</time>–<time
-                      datetime="17:30">17:30</time></span>
-                  <div><strong data-edit-id="dec-15-16">Return and coast downtime</strong>
-                    <p data-edit-id="dec-15-17">Return to the same accommodation rather than adding a hotel move. If you
-                      prefer sunset in the Fort, agree the later return with the driver.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="18:00">18:00</time>–<time
-                      datetime="19:30">19:30</time></span>
-                  <div><strong data-edit-id="dec-15-18">Dinner and pack gradually</strong>
-                    <p data-edit-id="dec-15-19">Eat near the hotel and prepare for tomorrow’s drive to the airport area.
-                    </p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="day-highlights">
-            <ul class="highlight-list">
-              <li><strong data-edit-id="dec-15-20">Walk the fort and historic streets</strong>
-                <p data-edit-id="dec-15-21">Explore the ramparts, lighthouse area and streets on foot. Keeping the same
-                  accommodation makes this a relaxed cultural day between diving and departure.</p>
-              </li>
-            </ul>
-            <details>
-              <summary>More Information</summary>
-              <p data-edit-id="dec-15-22">Allow 3–5 hours for the old town and a meal. From Unawatuna allow 15–30
-                minutes each way; from Ahangama roughly 40–60 minutes depending on traffic.</p><a
-                href="#sources">Sources and checks ↗</a>
-            </details>
-          </div>
-        </div>
-        <div class="stop" data-date="16" data-thread="dec-16">
-          <div class="date">16 DEC · Apostolos</div>
-          <h3 data-edit-id="dec-16-1">Coast → optional Colombo culture → airport area</h3>
-          <p class="sub" data-edit-id="dec-16-2">Proposed activities · Overnight Negombo / airport area; Colombo visit
-            optional</p>
-          <div class="travel-links"><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Unawatuna&amp;destination=Negombo&amp;travelmode=driving"
-              rel="noopener" target="_blank">Direct coast → Negombo (3–4.5 h)</a><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Unawatuna&amp;destination=Colombo+National+Museum&amp;travelmode=driving"
-              rel="noopener" target="_blank">Optional coast → Colombo (2.5–3.5 h planning allowance)</a><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Colombo&amp;destination=Negombo&amp;travelmode=driving"
-              rel="noopener" target="_blank">Optional city exit → airport area (1.5–2.5 h with buffer)</a><a
-              href="#plans">⇄ Alternatives</a></div>
-          <div class="stop-media">
-            <div class="stop-map">
-              <div aria-label="16 December route map" class="local-map" role="region"></div>
-            </div>
-            <div aria-label="Photos near Negombo" class="gallery" role="region">
-              <div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener"
-                    target="_blank"><img alt="Negombo beach" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/500px-Negombo_Beach%2C_Sri_Lanka.jpg"
-                      width="500" /></a>
-                  <figcaption>Negombo beach · <a
-                      href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                    rel="noopener" target="_blank"><img alt="Fishing boat at Negombo" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Fibreglass_fishing_boat_on_Negombo_Beach.JPG/500px-Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                      width="500" /></a>
-                  <figcaption>Fishing boat at Negombo · <a
-                      href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                      rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-              </div>
-              <div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
-                <div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1"
-                  type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="day-schedule" data-schedule-day="16">
-            <h4 data-edit-id="dec-16-3">Proposed day breakdown</h4>
-            <div class="schedule-track">
-              <h5 data-edit-id="dec-16-4">Apostolos · coast to airport area</h5>
-              <ol class="time-blocks">
-                <li><span class="time-range"><time datetime="08:00">08:00</time>–<time
-                      datetime="09:00">09:00</time></span>
-                  <div><strong data-edit-id="dec-16-5">Breakfast, packing and flight check</strong>
-                    <p data-edit-id="dec-16-6">The supplied return ticket departs CMB at 20:05 on 17 December. Plan
-                      tomorrow’s airport arrival for 16:00 and confirm the pickup with the driver. Do not add a later
-                      dive to this departure buffer.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
-                      datetime="13:30">13:30</time></span>
-                  <div><strong data-edit-id="dec-16-7">Coast → Negombo/airport accommodation</strong>
-                    <p data-edit-id="dec-16-8">Allow roughly 3–4.5 hours with the driver’s traffic advice. Take a short
-                      comfort break rather than a sightseeing detour.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
-                      datetime="14:30">14:30</time></span>
-                  <div><strong data-edit-id="dec-16-9">Lunch and check-in</strong>
-                    <p data-edit-id="dec-16-10">Choose a curry or simple café meal close to the airport-area
-                      accommodation.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="14:30">14:30</time>–<time
-                      datetime="17:30">17:30</time></span>
-                  <div data-place-photo="negombo"><strong data-edit-id="dec-16-11">Rest and optional Negombo stroll</strong>
-                    <p data-edit-id="dec-16-12">A nearby beach walk is enough if weather and energy allow. Keep the
-                      afternoon easy before tomorrow’s evening departure.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="18:00">18:00</time>–<time
-                      datetime="19:30">19:30</time></span>
-                  <div><strong data-edit-id="dec-16-13">Dinner and final checks</strong>
-                    <p data-edit-id="dec-16-14">Eat near the hotel. Set the airport car time from the actual flight,
-                      with a generous check-in buffer.</p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-            <details>
-              <summary>Optional Colombo visit · choose one short stop</summary>
-              <div class="schedule-track">
-                <h5 data-edit-id="dec-16-15">Optional Colombo branch</h5>
-                <ol class="time-blocks">
-                  <li><span class="time-range"><time datetime="08:00">08:00</time>–<time
-                        datetime="09:00">09:00</time></span>
-                    <div><strong data-edit-id="dec-16-16">Breakfast and checkout</strong>
-                      <p data-edit-id="dec-16-17">Confirm luggage and city traffic before choosing this optional branch.
-                      </p>
-                    </div>
-                  </li>
-                  <li><span class="time-range"><time datetime="09:00">09:00</time>–<time
-                        datetime="12:30">12:30</time></span>
-                    <div><strong data-edit-id="dec-16-18">Coast → central Colombo</strong>
-                      <p data-edit-id="dec-16-19">Allow 2.5–3.5 hours. If delayed, skip the city visit and continue
-                        directly to the airport-area accommodation.</p>
-                    </div>
-                  </li>
-                  <li><span class="time-range"><time datetime="12:30">12:30</time>–<time
-                        datetime="13:30">13:30</time></span>
-                    <div><strong data-edit-id="dec-16-20">Lunch near the chosen stop</strong>
-                      <p data-edit-id="dec-16-21">Avoid a cross-city detour for a restaurant.</p>
-                    </div>
-                  </li>
-                  <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
-                        datetime="15:00">15:00</time></span>
-                    <div data-place-photo="colombo"><strong data-edit-id="dec-16-22">One short museum or temple visit</strong>
-                      <p data-edit-id="dec-16-23">Choose one attraction and confirm its opening hours. Leave at 15:00
-                        even if that means a shorter visit.</p>
-                    </div>
-                  </li>
-                  <li><span class="time-range"><time datetime="15:00">15:00</time>–<time
-                        datetime="17:30">17:30</time></span>
-                    <div><strong data-edit-id="dec-16-24">Colombo → airport-area accommodation</strong>
-                      <p data-edit-id="dec-16-25">Keep the existing 1.5–2.5-hour city-exit allowance. No extra stops.
-                      </p>
-                    </div>
-                  </li>
-                  <li><span class="time-range"><time datetime="18:00">18:00</time>–<time
-                        datetime="19:30">19:30</time></span>
-                    <div><strong data-edit-id="dec-16-26">Dinner and departure preparations</strong>
-                      <p data-edit-id="dec-16-27">Keep tomorrow’s airport pickup unchanged.</p>
-                    </div>
-                  </li>
-                </ol>
-              </div>
-            </details>
-          </div>
-          <div class="day-highlights">
-            <ul class="highlight-list">
-              <li><strong data-edit-id="dec-16-28">Protect the airport-area overnight</strong>
-                <p data-edit-id="dec-16-29">Breakfast at 08:00 and departure at 09:00. Go directly to Negombo, or choose
-                  one short Colombo stop only if traffic permits.</p>
-              </li>
-            </ul>
-            <details>
-              <summary>More Information</summary>
-              <p data-edit-id="dec-16-30">Skip Colombo if delayed or tired. The airport-area overnight on 16 December
-                and the 16:00 CMB arrival target on 17 December remain unchanged.</p><a href="#sources">Sources and
+<div class="stop-media">
+<div class="stop-map">
+<div aria-label="14 December route map" class="local-map" role="region"></div>
+</div>
+<div aria-label="Photos near Galle Fort" class="gallery" role="region">
+<div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
+<figure><a href="https://commons.wikimedia.org/wiki/File:SL_Galle_Fort_asv2020-01_img24.jpg" rel="noopener" target="_blank"><img alt="Galle Fort lighthouse" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/SL_Galle_Fort_asv2020-01_img24.jpg/500px-SL_Galle_Fort_asv2020-01_img24.jpg" width="500"/></a>
+<figcaption>Galle Fort lighthouse · <a href="https://commons.wikimedia.org/wiki/File:SL_Galle_Fort_asv2020-01_img24.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+<figure><a href="https://commons.wikimedia.org/wiki/File:Galle_Fort%2C_Sri_Lanka.JPG" rel="noopener" target="_blank"><img alt="Galle Fort" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Galle_Fort%2C_Sri_Lanka.JPG/500px-Galle_Fort%2C_Sri_Lanka.JPG" width="500"/></a>
+<figcaption>Galle Fort · <a href="https://commons.wikimedia.org/wiki/File:Galle_Fort%2C_Sri_Lanka.JPG" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+</div>
+<div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
+<div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1" type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
+</div>
+</div>
+</div>
+<div class="day-schedule" data-schedule-day="14">
+<h4 data-edit-id="diy-moved-14-2">Proposed day breakdown</h4>
+<div class="schedule-track">
+<h5 data-edit-id="diy-moved-14-3">Apostolos · Galle Fort</h5>
+<ol class="time-blocks">
+<li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="08:30">08:30</time></span>
+<div><strong data-edit-id="diy-moved-14-4">Breakfast</strong>
+<p data-edit-id="diy-moved-14-5-diy">Eat at the accommodation before travelling into Galle.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="08:30">08:30</time>–<time datetime="09:30">09:30</time></span>
+<div><strong data-edit-id="diy-moved-14-6">Travel to Galle Fort</strong>
+<p data-edit-id="diy-moved-14-7-diy">Allow 15–30 minutes from Unawatuna or roughly 40–60 minutes from Ahangama. The larger window includes finding the drop-off point.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="09:30">09:30</time>–<time datetime="12:00">12:00</time></span>
+<div data-place-photo="galle"><strong data-edit-id="diy-moved-14-8">Ramparts, lighthouse and historic lanes</strong>
+<p data-edit-id="diy-moved-14-9-diy">Walk the Fort’s defensive walls and streets at an unhurried pace. Use shade and water stops; the aim is a compact historic walk rather than a checklist of buildings.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="12:00">12:00</time>–<time datetime="13:30">13:30</time></span>
+<div><strong data-edit-id="diy-moved-14-10">Lunch in the Fort</strong>
+<p data-edit-id="independent-copy-1">Try Church Street Social at Fort Bazaar for a sit-down meal, or choose a smaller local café after checking its menu. No table is reserved.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="13:30">13:30</time>–<time datetime="15:30">15:30</time></span>
+<div><strong data-edit-id="diy-moved-14-13">Museum, galleries or a café</strong>
+<p data-edit-id="diy-moved-14-14-diy">Choose one indoor stop that interests you and confirm its opening hours locally. Keep time to revisit a favourite street or shop.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="15:30">15:30</time>–<time datetime="17:30">17:30</time></span>
+<div><strong data-edit-id="diy-moved-14-15">Return and coast downtime</strong>
+<p data-edit-id="diy-moved-14-16-diy">Return to the same accommodation rather than adding a hotel move. If you prefer sunset in the Fort, check the return bus or arrange a local tuk-tuk.</p>
+</div>
+</li>
+<li><span class="time-range"><time datetime="18:00">18:00</time>–<time datetime="19:30">19:30</time></span>
+<div><strong data-edit-id="diy-moved-14-17">Dinner and pack gradually</strong>
+<p data-edit-id="diy-moved-14-18-diy">Eat near the hotel and prepare for tomorrow’s rainforest journey.</p>
+</div>
+</li>
+</ol>
+</div>
+</div><details class="transport-alternatives" id="transport-dec-14"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-14">Use the Galle–Matara coast corridor, route 350, from the Unawatuna main road toward Galle; return in the Matara direction and confirm the Unawatuna stop with the conductor. The official table gives terminal departures, not exact passing times at Unawatuna. Walk or take a tuk-tuk between the beach accommodation and the main-road bus stop. A local Fort guide is optional.</p><ul><li><a href="https://www.sprpta.lk/schedulebyrouteall.php?routenumber=350" rel="noopener" target="_blank">Official route 350 timetable: Galle ↔ Matara</a></li></ul></details>
+<div class="day-highlights">
+<ul class="highlight-list">
+<li><strong data-edit-id="diy-moved-14-19-diy">Galle stays in the trip</strong>
+<p data-edit-id="diy-moved-14-20-diy">Use the local coast bus or a tuk-tuk to Galle, then explore the ramparts, lighthouse and lanes on foot. Hire a local guide only if you want one.</p>
+</li>
+</ul>
+<details>
+<summary>More Information</summary>
+<p data-edit-id="diy-moved-14-21-diy">Return to Unawatuna tonight. The rainforest replaces the following coastal day, so pack for Sinharaja rather than another beach day.</p><a href="#sources">Sources and checks ↗</a>
+</details>
+</div>
+</div>
+<div class="stop" data-date="15" data-thread="dec-15">
+<div class="date">15 DEC · Apostolos</div>
+<h3 data-edit-id="diy-moved-15-0-diy">Sinharaja rainforest · Deniyaya/Pitadeniya side</h3>
+<p class="sub" data-edit-id="diy-moved-15-1-diy">Independent rainforest visit · overnight near the chosen forest entrance</p>
+<div class="travel-links"><a href="https://www.google.com/maps/search/?api=1&amp;query=Sinharaja+Pitadeniya+Entrance" rel="noopener" target="_blank">Check the Pitadeniya access point</a><a href="#public-transport">Bus alternative via Matara and Deniyaya</a></div>
+<div class="stop-media">
+<div class="stop-map">
+<div aria-label="15 December route map" class="local-map" role="region"></div>
+</div>
+<div aria-label="Photo of Sinharaja rainforest" class="gallery" role="region">
+<div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0"><figure><a href="https://commons.wikimedia.org/wiki/File:Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg" rel="noopener" target="_blank"><img alt="Sinharaja rainforest · giant trees and lianas" height="161" loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg/330px-Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg" width="330"/></a><figcaption>Sinharaja · Ruwan Illeperuma · <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a></figcaption></figure></div>
+<div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
+<div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1" type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
+</div>
+</div></div>
+<div class="day-schedule" data-schedule-day="15"><h4 data-edit-id="diy-15-schedule">Suggested day · adjust to actual transport</h4><div class="schedule-track"><h5 data-edit-id="diy-15-track">Apostolos · one-off ride, local forest visit and overnight</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="diy-15-0-title">Breakfast and checkout in Unawatuna</strong><p data-edit-id="diy-15-0-body">Take your luggage and arrange only this journey directly. A one-off car is the practical choice for keeping a full afternoon in the forest; no driver is retained for the rest of the trip.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="13:00">13:00</time></span><div><strong data-edit-id="diy-15-1-title">Unawatuna → Deniyaya / Pitadeniya area</strong><p data-edit-id="diy-15-1-body">Allow a generous 3–4-hour road and entrance-access window, confirmed against the actual accommodation and gate. Choose the Deniyaya/Pitadeniya side before booking a room; the different Sinharaja entrances are not interchangeable.</p></div></li><li><span class="time-range"><time datetime="13:00">13:00</time>–<time datetime="14:00">14:00</time></span><div><strong data-edit-id="diy-15-2-title">Lunch, bags and forest tickets</strong><p data-edit-id="diy-15-2-body">Check in or ask the accommodation to store luggage. Arrange entry and an approved local forest guide directly at the gate or through the accommodation. Confirm the day’s access, fees and latest finish; this is a local site arrangement, not a managed tour.</p></div></li><li><span class="time-range"><time datetime="14:00">14:00</time>–<time datetime="17:00">17:00</time></span><div data-place-photo="forest"><strong data-edit-id="diy-15-3-title">Sinharaja forest walk</strong><p data-edit-id="diy-15-3-body">Take a locally agreed trail suited to the weather and your energy. Budget for a local forest guide as an entry requirement and reconfirm the current rule at the ticket office. Bring rain protection, water and footwear suitable for mud and leeches; finish before the gate closes.</p></div></li><li><span class="time-range"><time datetime="17:00">17:00</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="diy-15-4-title">Forest-area overnight and dinner</strong><p data-edit-id="diy-15-4-body">Stay near the same access point. Arrange tomorrow’s local ride to Deniyaya bus stand, and recheck the published 10:30 Colombo service before relying on it.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-15"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-15">Bus alternative: Unawatuna main road → Matara on the coast corridor, then route 360 Matara → Deniyaya, followed by a local tuk-tuk/car to the actual Pitadeniya-area accommodation. The southern authority publishes route 360 departures from Matara including 10:30, 11:30 and 12:30; recheck them for 15 December. These are terminal departures, not a guaranteed connection. No official local timetable verified for Deniyaya–forest access. Public transport may use most of the day; if it prevents the full afternoon walk, move the walk to the 16th and use a one-off car afterward rather than the 10:30 Colombo bus.</p><ul><li><a href="https://www.sprpta.lk/schedulebyrouteall.php?routenumber=350" rel="noopener" target="_blank">Official route 350 timetable: Galle ↔ Matara</a></li><li><a href="https://www.sprpta.lk/schedulebyrouteall.php?routenumber=360" rel="noopener" target="_blank">Official route 360 timetable: Matara ↔ Deniyaya</a></li></ul></details>
+<div class="day-highlights">
+<ul class="highlight-list">
+<li><strong data-edit-id="diy-moved-15-10-diy">Rainforest instead of a third coastal day</strong>
+<p data-edit-id="diy-moved-15-11-diy">Sinharaja replaces the last coastal day. The main plan uses a one-off ride to preserve the afternoon forest walk, followed by a night near the entrance.</p>
+</li>
+</ul>
+<details>
+<summary>More Information</summary>
+<p data-edit-id="diy-moved-15-12-diy">Bus alternative: Unawatuna main road → Matara, then route 360 to Deniyaya and a local ride to the forest accommodation. This takes longer and may leave no full afternoon walk. If choosing buses here, move the forest walk to the 16th and use a later one-off car to the airport area; do not also assume the 10:30 bus can fit.</p><a href="#sources">Sources and checks ↗</a>
+</details>
+</div>
+</div>
+<div class="stop" data-date="16" data-thread="dec-16">
+<div class="date">16 DEC · Apostolos</div>
+<h3 data-edit-id="dec-16-1-diy">Sinharaja → Colombo → airport area</h3>
+<p class="sub" data-edit-id="dec-16-2-diy">Independent return journey · overnight near CMB before the 17 December flight</p>
+<div class="travel-links"><a href="#public-transport">Official bus timetables and source notes</a><a href="#flights">17 December flight · airport target 16:00</a></div>
+<div class="stop-media">
+<div class="stop-map">
+<div aria-label="16 December route map" class="local-map" role="region"></div>
+</div>
+<div aria-label="Photos near Negombo" class="gallery" role="region">
+<div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
+<figure><a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener" target="_blank"><img alt="Negombo beach" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/500px-Negombo_Beach%2C_Sri_Lanka.jpg" width="500"/></a>
+<figcaption>Negombo beach · <a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+<figure><a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG" rel="noopener" target="_blank"><img alt="Fishing boat at Negombo" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Fibreglass_fishing_boat_on_Negombo_Beach.JPG/500px-Fibreglass_fishing_boat_on_Negombo_Beach.JPG" width="500"/></a>
+<figcaption>Fishing boat at Negombo · <a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+</div>
+<div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
+<div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1" type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
+</div>
+</div>
+</div>
+<div class="day-schedule" data-schedule-day="16"><h4 data-edit-id="diy-16-schedule">Suggested day · adjust to actual transport</h4><div class="schedule-track"><h5 data-edit-id="diy-16-track">Apostolos · published bus option and airport-area overnight</h5><ol class="time-blocks"><li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="09:00">09:00</time></span><div><strong data-edit-id="diy-16-0-title">Breakfast, pack and check the bus</strong><p data-edit-id="diy-16-0-body">The forest walk is planned for yesterday. Recheck the 10:30 Deniyaya → Colombo service and its boarding point. Keep your 17 December flight at 20:05 and the 16:00 airport target tomorrow.</p></div></li><li><span class="time-range"><time datetime="09:00">09:00</time>–<time datetime="10:15">10:15</time></span><div><strong data-edit-id="diy-16-1-title">Local ride to Deniyaya bus stand</strong><p data-edit-id="diy-16-1-body">Arrange a tuk-tuk or local car from the actual forest accommodation and reach the stand before departure. This last-mile journey is separate from the intercity bus; confirm the fare and pickup locally.</p></div></li><li><span class="time-range"><time datetime="10:30">10:30</time>–<time datetime="16:10">16:10</time></span><div><strong data-edit-id="diy-16-2-title">Deniyaya → Colombo · published SLTB route 60 option</strong><p data-edit-id="diy-16-2-body">The official SLTB search currently lists this departure and arrival. It is not booked or confirmed for 16 December. Carry lunch and water, keep your bags with you, and confirm where the bus terminates in Colombo.</p></div></li><li><span class="time-range"><time datetime="16:10">16:10</time>–<time datetime="19:30">19:30</time></span><div><strong data-edit-id="diy-16-3-title">Colombo → CMB / airport-area accommodation</strong><p data-edit-id="diy-16-3-body">Continue to the route 187 airport-bus boarding point and allow for waiting, traffic and the local ride to your hotel. Use the airport’s official service page to verify the current pickup and terminal access. A one-off taxi is an alternative if the bus connection does not work.</p></div></li><li><span class="time-range"><time datetime="19:30">19:30</time>–<time datetime="21:00">21:00</time></span><div><strong data-edit-id="diy-16-4-title">Dinner and airport-area overnight</strong><p data-edit-id="diy-16-4-body">Rest near the airport. No Colombo sightseeing is added to this connection day. Confirm tomorrow’s hotel-to-terminal journey and airline boarding requirements.</p></div></li></ol></div></div><details class="transport-alternatives" id="transport-dec-16"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-16">The official SLTB search currently lists Deniyaya → Colombo route 60 at 08:05–14:05 and 10:30–16:10. The main schedule uses the later service after breakfast and a local ride from your forest accommodation. Recheck the day’s service, boarding point and seats directly; no ticket is reserved. Then use airport bus 187, checking its Colombo boarding point and BIA access, plus a short ride to your airport-area hotel. If the forest walk moves to this morning, these departures do not fit and a later direct car is the fallback.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=1596&amp;to=39&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Deniyaya → Colombo timetable search</a></li><li><a href="https://www.airport.lk/passenger_guide/getting_arround/luxury_bus_service" rel="noopener" target="_blank">Official airport bus 187 information · no exact departure table verified</a></li><li><a href="https://ntc.gov.lk/times/" rel="noopener" target="_blank">NTC official inter-provincial search</a></li></ul></details>
+<div class="day-highlights">
+<ul class="highlight-list">
+<li><strong data-edit-id="dec-16-28-diy">Return by public transport before flight day</strong>
+<p data-edit-id="dec-16-29-diy">The main option is a local ride to Deniyaya, the published 10:30 bus to Colombo, then the airport bus and a short final ride to the hotel.</p>
+</li>
+</ul>
+<details>
+<summary>More Information</summary>
+<p data-edit-id="dec-16-30-diy">If the forest walk moves to this morning because you used buses on the 15th, the 10:30 departure no longer fits. Keep a one-off direct car to the airport area after the walk instead. All bus times must be rechecked; no ticket or connection has been reserved.</p><a href="#sources">Sources and
                 checks ↗</a>
-            </details>
-          </div>
-        </div>
-        <div class="stop" data-date="17" data-thread="dec-17">
-          <div class="date">17 DEC · Apostolos</div>
-          <h3 data-edit-id="dec-17-1">Colombo → Delhi → Athens</h3>
-          <p class="sub" data-edit-id="dec-17-2">Supplied return tickets · CMB 20:05 · Athens arrival 18 Dec 11:55</p>
-          <div class="travel-links"><a
-              href="https://www.google.com/maps/dir/?api=1&amp;origin=Negombo&amp;destination=Colombo+Bandaranaike+Airport&amp;travelmode=driving"
-              rel="noopener" target="_blank">Accommodation → CMB (allow up to 90 min)</a><a href="#flights">✈ CMB → DEL
+</details>
+</div>
+</div>
+<div class="stop" data-date="17" data-thread="dec-17">
+<div class="date">17 DEC · Apostolos</div>
+<h3 data-edit-id="dec-17-1">Colombo → Delhi → Athens</h3>
+<p class="sub" data-edit-id="dec-17-2">Supplied return tickets · CMB 20:05 · Athens arrival 18 Dec 11:55</p>
+<div class="travel-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Negombo&amp;destination=Colombo+Bandaranaike+Airport&amp;travelmode=driving" rel="noopener" target="_blank">Accommodation → CMB (allow up to 90 min)</a><a href="#flights">✈ CMB → DEL
               → ATH · 17–18 Dec</a></div>
-          <div class="stop-media">
-            <div class="stop-map">
-              <div aria-label="17 December route map" class="local-map" role="region"></div>
-            </div>
-            <div aria-label="Photos near Colombo Airport" class="gallery" role="region">
-              <div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener"
-                    target="_blank"><img alt="Negombo beach" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/500px-Negombo_Beach%2C_Sri_Lanka.jpg"
-                      width="500" /></a>
-                  <figcaption>Negombo beach · <a
-                      href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener"
-                      target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-                <figure><a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                    rel="noopener" target="_blank"><img alt="Fishing boat at Negombo" height="310" loading="lazy"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Fibreglass_fishing_boat_on_Negombo_Beach.JPG/500px-Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                      width="500" /></a>
-                  <figcaption>Fishing boat at Negombo · <a
-                      href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG"
-                      rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
-                </figure>
-              </div>
-              <div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
-                <div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1"
-                  type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="day-schedule" data-schedule-day="17">
-            <h4 data-edit-id="dec-17-3">Proposed day breakdown</h4>
-            <div class="schedule-track">
-              <h5 data-edit-id="dec-17-4">Apostolos · airport target 16:00 for the 20:05 departure</h5>
-              <ol class="time-blocks">
-                <li><span class="time-range"><time datetime="08:00">08:00</time>–<time
-                      datetime="10:00">10:00</time></span>
-                  <div><strong data-edit-id="dec-17-5">Breakfast and a relaxed morning</strong>
-                    <p data-edit-id="dec-17-6">Eat near the airport-area accommodation. Keep today local and free of
+<div class="stop-media">
+<div class="stop-map">
+<div aria-label="17 December route map" class="local-map" role="region"></div>
+</div>
+<div aria-label="Photos near Colombo Airport" class="gallery" role="region">
+<div aria-label="Swipe or use the arrow keys to browse photos" class="slides" tabindex="0">
+<figure><a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener" target="_blank"><img alt="Negombo beach" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Negombo_Beach%2C_Sri_Lanka.jpg/500px-Negombo_Beach%2C_Sri_Lanka.jpg" width="500"/></a>
+<figcaption>Negombo beach · <a href="https://commons.wikimedia.org/wiki/File:Negombo_Beach%2C_Sri_Lanka.jpg" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+<figure><a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG" rel="noopener" target="_blank"><img alt="Fishing boat at Negombo" height="310" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Fibreglass_fishing_boat_on_Negombo_Beach.JPG/500px-Fibreglass_fishing_boat_on_Negombo_Beach.JPG" width="500"/></a>
+<figcaption>Fishing boat at Negombo · <a href="https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG" rel="noopener" target="_blank">Photo credit &amp; licence</a></figcaption>
+</figure>
+</div>
+<div class="slide-controls"><span aria-live="polite" class="photo-count"></span>
+<div class="photo-dots"></div><button aria-label="Previous photo" data-step="-1" type="button">←</button><button aria-label="Next photo" data-step="1" type="button">→</button>
+</div>
+</div>
+</div>
+<div class="day-schedule" data-schedule-day="17">
+<h4 data-edit-id="dec-17-3">Proposed day breakdown</h4>
+<div class="schedule-track">
+<h5 data-edit-id="dec-17-4">Apostolos · airport target 16:00 for the 20:05 departure</h5>
+<ol class="time-blocks">
+<li><span class="time-range"><time datetime="08:00">08:00</time>–<time datetime="10:00">10:00</time></span>
+<div><strong data-edit-id="dec-17-5">Breakfast and a relaxed morning</strong>
+<p data-edit-id="dec-17-6">Eat near the airport-area accommodation. Keep today local and free of
                       diving or long sightseeing transfers.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="12:30">12:30</time>–<time
-                      datetime="13:30">13:30</time></span>
-                  <div><strong data-edit-id="dec-17-7">Lunch near the accommodation</strong>
-                    <p data-edit-id="dec-17-8">Choose a simple meal before the airport transfer. Arrange luggage storage
+</div>
+</li>
+<li><span class="time-range"><time datetime="12:30">12:30</time>–<time datetime="13:30">13:30</time></span>
+<div><strong data-edit-id="dec-17-7">Lunch near the accommodation</strong>
+<p data-edit-id="dec-17-8">Choose a simple meal before the airport transfer. Arrange luggage storage
                       if the hotel checkout is earlier.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="13:30">13:30</time>–<time
-                      datetime="14:30">14:30</time></span>
-                  <div><strong data-edit-id="dec-17-9">Collect luggage and meet the driver</strong>
-                    <p data-edit-id="dec-17-10">Confirm the hotel-to-terminal journey. The proposed 14:30 pickup allows
+</div>
+</li>
+<li><span class="time-range"><time datetime="13:30">13:30</time>–<time datetime="14:30">14:30</time></span>
+<div><strong data-edit-id="dec-17-9">Collect luggage and meet the driver</strong>
+<p data-edit-id="dec-17-10">Confirm the hotel-to-terminal journey. The proposed 14:30 pickup allows
                       up to 90 minutes for driving and traffic; move it earlier if the driver advises.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="14:30">14:30</time>–<time
-                      datetime="16:00">16:00</time></span>
-                  <div><strong data-edit-id="dec-17-11">Negombo / airport accommodation → CMB</strong>
-                    <p data-edit-id="dec-17-12">Target CMB by 16:00, leaving about four hours before departure. Allow
+</div>
+</li>
+<li><span class="time-range"><time datetime="14:30">14:30</time>–<time datetime="16:00">16:00</time></span>
+<div><strong data-edit-id="dec-17-11">Negombo / airport accommodation → CMB</strong>
+<p data-edit-id="dec-17-12">Target CMB by 16:00, leaving about four hours before departure. Allow
                       the airline’s actual check-in requirements and current traffic to determine the final pickup.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="16:00">16:00</time>–<time
-                      datetime="19:00">19:00</time></span>
-                  <div><strong data-edit-id="dec-17-13">Check in, security and airport food</strong>
-                    <p data-edit-id="dec-17-14">Use the buffer for formalities and a light meal. Follow the boarding
+</div>
+</li>
+<li><span class="time-range"><time datetime="16:00">16:00</time>–<time datetime="19:00">19:00</time></span>
+<div><strong data-edit-id="dec-17-13">Check in, security and airport food</strong>
+<p data-edit-id="dec-17-14">Use the buffer for formalities and a light meal. Follow the boarding
                       time on the pass and check for gate changes.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="20:05">20:05</time>–<time
-                      datetime="23:55">23:55</time></span>
-                  <div><strong data-edit-id="dec-17-15">Colombo → Delhi · IndiGo 6E 1170</strong>
-                    <p data-edit-id="dec-17-16">17 December: depart CMB at 20:05 and arrive DEL at 23:55. The ticket
+</div>
+</li>
+<li><span class="time-range"><time datetime="20:05">20:05</time>–<time datetime="23:55">23:55</time></span>
+<div><strong data-edit-id="dec-17-15">Colombo → Delhi · IndiGo 6E 1170</strong>
+<p data-edit-id="dec-17-16">17 December: depart CMB at 20:05 and arrive DEL at 23:55. The ticket
                       shows 3 h 50 min; all airport times are local.</p>
-                  </div>
-                </li>
-                <li><span class="time-range"><time datetime="23:55">23:55</time>–<time datetime="07:20">07:20</time> (+1
+</div>
+</li>
+<li><span class="time-range"><time datetime="23:55">23:55</time>–<time datetime="07:20">07:20</time> (+1
                     day)</span>
-                  <div><strong data-edit-id="dec-17-17">Delhi connection · 7 h 25 min</strong>
-                    <p data-edit-id="dec-17-18">Follow the airline’s transfer instructions for the overnight connection,
+<div><strong data-edit-id="dec-17-17">Delhi connection · 7 h 25 min</strong>
+<p data-edit-id="dec-17-18">Follow the airline’s transfer instructions for the overnight connection,
                       documents and baggage. Rest and eat near the assigned terminal/gate.</p>
-                  </div>
-                </li>
-                <li><span class="time-range">18 Dec <time datetime="07:20">07:20</time>–<time
-                      datetime="11:55">11:55</time></span>
-                  <div><strong data-edit-id="dec-17-19">Delhi → Athens · IndiGo 6E 1901</strong>
-                    <p data-edit-id="dec-17-20">18 December: depart DEL at 07:20 and arrive ATH at 11:55. The ticket
+</div>
+</li>
+<li><span class="time-range">18 Dec <time datetime="07:20">07:20</time>–<time datetime="11:55">11:55</time></span>
+<div><strong data-edit-id="dec-17-19">Delhi → Athens · IndiGo 6E 1901</strong>
+<p data-edit-id="dec-17-20">18 December: depart DEL at 07:20 and arrive ATH at 11:55. The ticket
                       shows 8 h 5 min; all airport times are local.</p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="day-highlights">
-            <ul class="highlight-list">
-              <li><strong data-edit-id="dec-17-21">Return tickets supplied · 17–18 December</strong>
-                <p data-edit-id="dec-17-22">CMB 20:05 → DEL 23:55 on 6E 1170, then DEL 07:20 → ATH 11:55 on 6E 1901 the
+</div>
+</li>
+</ol>
+</div>
+</div><details class="transport-alternatives" id="transport-dec-17"><summary>Public transport · route and official timetable links</summary><p data-edit-id="public-route-17">Keep the flight-day journey local. Ask about Negombo → Katunayake/Averiwatta buses and any last-mile ride to the terminal, but no official local timetable meeting the 16:00 airport target was verified. A short one-off taxi/tuk-tuk is the practical fallback; confirm terminal access, bags and pickup yourselves.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedule/search?from=697&amp;to=792&amp;start=00%3A00&amp;end=23%3A59&amp;bus_type=any" rel="noopener" target="_blank">Official SLTB: Negombo → Katunayake search</a></li><li><a href="https://www.airport.lk/passenger_guide/getting_arround/luxury_bus_service" rel="noopener" target="_blank">Airport official transport information</a></li></ul></details>
+<div class="day-highlights">
+<ul class="highlight-list">
+<li><strong data-edit-id="dec-17-21">Return tickets supplied · 17–18 December</strong>
+<p data-edit-id="dec-17-22">CMB 20:05 → DEL 23:55 on 6E 1170, then DEL 07:20 → ATH 11:55 on 6E 1901 the
                   following day. Delhi connection: 7 h 25 min.</p>
-              </li>
-            </ul>
-            <details>
-              <summary>More Information</summary>
-              <p data-edit-id="dec-17-23">Keep the 16 December airport-area overnight. Target CMB at 16:00 on the 17th,
+</li>
+</ul>
+<details>
+<summary>More Information</summary>
+<p data-edit-id="dec-17-23">Keep the 16 December airport-area overnight. Target CMB at 16:00 on the 17th,
                 with pickup provisionally 14:30 and the exact hotel/traffic allowance agreed with the driver. Check the
                 airline for flight status and boarding instructions.</p><a href="#flights">Return flight details ↗</a>
-            </details>
-          </div>
-        </div>
-      </section>
-      <section class="panel" data-thread="plans" id="plans"><h2 data-edit-id="plans-shared-title">One shared itinerary</h2><p data-edit-id="plans-shared-summary">Stay together through the mountain section, Nine Arch Bridge on 9 December, and the Udawalawe safari and overnight on 11 December. Maria has no diving scheduled. She flies home on 12 December; Apostolos keeps diving on the 14th and Galle on the 15th.</p><div class="itinerary-choice" id="hike-choice"><label for="hike-select">Primary mountain hike · 10 December</label><select aria-describedby="hike-help" id="hike-select" name="hike"><option value="stage13">Pekoe Trail Stage 13 · Haputale base</option><option value="ella">Ella Rock · Ella base</option></select><p class="sub" data-edit-id="plans-shared-hike" id="hike-help">Both travellers stay at the selected base on 9–10 December. Confirm Maria’s hiking participation separately; resting locally does not require another hotel or a separate driver.</p></div><p data-edit-id="plans-shared-bookings">Flights are supplied. Drivers, rooms, guides, safari and Apostolos’s dive session remain unconfirmed. Ordinary days begin with an 08:00 breakfast; Horton Plains remains the early-start exception.</p><div class="itinerary-choice"><label for="transport-select">Shared journey on 9 December</label><select aria-describedby="train-help" id="transport-select"><option value="road">Private car · confirmed-timing fallback</option><option value="train">Scenic train · Nanu Oya → Ella → Demodara, if available</option></select><p data-edit-id="shared-train-help" id="train-help">Travel together. The train option continues past Ella to Demodara to cross Nine Arch Bridge, followed by a driver pickup and bridge-viewpoint visit. Use it only after Sri Lanka Railways confirms the actual 9 December service, two seats and arrival by 14:00. These are planning windows, not published departures. If timings or service do not fit, choose the car.</p><p><a href="https://seatreservation.railway.gov.lk/mtktwebslr/" rel="noopener" target="_blank">Check official seats</a><span data-edit-id="shared-train-booking-1"> · </span><a href="https://eservices.railway.gov.lk/schedule/searchTrain.action?lang=en" rel="noopener" target="_blank">Check the official timetable</a><span data-edit-id="shared-train-booking-3">. Ask for reserved seats together and confirm the train stops at Demodara. Nanu Oya → Ella alone ends before Nine Arch Bridge. Keep the driver for luggage and the onward mountain-base transfer.</span></p></div></section>
+</details>
+</div>
+</div>
+<section class="panel" data-thread="plans" id="plans"><h2 data-edit-id="plans-shared-title-diy">Independent trip · shared route and transport choices</h2><p data-edit-id="plans-shared-summary-diy">Independent trip: stay together through the mountains, Nine Arch Bridge on 9 December, and Udawalawe safari and overnight on the 11th. Maria has no diving scheduled and flies home on 12 December. Apostolos then has diving on the 13th, Galle on the 14th, Sinharaja on the 15th and an airport-area overnight on the 16th.</p><div class="itinerary-choice" id="hike-choice"><label for="hike-select">Primary mountain hike · 10 December</label><select aria-describedby="hike-help" id="hike-select" name="hike"><option value="stage13">Pekoe Trail Stage 13 · Haputale base</option><option value="ella">Ella Rock · Ella base</option></select><p class="sub" data-edit-id="plans-shared-hike" id="hike-help">Both travellers stay at the selected base on 9–10 December. Confirm Maria’s hiking participation separately; resting locally does not require another hotel or a separate driver.</p></div><p data-edit-id="plans-shared-bookings-diy">Independent trip. Flights and Palitha Homestay for the first night are confirmed from your information. Other rooms, transport, local guides, the safari jeep and the dive session are for you to arrange directly as needed.</p><div class="itinerary-choice"><label for="transport-select">Shared journey on 9 December</label><select aria-describedby="train-help" id="transport-select"><option value="road">Road · public connections or a one-off ride</option><option value="train">Scenic train · Nanu Oya → Ella → Demodara, if available</option></select><p data-edit-id="shared-train-help-diy" id="train-help">Travel together. The train option continues past Ella to Demodara to cross Nine Arch Bridge, then you arrange your own local ride to the viewpoints and shared base. Use it only after checking the actual 9 December service, two seats and arrival by 14:00. Carry your luggage; these are planning windows, not published departures.</p><p><a href="https://seatreservation.railway.gov.lk/mtktwebslr/" rel="noopener" target="_blank">Check official seats</a><span data-edit-id="shared-train-booking-1"> · </span><a href="https://eservices.railway.gov.lk/schedule/searchTrain.action?lang=en" rel="noopener" target="_blank">Check the official timetable</a><span data-edit-id="shared-train-booking-3-diy">. Reserve seats together if available and confirm the train stops at Demodara. Nanu Oya → Ella alone ends before Nine Arch Bridge. Arrange local tuk-tuks or buses separately and keep your luggage with you.</span></p></div></section>
       <section class="panel" data-thread="hiking" id="hiking">
 <h2 data-edit-id="hiking-1">Serious hiking choices</h2>
-<p><strong data-edit-id="hiking-3">Horton Plains</strong><span data-edit-id="hiking-2-together"> · 9 km loop, approximately 200–350 m gain (planning estimate), 3–4 hours, moderate. Visitor-centre start/end; return car from the shared Nuwara Eliya base. Start early, carry waterproofs and a warm layer; confirm both travellers’ participation and the guide’s route.</span></p>
+<p><strong data-edit-id="hiking-3">Horton Plains</strong><span data-edit-id="hiking-2-together-diy"> · 9 km loop, approximately 200–350 m gain (planning estimate), 3–4 hours, moderate. Start and finish at the visitor centre and arrange a local return ride from Nuwara Eliya. Start early, carry waterproofs and a warm layer, and check the current route and entry rules with park staff. No pre-booked walking guide is assumed.</span></p>
 <p data-edit-id="shared-hiking-1">10–11 December priority: choose one primary hike on the 10th from the shared Haputale or Ella base. Nine Arch Bridge is already included together on the 9th. Travel together to the Udawalawe safari on the 11th. Confirm Maria’s hiking participation before booking; she can rest at the same base.</p>
 <p><strong data-edit-id="hiking-7">Pekoe Stage 13</strong><span data-edit-id="hiking-6"> · 14.6 km, +810/−360 m,
             official 4 hours; plan 5–6. Haputale → St Catherine, point-to-point pickup required. Officially moderate
             with sustained ascent. Guide recommended if navigation or visibility is poor. November advisory reports
             leeches and overgrowth. Reconfirm trail access/pass arrangements.</span></p>
-<p><strong data-edit-id="hiking-9">Ella Rock</strong><span data-edit-id="hiking-8"> · provisional 8–12 km,
-            +400–600 m, 4–6 hours, moderate to demanding. Obtain a guide-confirmed road-access start/end and track
-            avoiding the railway. Figures vary with that route and are not a surveyed itinerary. December rain makes
-            roots and slopes slippery. Little Adam’s Peak remains a short fallback.</span></p>
+<p><strong data-edit-id="hiking-9">Ella Rock</strong><span data-edit-id="hiking-8-diy"> · provisional 8–12 km, +400–600 m, 4–6 hours, moderate to demanding. Check a road-access start/end and a current route avoiding active railway tracks. Use a local guide if you want navigation help. Figures vary with the route and are not a surveyed itinerary. December rain makes roots and slopes slippery; Little Adam’s Peak remains a shorter alternative.</span></p>
 <div id="knuckles-option">
 <h3 data-edit-id="hiking-10">Knuckles Range · not included in this slower itinerary</h3>
 <p data-edit-id="hiking-11">A full Knuckles trek would replace Horton Plains and require a different
@@ -2397,9 +2104,7 @@
 </section>
       <section class="panel" data-thread="diving" id="diving">
 <h2 data-edit-id="diving-1">Advanced recreational diving</h2>
-<p data-edit-id="diving-2">Both travellers hold Advanced Open Water certification. Choose sites with an operator
-          after reviewing recent logged dives, sea conditions and depth limits. Use external wreck tours only;
-          certification alone does not cover penetration, decompression or technical diving.</p>
+<p data-edit-id="diving-2-diy">Both travellers hold Advanced Open Water certification, but only Apostolos is planning to dive. Choose a local dive centre and sites directly after reviewing recent logged dives, sea conditions and qualification limits. Use external wreck tours only; certification alone does not cover penetration, decompression or technical diving.</p>
 <table>
 <thead>
 <tr>
@@ -2426,13 +2131,13 @@
 </tr>
 <tr>
 <td data-edit-id="diving-15">Rangoon</td>
-<td data-edit-id="diving-16">Wreck · operator reports vary 30–32 m</td>
+<td data-edit-id="diving-16-diy">Wreck · centre-reported depths vary 30–32 m</td>
 <td data-edit-id="diving-17">Only if actual profile stays within your qualifications; otherwise choose
                 another site</td>
 </tr>
 <tr>
 <td data-edit-id="diving-18">Hikkaduwa</td>
-<td data-edit-id="diving-19">Reef and wreck choices; site/depth to agree with operator</td>
+<td data-edit-id="diving-19-diy">Reef and wreck choices; site and depth to agree with your chosen dive centre</td>
 <td data-edit-id="diving-20">Alternative if conditions justify a longer transfer</td>
 </tr>
 </tbody>
@@ -2444,14 +2149,11 @@
             Station, Hikkaduwa</a><span data-edit-id="diving-22"> is a candidate to enquire with, not a booked or
             independently audited recommendation. Ask about group ratios, emergency oxygen, boat support and
             cancellation terms.</span></p>
-<p><span data-edit-id="diving-23">December falls in the operator’s published south-coast season, but weather and
-            visibility remain variable. Use Unawatuna as the coast base to remove the long dive-day transfer. </span><a href="https://www.unawatunadiving.com/unawatuna/" rel="noopener" target="_blank">Divinguru
+<p><span data-edit-id="diving-23-diy">December falls in the dive centre’s published south-coast season, but weather and visibility remain variable. Use Unawatuna as the coast base to remove the long dive-day transfer.</span><a href="https://www.unawatunadiving.com/unawatuna/" rel="noopener" target="_blank">Divinguru
             Unawatuna</a><span data-edit-id="diving-24"> publishes 08:30 and 13:30 starts; this itinerary proposes the
             13:30 session. Confirm check-in, number of dives, finish time, sea conditions and rental equipment before
             booking. The schedule is a planning window, not a confirmed boat.</span></p>
-
-
-<p data-edit-id="diving-apostolos-only">Apostolos only · proposed afternoon diving in Unawatuna on 14 December, with operator-confirmed profiles and finish time. Maria has no diving scheduled. Both travellers share the mountain and safari journey.</p><p class="warn" data-edit-id="diving-apostolos-buffer">Apostolos’s supplied flight is on 17 December at 20:05. Follow the dive computer and professional flying-after-diving and altitude guidance. Keep the mountain hikes before diving; no diving is scheduled on a flight day.</p></section>
+<p data-edit-id="diving-apostolos-only-diy-diy">Apostolos only · proposed afternoon diving in Unawatuna on 13 December. Choose a local dive centre directly and arrange the boat, buddy/equipment needs, profiles and finish time with it. Maria has no diving scheduled. No dive session has been booked.</p><p class="warn" data-edit-id="diving-apostolos-buffer-diy">Record the final dive time on 13 December. Galle on the 14th stays coastal; the inland Sinharaja journey starts on the 15th, before the 17 December flight. Follow your dive computer and any longer professional advice for altitude and flying. If diving moves later, rework the forest timing instead of keeping these connections unchanged.</p></section>
       <section class="panel" data-thread="practical" id="practical">
 <h2 data-edit-id="practical-1">Transfers, wildlife and weather</h2>
 <p><strong data-edit-id="practical-3">Train status</strong><span data-edit-id="practical-2"> · Sri Lanka
@@ -2459,17 +2161,15 @@
             Oya–Ella journey but does not confirm a train or seats on 9 December. Recheck the official
             timetable/reservations shortly before travel. If unavailable, use the 2.5–3.5-hour road fallback; buses can
             require changes and substantially more time.</span></p>
-<p data-edit-id="shared-practical-1">Private transfers · one shared driver for the mountain journey, Nine Arch Bridge and Udawalawe. Maria’s direct airport journey is on 12 December, after the shared safari. Confirm door-to-door times, food stops and traffic buffers.</p>
-<p data-edit-id="shared-practical-2">Udawalawe · both travellers take the afternoon safari on 11 December, provisionally 14:00–17:00, and stay nearby together. Confirm permits, gate access and the jeep with the operator. No long coast drive follows that evening. On the 12th Maria goes directly to CMB while Apostolos transfers to Unawatuna. Sightings are not guaranteed.</p>
-<p><strong data-edit-id="practical-9">December weather</strong><span data-edit-id="practical-8"> ·
-            northeast-monsoon exposure is stronger in the north/east, while the southwest is in its usual coastal dive
-            season. The central highlands can still be cold, wet and misty. Reserve hiking mornings, keep a wet-weather
-            rest/tea-estate option, and let operators cancel unsafe ocean outings.</span></p>
-<p data-edit-id="shared-practical-4-arrival">Access and bookings · shared overnights: Sigiriya on 5 December, Kandy on the 6th, Nuwara Eliya on 7–8 December, the selected Haputale/Ella base on 9–10 December, and Udawalawe on the 11th. Apostolos uses Unawatuna on 12–15 December and the airport area on the 16th. Confirm Polonnaruwa arrival-day access, the Kandy temple, tea-estate operation, mountain journey, safari and diving before booking.</p>
+<p data-edit-id="shared-practical-1-diy">Getting around · self-organised buses, trains and local rides, not a retained driver or managed itinerary. Keep a one-off driver for 5 December because the airport–Polonnaruwa–Sigiriya timing is tight. Use another local ride only where a verified public connection cannot meet the day’s access or flight deadline.</p>
+<p data-edit-id="shared-practical-2-diy">Udawalawe · both travellers take the afternoon safari on 11 December and stay nearby together. Arrange the jeep, its driver, entry permits and any park-required staff directly in the park area or through your accommodation. This is one local activity, not someone managing the rest of the trip. Recheck park access and the exit time.</p>
+<p><strong data-edit-id="practical-9">December weather</strong><span data-edit-id="practical-8-diy">· northeast-monsoon exposure is stronger in the north/east, while the southwest is in its usual coastal dive season. The central highlands can still be cold, wet and misty. Reserve hiking mornings, keep a wet-weather rest/tea-estate option, and let the local dive centre cancel unsafe ocean outings.</span></p>
+<p data-edit-id="shared-practical-4-arrival-diy-diy">Stays and access · first night booked: Palitha Homestay, 5–6 December. Other nights to self-book: Kandy on the 6th, Nuwara Eliya on 7–8, Haputale/Ella on 9–10, Udawalawe on the 11th, Unawatuna for Apostolos on 12–14, Sinharaja’s Deniyaya/Pitadeniya side on the 15th, and near CMB on the 16th. Confirm each local connection and entry requirement yourselves.</p>
 </section>
-      <section class="panel" data-thread="sources" id="sources">
+      <section class="panel" id="public-transport"><h2 data-edit-id="public-transport-heading">Official bus timetables · independent travel</h2><p data-edit-id="public-transport-intro">Open the transport note on each day for route-specific links and the connections to check. Published schedules are not bookings. The time blocks in the itinerary are planning windows, not bus departures unless explicitly identified as a published service.</p><p data-edit-id="public-transport-coverage">Official coverage is incomplete. SLTB’s search lists selected services, so an empty result does not prove that no local bus runs. A route map, live tracker or service-information page is not a timetable. Where no official local schedule was verified, ask at the bus stand or choose a one-off local ride; do not rely on an invented departure.</p><ul><li><a href="https://sltb.eseat.lk/bus/schedules" rel="noopener" target="_blank">SLTB official timetable search</a> · supported by the <a href="https://www.transport.gov.lk/web/index.php?catid=8&amp;id=335&amp;lang=en&amp;option=com_content&amp;view=article" rel="noopener" target="_blank">Ministry of Transport’s description of the 1315/SLTB service</a>.</li><li><a href="https://ntc.gov.lk/times/" rel="noopener" target="_blank">National Transport Commission · inter-provincial timetable search</a>.</li><li><a href="https://www.sprpta.lk/?page_id=1120" rel="noopener" target="_blank">Southern Provincial Road Passenger Transport Authority · route timetables</a>. Route 350 covers Galle–Matara; route 360 covers Matara–Deniyaya.</li><li><a href="https://tsa.cp.gov.lk/bus-routes.php" rel="noopener" target="_blank">Central Province Transport Services Authority · route information</a>. The page did not respond during this check, so no local departure time is claimed from it.</li><li><a href="https://www.airport.lk/passenger_guide/getting_arround/luxury_bus_service" rel="noopener" target="_blank">Airport authority · 187 Colombo Fort–BIA bus service</a>. Confirm the boarding point and terminal access; no exact departure table was verified.</li></ul><p data-edit-id="public-transport-checked">Research checked 20 November 2026. Recheck the actual travel date and direction. Do not treat a terminal departure as an exact time at an intermediate stop, or a search result as a reserved seat.</p></section>
+<section class="panel" data-thread="sources" id="sources">
 <h2 data-edit-id="sources-1">Sources and outstanding decisions</h2>
-<p data-edit-id="sources-2-together">Itinerary revised 20 November 2026: no diving for Maria and no separate mountain-to-coast travel. Nine Arch Bridge is a shared visit on 9 December; the safari and Udawalawe overnight are shared on the 11th. Maria’s flight remains 12 December at 20:05. Activities, accommodation, operators and transport still need direct confirmation.</p>
+<p data-edit-id="sources-2-together-diy-diy">Independent-trip revision · 20 November 2026. No trip operator or permanent driver is assumed. First night booked at Palitha Homestay; other arrangements are self-booked or paid locally. Apostolos dives on 13 December, visits Galle on the 14th and Sinharaja on the 15th, then travels toward CMB on the 16th. Maria’s bridge visit and safari remain shared before her 12 December flight.</p>
 <ul>
 <li><a href="https://thepekoetrail.org/pekoe-stages/stage-13/" rel="noopener" target="_blank">Pekoe Stage 13
               and current advisory ↗</a></li>
@@ -2490,7 +2190,6 @@
 </ul>
 <p data-edit-id="sources-3">Day-breakdown sources and food candidates:</p>
 <ul>
-<li><a href="https://slvoyo.com/one-day-tour/knuckles-five-peaks-trail/" rel="noopener" target="_blank">Knuckles day-trek operator example</a></li>
 <li><a href="https://www.balajidosai.com/" rel="noopener" target="_blank">Balaji Dosai · Kandy menu and
               location</a></li>
 <li><a href="https://www.thegrandhotelnuwaraeliya.com/dining/" rel="noopener" target="_blank">Grand Hotel ·
@@ -2513,8 +2212,8 @@
               of National Museums · Colombo collections and visitor information</a></li>
 <li><a href="https://srilanka.travel/index.php?information_id=15&amp;route=information%2Finformation" rel="noopener" target="_blank">Sri Lanka Tourism · Colombo cultural choices</a></li>
 </ul>
-<p data-edit-id="sources-8-together">Confirm the shared hiking base, Maria’s hiking participation, the Nine Arch Bridge access route, shared safari, driver budget and accommodation. Apostolos’s diving remains on 14 December. Check both return flights and airport pickups.</p>
-<p data-edit-id="sources-train-20nov">Train option checked 20 November 2026: the official booking FAQ permits reservations up to 30 days ahead, so 9 December is within the booking window. No train, seat or departure time has been confirmed here. Check operation and stops directly with Sri Lanka Railways; do not assume the entire Kandy–Nanu Oya line is available. Nine Arch Bridge lies between Ella and Demodara, so a journey ending in Ella does not cross it.</p><p><a href="https://seatreservation.railway.gov.lk/mtktwebslr/faq" rel="noopener" target="_blank">Sri Lanka Railways · official booking FAQ</a> · <a href="https://www.visitella.com/things-to-do/nine-arch-bridge" rel="noopener" target="_blank">Visit Ella · bridge location</a></p><p data-edit-id="sources-arrival-route">Arrival route revised 20 November 2026: airport → Polonnaruwa → Sigiriya on 5 December, Sigiriya → Kandy and the Temple of the Tooth on the 6th, then Labookellie tea country → Nuwara Eliya on the 7th. Driver estimates put the airport–Polonnaruwa journey around 4–5.5 hours and Polonnaruwa–Sigiriya around 1.5–2 hours. The 14:30 site arrival is a target; exact monument access and closing times were not confirmed. Keep the delay contingency and flexible first nights.</p><p><a href="https://www.gotourride.com/routes/colombo-airport-to-polonnaruwa" rel="noopener" target="_blank">Airport–Polonnaruwa drive estimate</a> · <a href="https://ccf.gov.lk/heritage-sites/polonnaruwa/" rel="noopener" target="_blank">CCF · Polonnaruwa access</a> · <a href="https://sridaladamaligawa.lk/faq/" rel="noopener" target="_blank">Temple of the Tooth · official hours and entry guidance</a> · <a href="https://tourism.cp.gov.lk/en/labookelle-tea-centre" rel="noopener" target="_blank">Central Province Tourism · Labookelle Tea Centre</a></p></section>
+<p data-edit-id="sources-8-together-diy">Confirm the shared hiking base, Maria’s hiking participation, the Nine Arch Bridge access route, shared safari, driver budget and accommodation. Apostolos’s diving remains on 13 December. Check both return flights and airport pickups.</p>
+<p data-edit-id="sources-train-20nov">Train option checked 20 November 2026: the official booking FAQ permits reservations up to 30 days ahead, so 9 December is within the booking window. No train, seat or departure time has been confirmed here. Check operation and stops directly with Sri Lanka Railways; do not assume the entire Kandy–Nanu Oya line is available. Nine Arch Bridge lies between Ella and Demodara, so a journey ending in Ella does not cross it.</p><p><a href="https://seatreservation.railway.gov.lk/mtktwebslr/faq" rel="noopener" target="_blank">Sri Lanka Railways · official booking FAQ</a> · <a href="https://www.visitella.com/things-to-do/nine-arch-bridge" rel="noopener" target="_blank">Visit Ella · bridge location</a></p><p data-edit-id="sources-arrival-route">Arrival route revised 20 November 2026: airport → Polonnaruwa → Sigiriya on 5 December, Sigiriya → Kandy and the Temple of the Tooth on the 6th, then Labookellie tea country → Nuwara Eliya on the 7th. Driver estimates put the airport–Polonnaruwa journey around 4–5.5 hours and Polonnaruwa–Sigiriya around 1.5–2 hours. The 14:30 site arrival is a target; exact monument access and closing times were not confirmed. Keep the delay contingency and flexible first nights.</p><p><a href="https://www.gotourride.com/routes/colombo-airport-to-polonnaruwa" rel="noopener" target="_blank">Airport–Polonnaruwa drive estimate</a> · <a href="https://ccf.gov.lk/heritage-sites/polonnaruwa/" rel="noopener" target="_blank">CCF · Polonnaruwa access</a> · <a href="https://sridaladamaligawa.lk/faq/" rel="noopener" target="_blank">Temple of the Tooth · official hours and entry guidance</a> · <a href="https://tourism.cp.gov.lk/en/labookelle-tea-centre" rel="noopener" target="_blank">Central Province Tourism · Labookelle Tea Centre</a></p><p data-edit-id="sources-diy-forest">Sinharaja plan: reach the Deniyaya/Pitadeniya access side on 15 December, arrange entry and a local forest guide directly, and stay near that same entrance. The Forest Department’s report to UNESCO describes approved guides accompanying groups; reconfirm current gate rules and fees. The published 10:30 Deniyaya → Colombo service on the 16th is not booked and must be rechecked.</p><p><a href="https://rainforestprotectorstrust.org/rainforestreserves/Sinharaja" rel="noopener" target="_blank">Sinharaja · entrances and permits</a> · <a href="https://whc.unesco.org/document/162376" rel="noopener" target="_blank">Forest Department report to UNESCO · guide requirement (2003)</a> · <a href="https://sltda.gov.lk/storage/common_media/SME-Sector-Certified-Businesess-List.pdf" rel="noopener" target="_blank">SLTDA listing · Palitha Homestay in Sigiriya</a></p></section>
       <section class="panel" id="todo">
 <h2 data-edit-id="todo-1">Trip to-do list</h2>
 <p class="sub" id="todo-status" role="status">Ticks are saved on this browser only, not shared between devices.
@@ -2527,12 +2226,12 @@
 <label for="todo-documents"><input id="todo-documents" type="checkbox"/><span><strong data-edit-id="todo-documents-2">Check documents and connections.</strong><span data-edit-id="todo-documents-1"> Verify Sri Lanka entry requirements for both passports, India transit
                 requirements for the actual ticket/baggage arrangements, and airline baggage rules. Save both return
                 tickets offline. </span><a href="#flights">Flights</a></span></label>
-<label for="todo-driver-arrival"><input id="todo-driver-arrival" type="checkbox"/><span><strong data-edit-id="todo-driver-2">Arrange the first driver and agree payment.</strong><span data-edit-id="todo-driver-1-arrival">Quote the full 5 December airport → Polonnaruwa → Sigiriya journey, Sigiriya → Kandy and the temple visit on the 6th, and Kandy → Labookellie tea estate → Nuwara Eliya on the 7th. Confirm last entry, waiting, luggage, meals, overnight costs and the arrival-delay fallback.</span></span></label>
-<label for="todo-stays-together-arrival"><input id="todo-stays-together-arrival" type="checkbox"/><span data-edit-id="todo-stays-shared-arrival">Reserve shared accommodation: Sigiriya on 5 December, Kandy on the 6th, Nuwara Eliya on 7–8 December, Haputale/Ella on 9–10 December, and Udawalawe on the 11th. Apostolos stays in Unawatuna on 12–15 December and near the airport on the 16th. Choose flexible first nights in case arrival delays force the Polonnaruwa fallback.</span></label>
-<label for="todo-guides-together"><input id="todo-guides-together" type="checkbox"/><span data-edit-id="todo-guides-shared">Arrange the shared mountain transfer and Nine Arch Bridge visit on 9 December. Choose Stage 13 from Haputale or Ella Rock from Ella for the 10th. Confirm Maria’s hiking participation; keep both travellers at the same base.</span></label>
-<label for="todo-diving-together"><input id="todo-diving-together" type="checkbox"/><span data-edit-id="todo-diving-shared">Reserve Apostolos’s afternoon dive session on 14 December. Confirm equipment, certification, profiles, sea conditions and finish time. Maria has no diving scheduled.</span></label>
-<label for="todo-safari-together"><input id="todo-safari-together" type="checkbox"/><span data-edit-id="todo-safari-shared">Book the 11 December Udawalawe safari for both travellers: one shared morning transfer from the mountain base, afternoon jeep, permits and a nearby overnight together.</span></label>
-<label for="todo-airport-together"><input id="todo-airport-together" type="checkbox"/><span data-edit-id="todo-airport-shared">Book Maria’s direct Udawalawe → CMB transfer on 12 December around 10:00 or earlier if advised, targeting 16:00 for the 20:05 flight. Book Apostolos’s airport-area hotel → CMB transfer on 17 December, also targeting 16:00.</span></label>
+<label for="todo-driver-arrival-diy"><input id="todo-driver-arrival-diy" type="checkbox"/><span data-edit-id="todo-driver-arrival-diy-text">Arrange a one-off driver for 5 December: airport → Polonnaruwa → booked Palitha Homestay in Sigiriya. Confirm the full day’s price, waiting, luggage and arrival-delay plan. This does not hire a driver for the rest of the trip.</span></label>
+<label for="todo-stays-together-arrival-diy"><input id="todo-stays-together-arrival-diy" type="checkbox"/><span data-edit-id="todo-stays-together-arrival-diy-text">First night booked: Palitha Homestay, 5–6 December, Standard Triple Room, approximately €19.28 total. Self-book the other nights: Kandy 6th, Nuwara Eliya 7–8th, shared mountain base 9–10th, Udawalawe 11th, Unawatuna for Apostolos 12–14th, Sinharaja 15th, airport area 16th.</span></label>
+<label for="todo-guides-together-diy"><input id="todo-guides-together-diy" type="checkbox"/><span data-edit-id="todo-guides-together-diy-text">Check the train/bus connections and hike routes yourselves. Local monument guides are optional tours you can arrange at the sites. For Sinharaja, budget for an approved local forest guide and confirm current entry rules directly at the gate.</span></label>
+<label for="todo-diving-together-diy"><input id="todo-diving-together-diy" type="checkbox"/><span data-edit-id="todo-diving-together-diy-text">Choose a local dive centre for Apostolos’s proposed 13 December afternoon session. Confirm the buddy, boat, equipment, profiles, sea conditions and finish time directly. Maria has no diving scheduled.</span></label>
+<label for="todo-safari-together-diy"><input id="todo-safari-together-diy" type="checkbox"/><span data-edit-id="todo-safari-together-diy-text">Arrange the 11 December safari locally for both travellers: a jeep and its driver, entry permits and any park-required staff. Separately choose buses or a one-off car to reach Udawalawe and book that night’s room.</span></label>
+<label for="todo-airport-together-diy"><input id="todo-airport-together-diy" type="checkbox"/><span data-edit-id="todo-airport-together-diy-text">Keep Maria’s 12 December airport target at 16:00 for her 20:05 flight; a one-off direct car is practical for this deadline. On 16 December, recheck Deniyaya → Colombo and airport-bus connections. On the 17th reach CMB by 16:00 for Apostolos’s 20:05 flight.</span></label>
 <label for="todo-packing"><input id="todo-packing" type="checkbox"/><span><strong data-edit-id="todo-packing-2">Pack for temples, wet trails and diving.</strong><span data-edit-id="todo-packing-1"> Covered-leg/shoulder clothing, easy-off footwear, grippy walking shoes,
                 rain layer, a warm highland layer, sun protection, insect repellent, charging kit and dive certification
                 details. Check insurance covers the planned hiking and diving.</span></span></label>
@@ -2626,9 +2325,9 @@
 <h3 data-edit-id="history-8">Kandy · kingship and living pilgrimage</h3>
 <p><span data-edit-id="history-9-arrival">Kandy was the last capital of the Sinhala kings before British occupation in 1815. The Temple of the Tooth remains a pilgrimage site. Visit on 6 December as an active place of worship, with time for security and respectful dress.</span><a href="https://whc.unesco.org/en/list/450/" rel="noopener" target="_blank">UNESCO: Kandy</a></p>
 <h3 data-edit-id="history-10">Galle · Indian Ocean trade and colonial architecture</h3>
-<p><span data-edit-id="history-11">The Portuguese established the fortified town in the sixteenth century; it
+<p><span data-edit-id="history-11-diy">The Portuguese established the fortified town in the sixteenth century; it
             expanded under Dutch rule, with later British influence. The fort combines European planning with South
-            Asian building traditions. During the 15 December walk, notice how the ramparts, lanes and buildings form
+            Asian building traditions. During the 14 December walk, notice how the ramparts, lanes and buildings form
             one town rather than a single monument. </span><a href="https://whc.unesco.org/en/list/451/" rel="noopener" target="_blank">UNESCO: Galle</a></p>
 <h3 data-edit-id="history-12">Modern Sri Lanka · two useful dates</h3>
 <p><span data-edit-id="history-13">Ceylon gained independence from Britain on 4 February 1948. The country
@@ -2710,7 +2409,7 @@
       </section>
     </aside>
   </div>
-  <footer>Working itinerary · updated 20 November 2026 · shared mountains, Nine Arch Bridge and safari; Maria has no diving scheduled. Activities remain provisional. Map data © OpenStreetMap contributors.</footer>
+  <footer>Independent trip · updated 20 November 2026 · first night booked at Palitha Homestay. Shared mountains, bridge and safari; Apostolos dives on the 13th, visits Galle on the 14th and Sinharaja on the 15th. Transport and local activities are self-arranged. Map data © OpenStreetMap contributors.</footer>
   <script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>const threads = new Map();
@@ -2954,7 +2653,7 @@
   <script>
     const points = [
       ['1 · CMB arrival', '5 Dec · together · immigration and transfer', 7.1804, 79.8841, '✈'],
-      ['2 · Sigiriya', '5 Dec overnight; 6 Dec fortress visit before Kandy', 7.957, 80.7603, '🏛'],
+      ['2 · Sigiriya', 'Booked Palitha Homestay 5–6 Dec; fortress visit on the 6th before Kandy', 7.957, 80.7603, '🏛'],
       ['3 · Dambulla', 'Not scheduled in the direct Polonnaruwa arrival route', 7.856, 80.649, '🏛'],
       ['4 · Kandy', '6 Dec · Temple of the Tooth and Kandy overnight', 7.2936, 80.6413, '🏛'],
       ['5 · Nuwara Eliya', '7–9 Dec · proposed overnight base; hotel unselected', 6.9497, 80.7891, '🛏'],
@@ -2963,15 +2662,15 @@
       ['8 · Haputale', '9–10 Dec · shared base if Stage 13 is selected; hike on the 10th', 6.768, 80.958, '🥾'],
       ['9 · Udawalawe', '11 Dec · shared safari and overnight for both travellers', 6.438, 80.889, '🐘'],
       ['10 · Ahangama', 'Alternative coast area · not the scheduled base', 5.974, 80.363, '🛏'],
-      ['11 · Unawatuna', 'Apostolos: 12–15 Dec base, dives 14 Dec; Maria has no diving scheduled', 6.01, 80.249, '🤿'],
-      ['12 · Galle', '15 Dec · cultural day trip · 3–5 hours', 6.0269, 80.217, '🏛'],
+      ['11 · Unawatuna', 'Apostolos: 12–14 Dec base, dives 13 Dec; Maria has no diving scheduled', 6.01, 80.249, '🤿'],
+      ['12 · Galle', '14 Dec · independent Fort visit · 3–5 hours', 6.0269, 80.217, '🏛'],
       ['13 · Negombo', '16 Dec · proposed airport-area stay', 7.211, 79.835, '🛏'],
       ['14 · CMB departure', 'Maria 12 Dec 20:05; Apostolos 17 Dec 20:05 · CMB target 16:00 for both', 7.1804, 79.8841, '✈'],
       ['Required · Polonnaruwa', '5 Dec · required three-hour afternoon visit before Sigiriya overnight; driver must confirm arrival and access', 7.9403, 81.0188, '🏛'],
-      ['Optional · Colombo culture', '16 Dec · choose one museum/temple before the airport-area overnight; not booked', 6.91, 79.86, '🏛'],
+      ['Optional · Colombo culture', '16 Dec · bus connection city only; no sightseeing stop planned', 6.91, 79.86, '🏛'],
       ['Optional · Mirissa whale watching', 'Not included in the relaxed itinerary; no boat departure scheduled', 5.947, 80.451, '🐋'],
       ['Ella Rock', 'Primary hike on 10 Dec if selected; both travellers use the same base', 6.8550355, 81.0523841, '🥾'],
-      ['St Catherine · Stage 13 finish', 'Point-to-point hike finish; agree pickup back to Haputale with the guide', 6.7960434, 81.0112718, '🥾']
+      ['St Catherine · Stage 13 finish', 'Point-to-point hike finish; arrange your own local pickup back to Haputale', 6.7960434, 81.0112718, '🥾']
     ];
     let mainMap, routeLayers;
     const dailyMaps = new Map();
@@ -2983,7 +2682,10 @@
       ['Nanu Oya station', '9 Dec · conditional shared train boarding', 6.9416, 80.7433, '🚆'],
       ['Demodara station', '9 Dec · conditional train arrival after crossing Nine Arch Bridge', 6.9005, 81.0597, '🚆'],
       ['Temple of the Tooth', '6 Dec · Kandy evening visit; confirm access', 7.2936, 80.6413, '🏛'],
-      ['Labookellie tea country', '7 Dec · tea-estate visit; approximate location, confirm with driver', 7.0264, 80.7033, '🍃']
+      ['Labookellie tea country', '7 Dec · tea-estate visit; confirm the stop locally', 7.0264, 80.7033, '🍃'],
+      ['Sinharaja · Deniyaya/Pitadeniya access area', '15 Dec · forest visit and overnight; use the actual gate/accommodation location for navigation', 6.366, 80.485, '🌳'],
+      ['Deniyaya bus stand', '16 Dec · published Colombo bus option, recheck locally', 6.3424, 80.5583, '🚌'],
+      ['Matara bus stand', 'Public-transport change for Deniyaya, check the boarding stand locally', 5.9484, 80.5353, '🚌']
     ];
     const position = i => [routePoints[i][2], routePoints[i][3]];
     function dailyRoutes(day, hike, transport = 'road') {
@@ -3001,10 +2703,10 @@
         case 10: return [r(primary, shared, 'Primary hike from shared mountain base · confirm participation')];
         case 11: return [r([base, 8], shared, 'Together · mountain transfer, Udawalawe safari and overnight')];
         case 12: return [r([8, 13], maria, 'Maria · Udawalawe to CMB; target 16:00 for 20:05 flight'), r([8, 10], apostolos, 'Apostolos · coast transfer after shared safari overnight')];
-        case 13: return [r([10], apostolos, 'Apostolos · free coastal day; no diving')];
-        case 14: return [r([10], apostolos, 'Apostolos · local Unawatuna afternoon dive session; no whale outing')];
-        case 15: return [r([10, 11, 10], apostolos, 'Apostolos · Galle Fort and return to the same coast accommodation')];
-        case 16: return [r([10, 12], apostolos, 'Apostolos · direct coast to airport-area overnight'), r([10, 15, 12], apostolos, 'Optional short Colombo cultural stop before the same airport-area overnight', true)];
+        case 13: return [r([10], apostolos, 'Apostolos · local afternoon diving, arranged directly')];
+        case 14: return [r([10, 11, 10], apostolos, 'Apostolos · independent Galle Fort visit and return')];
+        case 15: return [r([10, 28, 27], apostolos, 'Apostolos · one-off ride to Sinharaja, forest walk and overnight'), r([10, 29, 28, 27], apostolos, 'Bus alternative via Matara and Deniyaya; allow extra time and move the walk if late', true)];
+        case 16: return [r([27, 28, 15, 13, 12], apostolos, 'Apostolos · local ride, Deniyaya–Colombo bus, airport bus and airport-area overnight'), r([27, 12], apostolos, 'One-off direct car alternative if the bus or forest timing changes', true)];
         case 17: return [r([12, 13], apostolos, 'Apostolos · airport-area accommodation to CMB; target arrival 16:00 for 20:05 flight')];
         default: return [];
       }
@@ -3043,7 +2745,7 @@
       mainMap = L.map('map', { scrollWheelZoom: false });
       const tiles = () => L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors', maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', updateWhenIdle: true, keepBuffer: 1 });
       tiles().addTo(mainMap); routeLayers = L.layerGroup().addTo(mainMap);
-      for (const point of points) {
+      for (const point of [...points, routePoints[27]]) {
         const marker = L.marker([point[2], point[3]], { icon: L.divIcon({ className: 'activity-marker', html: '<span style="background:white;border:1px solid #146c61;border-radius:50%;padding:4px">' + point[4] + '</span>', iconSize: [28, 28] }) }).addTo(mainMap);
         const box = document.createElement('div'), heading = document.createElement('strong'), body = document.createElement('p'), a = document.createElement('a');
         heading.textContent = point[0]; body.textContent = point[1]; a.textContent = 'Navigation ↗'; a.target = '_blank'; a.rel = 'noopener';
@@ -3383,6 +3085,17 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "width": 4272,
     "height": 2485
+  },
+  "forest": {
+    "title": "Sinharaja rainforest · giant trees and lianas",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg/330px-Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg",
+    "large": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg/1280px-Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ginat_Liana_hanging_on_giant_trees_in_Sinharaja_Rain_forest_of_Sri_Lanka.jpg",
+    "author": "Ruwan Illeperuma",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 3264,
+    "height": 1588
   }
 };
   const dialog = document.querySelector('#place-photo-dialog');
